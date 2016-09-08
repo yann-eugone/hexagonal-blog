@@ -1,0 +1,3 @@
+app:
+    resource: "@AcmeAppBundle/Controller/"
+    type:     annotation
