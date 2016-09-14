@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('post_create') }}">create</a>
+    {% for post in posts %}
+        <div>
+            <h3>
+                <a href="{{ path('post', { id: post.id }) }}">{{ post.title }}</a>
+            </h3>
+            <p>by {{ post.author }}</p>
+            {{ post.summary|raw }}
+            <p>
+                <a href="{{ path('post_update', { id: post.id }) }}">update</a>
+            </p>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ post.title }}</h1>
+    <p>by {{ post.author }}</p>
+    {{ post.body|raw }}
+    <p>
+        <a href="{{ path('post_list') }}">blog</a> |
+        <a href="{{ path('post_update', { id: post.id }) }}">update</a>
+    </p>
+{% endblock %}

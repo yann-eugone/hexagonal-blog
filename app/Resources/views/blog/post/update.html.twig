@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>
+        <a href="{{ path('post', { id: post.id }) }}">{{ post.title }}</a>
+    </h1>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit">update</button>
+    {{ form_end(form) }}
+    <p>
+        <a href="{{ path('post_list') }}">blog</a>
+    </p>
+{% endblock %}

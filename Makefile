@@ -43,3 +43,15 @@ orm.install:
 ## Database update
 orm.update:
 	bin/console --env=$(ENV) doctrine:schema:update --force
+
+
+# ====================
+# Other rules
+
+## Cache clear
+cc:
+	bin/console --env=$(ENV) cache:clear
+
+## Assets
+assets:
+	bin/console --env=$(ENV) assets:install --symlink --relative

@@ -15,3 +15,4 @@ doctrine:
         auto_mapping: true
         resolve_target_entities:
             Acme\Domain\Blog\Model\Author: Acme\Infrastructure\Bundle\AppBundle\Entity\User
+            Acme\Domain\Blog\Model\Post:   Acme\Infrastructure\Bundle\BlogBundle\Entity\PostEntity
