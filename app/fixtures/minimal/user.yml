@@ -1,0 +1,5 @@
+Acme\Infrastructure\Bundle\AppBundle\Entity\User:
+    user_admin:
+        username (unique): admin
+        password:          admin
+        roles:             [ROLE_ADMIN]

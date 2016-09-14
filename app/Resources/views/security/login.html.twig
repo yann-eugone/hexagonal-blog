@@ -1,0 +1,32 @@
+{% extends "security/base.html.twig" %}
+
+{% trans_default_domain 'messages' %}
+
+{% from 'macros/alert.html.twig' import flashes %}
+
+{% block form_title %}
+    {{ 'login.title'|trans }}
+{% endblock %}
+
+{% block form_elements %}
+    <form action="{{ authenticate_path('main') }}" method="post">
+        <div class="form-group has-feedback">
+            {{ form_widget(form.username, { attr: { placeholder: 'login.label_username'|trans } }) }}
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            {{ form_widget(form.password, { attr: { placeholder: 'login.label_password'|trans } }) }}
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <div class="row">
+            <div class="col-xs-8">
+                {{ form_widget(form.remember, { label: 'login.label_remember'|trans }) }}
+            </div>
+            <div class="col-xs-4">
+                <button type="submit" class="btn btn-primary btn-block btn-flat">
+                    {{ 'login.label_submit'|trans }}
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

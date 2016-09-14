@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% trans_default_domain 'messages' %}
+
+{% from 'macros/alert.html.twig' import flashes %}
+
+{% block body %}
+    <div class="login-box">
+        {% for error in form.vars.errors %}
+            {{ flashes('danger', [error], 'messages') }}
+        {% endfor %}
+        {% block additional_flash %}
+            {% for message in app.session.flashBag.get('success') %}
+                {{ flashes('success', [message], 'messages') }}
+            {% endfor %}
+            {% for message in app.session.flashBag.get('error') %}
+                {{ flashes('danger', [message], 'messages') }}
+            {% endfor %}
+        {% endblock %}
+
+        <div class="login-box-body">
+            <p class="login-box-msg">
+                <span class="login-logo-title">{% block form_title '' %}</span>
+            </p>
+
+            {% block form_elements '' %}
+        </div>
+    </div>
+{% endblock %}
