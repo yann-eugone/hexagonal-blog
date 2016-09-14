@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Application\Blog\Command;
+namespace Acme\Application\Blog\Command\Post;
 
 use Acme\Domain\Blog\Model\Author;
 use Acme\Domain\Blog\Model\Post;

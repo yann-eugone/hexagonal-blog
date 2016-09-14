@@ -65,6 +65,14 @@ class PostEntity implements PostInterface
     private $author;
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->title;
+    }
+
+    /**
      * @inheritdoc
      */
     public function getId()

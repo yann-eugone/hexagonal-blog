@@ -1,21 +1,21 @@
 <?php
 
-namespace Acme\Domain\Blog\Exception;
+namespace Acme\Domain\Blog\Exception\Post;
 
 use Exception;
 use RuntimeException;
 
-class CannotCreatePostException extends RuntimeException
+class CannotDeletePostException extends RuntimeException
 {
     /**
      * @param Exception $exception
      *
-     * @return CannotCreatePostException
+     * @return CannotDeletePostException
      */
     public static function onException(Exception $exception)
     {
         return new self(
-            'Cannot create Post.',
+            'Cannot delete Post.',
             0,
             $exception
         );

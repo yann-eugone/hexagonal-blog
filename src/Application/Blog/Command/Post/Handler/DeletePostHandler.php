@@ -1,9 +1,9 @@
 <?php
 
-namespace Acme\Application\Blog\Command\Handler;
+namespace Acme\Application\Blog\Command\Post\Handler;
 
-use Acme\Application\Blog\Command\DeletePost;
-use Acme\Application\Blog\Event\PostDeleted;
+use Acme\Application\Blog\Command\Post\DeletePost;
+use Acme\Application\Blog\Event\Post\PostDeleted;
 use Acme\Domain\Blog\Repository\PostRepository;
 use SimpleBus\Message\Recorder\RecordsMessages;
 
@@ -30,7 +30,7 @@ class DeletePostHandler
     }
 
     /**
-     * @param DeletePost $command
+     * @param \Acme\Application\Blog\Command\Post\DeletePost $command
      */
     public function __invoke(DeletePost $command)
     {

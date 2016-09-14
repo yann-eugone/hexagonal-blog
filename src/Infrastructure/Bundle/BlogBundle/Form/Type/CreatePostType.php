@@ -2,7 +2,7 @@
 
 namespace Acme\Infrastructure\Bundle\BlogBundle\Form\Type;
 
-use Acme\Application\Blog\Command\CreatePost;
+use Acme\Application\Blog\Command\Post\CreatePost;
 use Acme\Infrastructure\Bundle\AppBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;

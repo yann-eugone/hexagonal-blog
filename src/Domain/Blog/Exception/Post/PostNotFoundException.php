@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Domain\Blog\Exception;
+namespace Acme\Domain\Blog\Exception\Post;
 
 use RuntimeException;
 

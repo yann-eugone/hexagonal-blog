@@ -2,10 +2,10 @@
 
 namespace Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository;
 
-use Acme\Domain\Blog\Exception\CannotCreatePostException;
-use Acme\Domain\Blog\Exception\CannotDeletePostException;
-use Acme\Domain\Blog\Exception\CannotUpdatePostException;
-use Acme\Domain\Blog\Exception\PostNotFoundException;
+use Acme\Domain\Blog\Exception\Post\CannotCreatePostException;
+use Acme\Domain\Blog\Exception\Post\CannotDeletePostException;
+use Acme\Domain\Blog\Exception\Post\CannotUpdatePostException;
+use Acme\Domain\Blog\Exception\Post\PostNotFoundException;
 use Acme\Domain\Blog\Model\Post;
 use Acme\Domain\Blog\Repository\PostRepository as PostRepositoryInterface;
 use Acme\Infrastructure\Bundle\BlogBundle\Entity\PostEntity;

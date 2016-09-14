@@ -2,9 +2,9 @@
 
 namespace Acme\Infrastructure\Bundle\BlogBundle\Controller;
 
-use Acme\Application\Blog\Command\CreatePost;
-use Acme\Application\Blog\Command\UpdatePost;
-use Acme\Domain\Blog\Exception\PostNotFoundException;
+use Acme\Application\Blog\Command\Post\CreatePost;
+use Acme\Application\Blog\Command\Post\UpdatePost;
+use Acme\Domain\Blog\Exception\Post\PostNotFoundException;
 use Acme\Domain\Blog\Repository\PostRepository;
 use Acme\Infrastructure\Bundle\BlogBundle\Form\Type\CreatePostType;
 use Acme\Infrastructure\Bundle\BlogBundle\Form\Type\UpdatePostType;
@@ -84,7 +84,7 @@ class PostController extends Controller
             );
         }
 
-        /** @var $command CreatePost */
+        /** @var $command \Acme\Application\Blog\Command\Post\CreatePost */
         $command = $form->getData();
 
         $this->getMessageBus()->handle($command);
@@ -123,7 +123,7 @@ class PostController extends Controller
             );
         }
 
-        /** @var $command UpdatePost */
+        /** @var $command \Acme\Application\Blog\Command\Post\UpdatePost */
         $command = $form->getData();
 
         $this->getMessageBus()->handle($command);

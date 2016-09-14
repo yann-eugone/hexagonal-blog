@@ -2,17 +2,20 @@
 
 namespace Acme\Infrastructure\Bundle\BlogBundle\Form\Type;
 
-use Acme\Application\Blog\Command\Post\UpdatePost;
+use Acme\Application\Blog\Command\Comment\CreateComment;
+use Acme\Application\Blog\Command\Comment\UpdateComment;
+use Acme\Infrastructure\Bundle\AppBundle\Entity\User;
+use Acme\Infrastructure\Bundle\BlogBundle\Entity\PostEntity;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UpdatePostType extends AbstractType implements DataMapperInterface
+class UpdateCommentType extends AbstractType implements DataMapperInterface
 {
     /**
      * @inheritDoc
@@ -21,9 +24,9 @@ class UpdatePostType extends AbstractType implements DataMapperInterface
     {
         $builder
             ->add('id', HiddenType::class)
-            ->add('title', TextType::class)
-            ->add('summary', TextType::class)
-            ->add('body', TextareaType::class)
+            ->add('text', TextType::class)
+            ->add('author', EntityType::class, ['class' => User::class])
+            ->add('post', EntityType::class, ['class' => PostEntity::class])
             ->setDataMapper($this)
         ;
     }
@@ -36,7 +39,7 @@ class UpdatePostType extends AbstractType implements DataMapperInterface
         $resolver
             ->setDefaults(
                 [
-                    'data_class' => UpdatePost::class,
+                    'data_class' => UpdateComment::class,
                     'empty_data' => null,
                 ]
             )
@@ -48,14 +51,12 @@ class UpdatePostType extends AbstractType implements DataMapperInterface
      */
     public function mapDataToForms($data, $forms)
     {
-        /** @var \Acme\Application\Blog\Command\Post\UpdatePost $data */
+        /** @var UpdateComment $data */
         $forms = iterator_to_array($forms);
         /** @var FormInterface[] $forms */
 
         $forms['id']->setData($data ? $data->getId() : null);
-        $forms['title']->setData($data ? $data->getTitle() : null);
-        $forms['summary']->setData($data ? $data->getSummary() : null);
-        $forms['body']->setData($data ? $data->getBody() : null);
+        $forms['text']->setData($data ? $data->getText() : null);
     }
 
     /**
@@ -66,11 +67,9 @@ class UpdatePostType extends AbstractType implements DataMapperInterface
         $forms = iterator_to_array($forms);
         /** @var FormInterface[] $forms */
 
-        $data = new UpdatePost(
+        $data = new UpdateComment(
             $forms['id']->getData(),
-            $forms['title']->getData(),
-            $forms['summary']->getData(),
-            $forms['body']->getData()
+            $forms['text']->getData()
         );
     }
 }

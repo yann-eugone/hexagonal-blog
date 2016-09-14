@@ -1,8 +1,8 @@
 <?php
 
-namespace Acme\Application\Blog\Command;
+namespace Acme\Application\Blog\Event\Comment;
 
-class PublishPost
+class CommentCreated
 {
     /**
      * @var int

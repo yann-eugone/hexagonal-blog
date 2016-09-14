@@ -1,0 +1,9 @@
+{% for comment in comments %}
+    <div>
+        <p>by {{ comment.author }}</p>
+        {{ comment.comment|raw }}
+        <p>
+            <a href="{{ path('post_update_comment', { postId: comment.post.id, id: comment.id }) }}">update</a>
+        </p>
+    </div>
+{% endfor %}

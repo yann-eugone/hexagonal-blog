@@ -1,13 +1,14 @@
 <?php
 
-namespace Acme\Application\Blog\Command\Handler;
+namespace Acme\Application\Blog\Command\Post\Handler;
 
-use Acme\Application\Blog\Command\UpdatePost;
-use Acme\Application\Blog\Event\PostUpdated;
+use Acme\Application\Blog\Command\Post\CreatePost;
+use Acme\Application\Blog\Event\Post\PostCreated;
 use Acme\Domain\Blog\Repository\PostRepository;
+use DateTime;
 use SimpleBus\Message\Recorder\RecordsMessages;
 
-class UpdatePostHandler
+class CreatePostHandler
 {
     /**
      * @var PostRepository
@@ -30,18 +31,22 @@ class UpdatePostHandler
     }
 
     /**
-     * @param UpdatePost $command
+     * @param CreatePost $command
      */
-    public function __invoke(UpdatePost $command)
+    public function __invoke(CreatePost $command)
     {
-        $post = $this->repository->getById($command->getId());
+        $post = $this->repository->instance();
+
+        $command->setPost($post);
 
         $post->setTitle($command->getTitle());
         $post->setSummary($command->getSummary());
         $post->setBody($command->getBody());
+        $post->setAuthor($command->getAuthor());
+        $post->setPostedAt(new DateTime());
 
-        $this->repository->update($post);
+        $this->repository->create($post);
 
-        $this->eventRecorder->record(new PostUpdated($post->getId()));
+        $this->eventRecorder->record(new PostCreated($post->getId()));
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Acme\Application\Blog\Event;
+namespace Acme\Application\Blog\Event\Post;
 
-class PostDeleted
+class PostUpdated
 {
     /**
      * @var int

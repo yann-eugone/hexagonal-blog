@@ -2,10 +2,10 @@
 
 namespace Acme\Domain\Blog\Repository;
 
-use Acme\Domain\Blog\Exception\CannotCreatePostException;
-use Acme\Domain\Blog\Exception\CannotDeletePostException;
-use Acme\Domain\Blog\Exception\CannotUpdatePostException;
-use Acme\Domain\Blog\Exception\PostNotFoundException;
+use Acme\Domain\Blog\Exception\Post\CannotCreatePostException;
+use Acme\Domain\Blog\Exception\Post\CannotDeletePostException;
+use Acme\Domain\Blog\Exception\Post\CannotUpdatePostException;
+use Acme\Domain\Blog\Exception\Post\PostNotFoundException;
 use Acme\Domain\Blog\Model\Post;
 
 interface PostRepository

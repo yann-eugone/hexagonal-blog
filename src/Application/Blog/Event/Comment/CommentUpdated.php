@@ -1,8 +1,8 @@
 <?php
 
-namespace Acme\Application\Blog\Event;
+namespace Acme\Application\Blog\Event\Comment;
 
-class PostUpdated
+class CommentUpdated
 {
     /**
      * @var int

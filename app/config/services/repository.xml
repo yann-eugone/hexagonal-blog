@@ -12,6 +12,12 @@
             <argument>Acme\Infrastructure\Bundle\BlogBundle\Entity\PostEntity</argument>
         </service>
 
+        <service id="repository.comment"
+                 class="Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository\CommentEntityRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>Acme\Infrastructure\Bundle\BlogBundle\Entity\CommentEntity</argument>
+        </service>
+
     </services>
 
 </container>

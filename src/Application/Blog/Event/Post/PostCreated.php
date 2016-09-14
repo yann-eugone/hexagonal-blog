@@ -1,8 +1,8 @@
 <?php
 
-namespace Acme\Application\Blog\Command;
+namespace Acme\Application\Blog\Event\Post;
 
-class DeletePost
+class PostCreated
 {
     /**
      * @var int
