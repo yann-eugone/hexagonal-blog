@@ -28,31 +28,13 @@ class UpdatePost
 
     /**
      * @param Post $post
-     *
-     * @return UpdatePost
      */
-    public static function fromPost(Post $post)
+    public function __construct(Post $post)
     {
-        return new self(
-            $post->getId(),
-            $post->getTitle(),
-            $post->getSummary(),
-            $post->getBody()
-        );
-    }
-
-    /**
-     * @param int    $id
-     * @param string $title
-     * @param string $summary
-     * @param string $body
-     */
-    public function __construct($id, $title, $summary, $body)
-    {
-        $this->id = $id;
-        $this->title = $title;
-        $this->summary = $summary;
-        $this->body = $body;
+        $this->id = $post->getId();
+        $this->title = $post->getTitle();
+        $this->summary = $post->getSummary();
+        $this->body = $post->getBody();
     }
 
     /**
@@ -72,6 +54,14 @@ class UpdatePost
     }
 
     /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
      * @return string
      */
     public function getSummary()
@@ -80,10 +70,26 @@ class UpdatePost
     }
 
     /**
+     * @param string $summary
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
+    }
+
+    /**
      * @return string
      */
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * @param string $body
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
     }
 }

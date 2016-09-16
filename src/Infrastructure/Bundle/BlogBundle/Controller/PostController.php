@@ -70,10 +70,8 @@ class PostController extends Controller
      */
     public function createAction(Request $request)
     {
-        $form = $this->getFormFactory()->create(
-            CreatePostType::class,
-            new CreatePost(null, null, null, $this->getUser())
-        );
+        $command = new CreatePost($this->getUser());
+        $form = $this->getFormFactory()->create(CreatePostType::class, $command);
 
         $form->handleRequest($request);
 
@@ -83,9 +81,6 @@ class PostController extends Controller
                 ['form' => $form->createView()]
             );
         }
-
-        /** @var $command \Acme\Application\Blog\Command\Post\CreatePost */
-        $command = $form->getData();
 
         $this->getMessageBus()->handle($command);
 
@@ -109,10 +104,9 @@ class PostController extends Controller
             throw new NotFoundHttpException(null, $exception);
         }
 
-        $form = $this->getFormFactory()->create(
-            UpdatePostType::class,
-            UpdatePost::fromPost($post)
-        );
+        $command = new UpdatePost($post);
+
+        $form = $this->getFormFactory()->create(UpdatePostType::class, $command);
 
         $form->handleRequest($request);
 
@@ -122,9 +116,6 @@ class PostController extends Controller
                 ['post' => $post, 'form' => $form->createView()]
             );
         }
-
-        /** @var $command \Acme\Application\Blog\Command\Post\UpdatePost */
-        $command = $form->getData();
 
         $this->getMessageBus()->handle($command);
 

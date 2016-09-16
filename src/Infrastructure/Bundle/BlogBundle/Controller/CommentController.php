@@ -62,9 +62,11 @@ class CommentController extends Controller
             throw new NotFoundHttpException(null, $exception);
         }
 
+        $command = new CreateComment($this->getUser(), $post);
+
         $form = $this->getFormFactory()->create(
             CreateCommentType::class,
-            new CreateComment(null, $this->getUser(), $post),
+            $command,
             [
                 'action' => $this->generateUrl('post_add_comment', ['postId' => $postId]),
                 'method' => 'post'
@@ -79,9 +81,6 @@ class CommentController extends Controller
                 ['form' => $form->createView()]
             );
         }
-
-        /** @var $command CreateComment */
-        $command = $form->getData();
 
         $this->getMessageBus()->handle($command);
 
@@ -112,9 +111,11 @@ class CommentController extends Controller
             throw new NotFoundHttpException(null, $exception);
         }
 
+        $command = new UpdateComment($comment);
+
         $form = $this->getFormFactory()->create(
             UpdateCommentType::class,
-            UpdateComment::fromComment($comment),
+            $command,
             [
                 'action' => $this->generateUrl('post_update_comment', ['postId' => $postId, 'id' => $id]),
                 'method' => 'post'
@@ -129,9 +130,6 @@ class CommentController extends Controller
                 ['comment' => $comment, 'form' => $form->createView()]
             );
         }
-
-        /** @var $command UpdateComment */
-        $command = $form->getData();
 
         $this->getMessageBus()->handle($command);
 

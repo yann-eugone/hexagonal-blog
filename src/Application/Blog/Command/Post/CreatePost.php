@@ -33,16 +33,10 @@ class CreatePost
     private $post;
 
     /**
-     * @param string $title
-     * @param string $summary
-     * @param string $body
      * @param Author $author
      */
-    public function __construct($title, $summary, $body, Author $author)
+    public function __construct(Author $author)
     {
-        $this->title = $title;
-        $this->summary = $summary;
-        $this->body = $body;
         $this->author = $author;
     }
 
@@ -55,6 +49,14 @@ class CreatePost
     }
 
     /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
      * @return string
      */
     public function getSummary()
@@ -63,11 +65,27 @@ class CreatePost
     }
 
     /**
+     * @param string $summary
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
+    }
+
+    /**
      * @return string
      */
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * @param string $body
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
     }
 
     /**
