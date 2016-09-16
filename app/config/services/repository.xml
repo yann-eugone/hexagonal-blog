@@ -18,6 +18,12 @@
             <argument>Acme\Infrastructure\Bundle\BlogBundle\Entity\CommentEntity</argument>
         </service>
 
+        <service id="repository.author_activity"
+                 class="Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository\Activity\AuthorActivityEntityRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>Acme\Infrastructure\Bundle\BlogBundle\Entity\Activity\AuthorActivityEntity</argument>
+        </service>
+
     </services>
 
 </container>
