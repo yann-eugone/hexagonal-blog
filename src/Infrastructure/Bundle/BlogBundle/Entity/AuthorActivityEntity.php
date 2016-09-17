@@ -1,8 +1,8 @@
 <?php
 
-namespace Acme\Infrastructure\Bundle\BlogBundle\Entity\Activity;
+namespace Acme\Infrastructure\Bundle\BlogBundle\Entity;
 
-use Acme\Domain\Blog\Model\Activity\AuthorActivity;
+use Acme\Domain\Blog\Model\AuthorActivity;
 use Acme\Domain\Blog\Model\Author;
 use Acme\Domain\Blog\Model\Comment;
 use Acme\Domain\Blog\Model\Post;
@@ -10,7 +10,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository\Activity\AuthorActivityEntityRepository")
+ * @ORM\Entity(repositoryClass="Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository\AuthorActivityEntityRepository")
  * @ORM\Table(name="blog_author_activity")
  */
 class AuthorActivityEntity implements AuthorActivity

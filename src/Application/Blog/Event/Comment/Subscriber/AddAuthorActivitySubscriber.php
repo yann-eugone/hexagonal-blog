@@ -5,8 +5,8 @@ namespace Acme\Application\Blog\Event\Comment\Subscriber;
 use Acme\Application\Blog\Event\Comment\CommentCreated;
 use Acme\Application\Blog\Event\Comment\CommentDeleted;
 use Acme\Application\Blog\Event\Comment\CommentUpdated;
-use Acme\Domain\Blog\Model\Activity\AuthorActivity;
-use Acme\Domain\Blog\Repository\Activity\AuthorActivityRepository;
+use Acme\Domain\Blog\Model\AuthorActivity;
+use Acme\Domain\Blog\Repository\AuthorActivityRepository;
 use Acme\Domain\Blog\Repository\CommentRepository;
 use DateTime;
 

@@ -6,8 +6,8 @@ use Acme\Application\Blog\Event\Post\PostCreated;
 use Acme\Application\Blog\Event\Post\PostDeleted;
 use Acme\Application\Blog\Event\Post\PostPublished;
 use Acme\Application\Blog\Event\Post\PostUpdated;
-use Acme\Domain\Blog\Model\Activity\AuthorActivity;
-use Acme\Domain\Blog\Repository\Activity\AuthorActivityRepository;
+use Acme\Domain\Blog\Model\AuthorActivity;
+use Acme\Domain\Blog\Repository\AuthorActivityRepository;
 use Acme\Domain\Blog\Repository\PostRepository;
 use DateTime;
 

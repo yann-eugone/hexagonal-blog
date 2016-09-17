@@ -1,8 +1,8 @@
 <?php
 
-namespace Acme\Domain\Blog\Repository\Activity;
+namespace Acme\Domain\Blog\Repository;
 
-use Acme\Domain\Blog\Model\Activity\AuthorActivity;
+use Acme\Domain\Blog\Model\AuthorActivity;
 use Acme\Domain\Blog\Model\Author;
 use DateTime;
 

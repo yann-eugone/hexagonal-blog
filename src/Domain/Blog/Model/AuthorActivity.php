@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Domain\Blog\Model\Activity;
+namespace Acme\Domain\Blog\Model;
 
 interface AuthorActivity
 {
