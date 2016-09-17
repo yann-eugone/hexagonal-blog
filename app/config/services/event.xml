@@ -23,6 +23,17 @@
                  method="__invoke"/>
         </service>
 
+        <service id="event_subscriber.increment_post_counter"
+                 class="Acme\Application\Blog\Event\Post\Subscriber\IncrementCounterSubscriber"
+                 autowire="true">
+            <tag name="event_subscriber"
+                 subscribes_to="Acme\Application\Blog\Event\Post\PostCreated"
+                 method="__invoke"/>
+            <tag name="event_subscriber"
+                 subscribes_to="Acme\Application\Blog\Event\Post\PostDeleted"
+                 method="__invoke"/>
+        </service>
+
         <service id="event_subscriber.add_comment_author_activity"
                  class="Acme\Application\Blog\Event\Comment\Subscriber\AddAuthorActivitySubscriber"
                  autowire="true">
@@ -31,6 +42,17 @@
                  method="__invoke"/>
             <tag name="event_subscriber"
                  subscribes_to="Acme\Application\Blog\Event\Comment\CommentUpdated"
+                 method="__invoke"/>
+            <tag name="event_subscriber"
+                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentDeleted"
+                 method="__invoke"/>
+        </service>
+
+        <service id="event_subscriber.increment_comment_counter"
+                 class="Acme\Application\Blog\Event\Comment\Subscriber\IncrementCounterSubscriber"
+                 autowire="true">
+            <tag name="event_subscriber"
+                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentCreated"
                  method="__invoke"/>
             <tag name="event_subscriber"
                  subscribes_to="Acme\Application\Blog\Event\Comment\CommentDeleted"
