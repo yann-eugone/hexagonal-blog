@@ -2,7 +2,9 @@
 
 namespace Acme\Application\Blog\Command\Post;
 
+use Acme\Domain\Blog\Model\Category;
 use Acme\Domain\Blog\Model\Post;
+use Acme\Domain\Blog\Model\Tag;
 
 class UpdatePost
 {
@@ -25,6 +27,16 @@ class UpdatePost
      * @var string
      */
     private $body;
+
+    /**
+     * @var Category
+     */
+    private $category;
+
+    /**
+     * @var Tag[]
+     */
+    private $tags;
 
     /**
      * @param Post $post
@@ -91,5 +103,37 @@ class UpdatePost
     public function setBody($body)
     {
         $this->body = $body;
+    }
+
+    /**
+     * @return Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param Category $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * @return Tag[]
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param Tag[] $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
     }
 }

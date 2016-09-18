@@ -3,7 +3,9 @@
 namespace Acme\Application\Blog\Command\Post;
 
 use Acme\Domain\Blog\Model\Author;
+use Acme\Domain\Blog\Model\Category;
 use Acme\Domain\Blog\Model\Post;
+use Acme\Domain\Blog\Model\Tag;
 
 class CreatePost
 {
@@ -21,6 +23,16 @@ class CreatePost
      * @var string
      */
     private $body;
+
+    /**
+     * @var Category
+     */
+    private $category;
+
+    /**
+     * @var Tag[]
+     */
+    private $tags;
 
     /**
      * @var Author
@@ -86,6 +98,38 @@ class CreatePost
     public function setBody($body)
     {
         $this->body = $body;
+    }
+
+    /**
+     * @return Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param Category $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * @return Tag[]
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param Tag[] $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
     }
 
     /**

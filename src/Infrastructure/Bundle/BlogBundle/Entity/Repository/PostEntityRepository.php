@@ -30,7 +30,38 @@ class PostEntityRepository extends EntityRepository implements PostRepositoryInt
      */
     public function list(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
-        return $this->findBy($criteria, $orderBy, $limit, $offset);
+        $builder = $this->createQueryBuilder('post');
+
+        if (isset($criteria['category'])) {
+            $builder
+                ->andWhere('post.category = :category')
+                ->setParameter('category', $criteria['category']);
+        }
+
+        if (isset($criteria['tag'])) {
+            $builder
+                ->innerJoin('post.tags', 'tag')
+                ->andWhere('tag = :tag')
+                ->setParameter('tag', $criteria['tag']);
+        } else {
+            $builder
+                ->leftJoin('post.tags', 'tag')
+            ;
+        }
+
+        if ($orderBy) {
+            foreach ($orderBy as $column => $direction) {
+                $builder->addOrderBy(sprintf('post.%s', $column), $direction);
+            }
+        }
+
+        if ($limit && $offset) {
+            $builder
+                ->setMaxResults($limit)
+                ->setFirstResult($offset);
+        }
+
+        return $builder->getQuery()->execute();
     }
 
     /**

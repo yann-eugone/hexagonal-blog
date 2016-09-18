@@ -2,7 +2,7 @@
 
 namespace Acme\Application\Blog\Command\Post\Handler;
 
-use Acme\Application\Blog\Command\Post\DeletePost;
+use Acme\Application\Blog\Command\Post\PublishPost;
 use Acme\Application\Blog\Event\Post\PostPublished;
 use Acme\Domain\Blog\Repository\PostRepository;
 use DateTime;
@@ -31,9 +31,9 @@ class PublishPostHandler
     }
 
     /**
-     * @param \Acme\Application\Blog\Command\Post\DeletePost $command
+     * @param PublishPost $command
      */
-    public function __invoke(DeletePost $command)
+    public function __invoke(PublishPost $command)
     {
         $post = $this->repository->getById($command->getId());
 

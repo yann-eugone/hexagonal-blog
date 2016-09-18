@@ -19,9 +19,9 @@
         </service>
 
         <service id="repository.author_activity"
-                 class="Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository\Activity\AuthorActivityEntityRepository">
+                 class="Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository\AuthorActivityEntityRepository">
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
-            <argument>Acme\Infrastructure\Bundle\BlogBundle\Entity\Activity\AuthorActivityEntity</argument>
+            <argument>Acme\Infrastructure\Bundle\BlogBundle\Entity\AuthorActivityEntity</argument>
         </service>
 
     </services>

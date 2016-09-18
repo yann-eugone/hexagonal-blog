@@ -30,7 +30,7 @@ class UpdatePostHandler
     }
 
     /**
-     * @param \Acme\Application\Blog\Command\Post\UpdatePost $command
+     * @param UpdatePost $command
      */
     public function __invoke(UpdatePost $command)
     {
@@ -39,6 +39,8 @@ class UpdatePostHandler
         $post->setTitle($command->getTitle());
         $post->setSummary($command->getSummary());
         $post->setBody($command->getBody());
+        $post->setCategory($command->getCategory());
+        $post->setTags($command->getTags());
 
         $this->repository->update($post);
 

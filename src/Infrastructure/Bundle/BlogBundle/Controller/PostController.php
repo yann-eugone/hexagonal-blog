@@ -20,16 +20,26 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PostController extends Controller
 {
     /**
-     * @Route("/posts", name="post_list", defaults={"_format" = "html"})
+     * @Route("/posts", name="post_list")
+     * @Route("/posts/by-category/{category}", name="post_list_by_category", requirements={"category" = "\d+"})
+     * @Route("/posts/by-tag/{tag}", name="post_list_by_tag", requirements={"tag" = "\d+"})
      * @Method("GET")
      *
      * @param Request $request
      *
      * @return Response
      */
-    public function listAction(Request $request)
+    public function listAction(Request $request, $category = null, $tag = null)
     {
-        $posts = $this->getRepository()->list([]);
+        $criteria = [];
+        if ($category) {
+            $criteria['category'] = $category;
+        }
+        if ($tag) {
+            $criteria['tag'] = $tag;
+        }
+
+        $posts = $this->getRepository()->list($criteria);
 
         return $this->render(
             ':blog/post:list.html.twig',

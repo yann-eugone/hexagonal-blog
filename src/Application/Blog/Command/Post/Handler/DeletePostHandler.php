@@ -30,7 +30,7 @@ class DeletePostHandler
     }
 
     /**
-     * @param \Acme\Application\Blog\Command\Post\DeletePost $command
+     * @param DeletePost $command
      */
     public function __invoke(DeletePost $command)
     {
