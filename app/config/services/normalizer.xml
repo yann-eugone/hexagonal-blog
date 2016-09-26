@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="normalizer.post"
+                 class="Acme\Infrastructure\Bundle\BlogBundle\Normalizer\SymfonyPostNormalizer"
+                 autowire="true">
+        </service>
+
+        <service id="normalizer.comment"
+                 class="Acme\Infrastructure\Bundle\BlogBundle\Normalizer\SymfonyCommentNormalizer"
+                 autowire="true">
+        </service>
+
+    </services>
+
+</container>
