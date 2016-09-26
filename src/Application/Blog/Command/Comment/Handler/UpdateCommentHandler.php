@@ -4,8 +4,8 @@ namespace Acme\Application\Blog\Command\Comment\Handler;
 
 use Acme\Application\Blog\Command\Comment\UpdateComment;
 use Acme\Application\Blog\Event\Comment\CommentUpdated;
+use Acme\Application\Blog\Event\EventBus;
 use Acme\Domain\Blog\Repository\CommentRepository;
-use SimpleBus\Message\Recorder\RecordsMessages;
 
 class UpdateCommentHandler
 {
@@ -15,18 +15,18 @@ class UpdateCommentHandler
     private $repository;
 
     /**
-     * @var RecordsMessages
+     * @var EventBus
      */
-    private $eventRecorder;
+    private $eventBus;
 
     /**
      * @param CommentRepository $repository
-     * @param RecordsMessages   $eventRecorder
+     * @param EventBus          $eventBus
      */
-    public function __construct(CommentRepository $repository, RecordsMessages $eventRecorder)
+    public function __construct(CommentRepository $repository, EventBus $eventBus)
     {
         $this->repository = $repository;
-        $this->eventRecorder = $eventRecorder;
+        $this->eventBus = $eventBus;
     }
 
     /**
@@ -40,6 +40,6 @@ class UpdateCommentHandler
 
         $this->repository->update($comment);
 
-        $this->eventRecorder->record(new CommentUpdated($comment->getId()));
+        $this->eventBus->dispatch(new CommentUpdated($comment->getId()));
     }
 }

@@ -3,10 +3,10 @@
 namespace Acme\Application\Blog\Command\Post\Handler;
 
 use Acme\Application\Blog\Command\Post\CreatePost;
+use Acme\Application\Blog\Event\EventBus;
 use Acme\Application\Blog\Event\Post\PostCreated;
 use Acme\Domain\Blog\Repository\PostRepository;
 use DateTime;
-use SimpleBus\Message\Recorder\RecordsMessages;
 
 class CreatePostHandler
 {
@@ -16,18 +16,18 @@ class CreatePostHandler
     private $repository;
 
     /**
-     * @var RecordsMessages
+     * @var EventBus
      */
-    private $eventRecorder;
+    private $eventBus;
 
     /**
-     * @param PostRepository  $repository
-     * @param RecordsMessages $eventRecorder
+     * @param PostRepository $repository
+     * @param EventBus       $eventBus
      */
-    public function __construct(PostRepository $repository, RecordsMessages $eventRecorder)
+    public function __construct(PostRepository $repository, EventBus $eventBus)
     {
         $this->repository = $repository;
-        $this->eventRecorder = $eventRecorder;
+        $this->eventBus = $eventBus;
     }
 
     /**
@@ -47,6 +47,6 @@ class CreatePostHandler
 
         $this->repository->create($post);
 
-        $this->eventRecorder->record(new PostCreated($post->getId()));
+        $this->eventBus->dispatch(new PostCreated($post->getId()));
     }
 }

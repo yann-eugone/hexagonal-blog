@@ -4,9 +4,9 @@ namespace Acme\Application\Blog\Command\Comment\Handler;
 
 use Acme\Application\Blog\Command\Comment\DeleteComment;
 use Acme\Application\Blog\Event\Comment\CommentDeleted;
+use Acme\Application\Blog\Event\EventBus;
 use Acme\Domain\Blog\Repository\CommentRepository;
 use Acme\Domain\Blog\Repository\PostRepository;
-use SimpleBus\Message\Recorder\RecordsMessages;
 
 class DeleteCommentHandler
 {
@@ -16,18 +16,18 @@ class DeleteCommentHandler
     private $repository;
 
     /**
-     * @var RecordsMessages
+     * @var EventBus
      */
-    private $eventRecorder;
+    private $eventBus;
 
     /**
      * @param CommentRepository $repository
-     * @param RecordsMessages   $eventRecorder
+     * @param EventBus          $eventBus
      */
-    public function __construct(CommentRepository $repository, RecordsMessages $eventRecorder)
+    public function __construct(CommentRepository $repository, EventBus $eventBus)
     {
         $this->repository = $repository;
-        $this->eventRecorder = $eventRecorder;
+        $this->eventBus = $eventBus;
     }
 
     /**
@@ -39,6 +39,6 @@ class DeleteCommentHandler
 
         $this->repository->delete($comment);
 
-        $this->eventRecorder->record(new CommentDeleted($command->getId()));
+        $this->eventBus->dispatch(new CommentDeleted($command->getId()));
     }
 }

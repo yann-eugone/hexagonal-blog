@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="application_command_bus"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Bus\SimpleCommandBus">
+            <argument type="service" id="command_bus"/>
+        </service>
+
+        <service id="application_event_bus"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Bus\SimpleEventBus">
+            <argument type="service" id="event_bus"/>
+        </service>
+
+    </services>
+
+</container>

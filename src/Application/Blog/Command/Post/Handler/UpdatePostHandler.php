@@ -3,9 +3,9 @@
 namespace Acme\Application\Blog\Command\Post\Handler;
 
 use Acme\Application\Blog\Command\Post\UpdatePost;
+use Acme\Application\Blog\Event\EventBus;
 use Acme\Application\Blog\Event\Post\PostUpdated;
 use Acme\Domain\Blog\Repository\PostRepository;
-use SimpleBus\Message\Recorder\RecordsMessages;
 
 class UpdatePostHandler
 {
@@ -15,22 +15,22 @@ class UpdatePostHandler
     private $repository;
 
     /**
-     * @var RecordsMessages
+     * @var EventBus
      */
-    private $eventRecorder;
+    private $eventBus;
 
     /**
-     * @param PostRepository  $repository
-     * @param RecordsMessages $eventRecorder
+     * @param PostRepository $repository
+     * @param EventBus       $eventBus
      */
-    public function __construct(PostRepository $repository, RecordsMessages $eventRecorder)
+    public function __construct(PostRepository $repository, EventBus $eventBus)
     {
         $this->repository = $repository;
-        $this->eventRecorder = $eventRecorder;
+        $this->eventBus = $eventBus;
     }
 
     /**
-     * @param \Acme\Application\Blog\Command\Post\UpdatePost $command
+     * @param UpdatePost $command
      */
     public function __invoke(UpdatePost $command)
     {
@@ -42,6 +42,6 @@ class UpdatePostHandler
 
         $this->repository->update($post);
 
-        $this->eventRecorder->record(new PostUpdated($post->getId()));
+        $this->eventBus->dispatch(new PostUpdated($post->getId()));
     }
 }

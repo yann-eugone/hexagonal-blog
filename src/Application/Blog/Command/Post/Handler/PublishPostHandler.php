@@ -2,11 +2,11 @@
 
 namespace Acme\Application\Blog\Command\Post\Handler;
 
-use Acme\Application\Blog\Command\Post\DeletePost;
+use Acme\Application\Blog\Command\Post\PublishPost;
+use Acme\Application\Blog\Event\EventBus;
 use Acme\Application\Blog\Event\Post\PostPublished;
 use Acme\Domain\Blog\Repository\PostRepository;
 use DateTime;
-use SimpleBus\Message\Recorder\RecordsMessages;
 
 class PublishPostHandler
 {
@@ -16,24 +16,24 @@ class PublishPostHandler
     private $repository;
 
     /**
-     * @var RecordsMessages
+     * @var EventBus
      */
-    private $eventRecorder;
+    private $eventBus;
 
     /**
-     * @param PostRepository  $repository
-     * @param RecordsMessages $eventRecorder
+     * @param PostRepository $repository
+     * @param EventBus       $eventBus
      */
-    public function __construct(PostRepository $repository, RecordsMessages $eventRecorder)
+    public function __construct(PostRepository $repository, EventBus $eventBus)
     {
         $this->repository = $repository;
-        $this->eventRecorder = $eventRecorder;
+        $this->eventBus = $eventBus;
     }
 
     /**
-     * @param \Acme\Application\Blog\Command\Post\DeletePost $command
+     * @param PublishPost $command
      */
-    public function __invoke(DeletePost $command)
+    public function __invoke(PublishPost $command)
     {
         $post = $this->repository->getById($command->getId());
 
@@ -41,6 +41,6 @@ class PublishPostHandler
 
         $this->repository->update($post);
 
-        $this->eventRecorder->record(new PostPublished($command->getId()));
+        $this->eventBus->dispatch(new PostPublished($command->getId()));
     }
 }

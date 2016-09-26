@@ -3,9 +3,9 @@
 namespace Acme\Application\Blog\Command\Post\Handler;
 
 use Acme\Application\Blog\Command\Post\DeletePost;
+use Acme\Application\Blog\Event\EventBus;
 use Acme\Application\Blog\Event\Post\PostDeleted;
 use Acme\Domain\Blog\Repository\PostRepository;
-use SimpleBus\Message\Recorder\RecordsMessages;
 
 class DeletePostHandler
 {
@@ -15,22 +15,22 @@ class DeletePostHandler
     private $repository;
 
     /**
-     * @var RecordsMessages
+     * @var EventBus
      */
-    private $eventRecorder;
+    private $eventBus;
 
     /**
-     * @param PostRepository  $repository
-     * @param RecordsMessages $eventRecorder
+     * @param PostRepository $repository
+     * @param EventBus       $eventBus
      */
-    public function __construct(PostRepository $repository, RecordsMessages $eventRecorder)
+    public function __construct(PostRepository $repository, EventBus $eventBus)
     {
         $this->repository = $repository;
-        $this->eventRecorder = $eventRecorder;
+        $this->eventBus = $eventBus;
     }
 
     /**
-     * @param \Acme\Application\Blog\Command\Post\DeletePost $command
+     * @param DeletePost $command
      */
     public function __invoke(DeletePost $command)
     {
@@ -38,6 +38,6 @@ class DeletePostHandler
 
         $this->repository->delete($post);
 
-        $this->eventRecorder->record(new PostDeleted($command->getId()));
+        $this->eventBus->dispatch(new PostDeleted($command->getId()));
     }
 }
