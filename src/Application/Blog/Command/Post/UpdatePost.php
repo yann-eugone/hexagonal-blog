@@ -3,7 +3,6 @@
 namespace Acme\Application\Blog\Command\Post;
 
 use Acme\Domain\Blog\Model\Category;
-use Acme\Domain\Blog\Model\Post;
 use Acme\Domain\Blog\Model\Tag;
 
 class UpdatePost
@@ -39,14 +38,21 @@ class UpdatePost
     private $tags;
 
     /**
-     * @param Post $post
+     * @param int      $id
+     * @param string   $title
+     * @param string   $summary
+     * @param string   $body
+     * @param Category $category
+     * @param Tag[]    $tags
      */
-    public function __construct(Post $post)
+    public function __construct($id, $title, $summary, $body, Category $category, $tags)
     {
-        $this->id = $post->getId();
-        $this->title = $post->getTitle();
-        $this->summary = $post->getSummary();
-        $this->body = $post->getBody();
+        $this->id = $id;
+        $this->title = $title;
+        $this->summary = $summary;
+        $this->body = $body;
+        $this->category = $category;
+        $this->tags = $tags;
     }
 
     /**

@@ -6,6 +6,16 @@
 
     <services>
 
+        <service id="command_factory.post"
+                 class="Acme\Application\Blog\Command\Post\PostCommandFactory"
+                 autowire="true">
+        </service>
+
+        <service id="command_factory.comment"
+                 class="Acme\Application\Blog\Command\Comment\CommentCommandFactory"
+                 autowire="true">
+        </service>
+
         <service id="command_handler.create_post"
                  class="Acme\Application\Blog\Command\Post\Handler\CreatePostHandler"
                  autowire="true">

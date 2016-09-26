@@ -2,8 +2,7 @@
 
 namespace Acme\Infrastructure\Bundle\BlogBundle\Controller;
 
-use Acme\Application\Blog\Command\Post\CreatePost;
-use Acme\Application\Blog\Command\Post\UpdatePost;
+use Acme\Application\Blog\Command\Post\PostCommandFactory;
 use Acme\Domain\Blog\Exception\Post\PostNotFoundException;
 use Acme\Domain\Blog\Repository\PostRepository;
 use Acme\Infrastructure\Bundle\BlogBundle\Form\Type\CreatePostType;
@@ -80,7 +79,7 @@ class PostController extends Controller
      */
     public function createAction(Request $request)
     {
-        $command = new CreatePost($this->getUser());
+        $command = $this->getCommandFactory()->newCreateCommand($this->getUser());
         $form = $this->getFormFactory()->create(CreatePostType::class, $command);
 
         $form->handleRequest($request);
@@ -114,7 +113,7 @@ class PostController extends Controller
             throw new NotFoundHttpException(null, $exception);
         }
 
-        $command = new UpdatePost($post);
+        $command = $this->getCommandFactory()->newUpdateCommand($post);
 
         $form = $this->getFormFactory()->create(UpdatePostType::class, $command);
 
@@ -138,6 +137,14 @@ class PostController extends Controller
     public function getRepository()
     {
         return $this->get('repository.post');
+    }
+
+    /**
+     * @return PostCommandFactory
+     */
+    public function getCommandFactory()
+    {
+        return $this->get('command_factory.post');
     }
 
     /**

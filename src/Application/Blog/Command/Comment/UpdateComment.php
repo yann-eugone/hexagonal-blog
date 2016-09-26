@@ -2,8 +2,6 @@
 
 namespace Acme\Application\Blog\Command\Comment;
 
-use Acme\Domain\Blog\Model\Comment;
-
 class UpdateComment
 {
     /**
@@ -17,12 +15,13 @@ class UpdateComment
     private $text;
 
     /**
-     * @param Comment $comment
+     * @param int    $id
+     * @param string $text
      */
-    public function __construct(Comment $comment)
+    public function __construct($id, $text)
     {
-        $this->id = $comment->getId();
-        $this->text = $comment->getComment();
+        $this->id = $id;
+        $this->text = $text;
     }
 
     /**

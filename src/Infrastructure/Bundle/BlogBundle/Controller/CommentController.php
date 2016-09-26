@@ -2,8 +2,7 @@
 
 namespace Acme\Infrastructure\Bundle\BlogBundle\Controller;
 
-use Acme\Application\Blog\Command\Comment\CreateComment;
-use Acme\Application\Blog\Command\Comment\UpdateComment;
+use Acme\Application\Blog\Command\Comment\CommentCommandFactory;
 use Acme\Domain\Blog\Exception\Post\PostNotFoundException;
 use Acme\Domain\Blog\Repository\CommentRepository;
 use Acme\Domain\Blog\Repository\PostRepository;
@@ -62,7 +61,7 @@ class CommentController extends Controller
             throw new NotFoundHttpException(null, $exception);
         }
 
-        $command = new CreateComment($this->getUser(), $post);
+        $command = $this->getCommandFactory()->newCreateCommand($this->getUser(), $post);
 
         $form = $this->getFormFactory()->create(
             CreateCommentType::class,
@@ -111,7 +110,7 @@ class CommentController extends Controller
             throw new NotFoundHttpException(null, $exception);
         }
 
-        $command = new UpdateComment($comment);
+        $command = $this->getCommandFactory()->newUpdateCommand($comment);
 
         $form = $this->getFormFactory()->create(
             UpdateCommentType::class,
@@ -150,6 +149,14 @@ class CommentController extends Controller
     public function getPostRepository()
     {
         return $this->get('repository.post');
+    }
+
+    /**
+     * @return CommentCommandFactory
+     */
+    public function getCommandFactory()
+    {
+        return $this->get('command_factory.comment');
     }
 
     /**
