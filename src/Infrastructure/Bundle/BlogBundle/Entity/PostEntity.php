@@ -55,13 +55,6 @@ class PostEntity implements PostInterface
     private $postedAt;
 
     /**
-     * @var DateTime|null
-     *
-     * @ORM\Column(type="datetimetz", nullable=true)
-     */
-    private $publishedAt;
-
-    /**
      * @var Author
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Author")
@@ -166,22 +159,6 @@ class PostEntity implements PostInterface
     public function setPostedAt($postedAt)
     {
         $this->postedAt = $postedAt;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getPublishedAt()
-    {
-        return $this->publishedAt;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setPublishedAt($publishedAt)
-    {
-        $this->publishedAt = $publishedAt;
     }
 
     /**

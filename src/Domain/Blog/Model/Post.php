@@ -72,16 +72,6 @@ interface Post
     public function setPostedAt($postedAt);
 
     /**
-     * @return DateTime
-     */
-    public function getPublishedAt();
-
-    /**
-     * @param DateTime $publishedAt
-     */
-    public function setPublishedAt($publishedAt);
-
-    /**
      * @return Author
      */
     public function getAuthor();

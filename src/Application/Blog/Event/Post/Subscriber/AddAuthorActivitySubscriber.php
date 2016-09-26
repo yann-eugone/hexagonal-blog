@@ -4,7 +4,6 @@ namespace Acme\Application\Blog\Event\Post\Subscriber;
 
 use Acme\Application\Blog\Event\Post\PostCreated;
 use Acme\Application\Blog\Event\Post\PostDeleted;
-use Acme\Application\Blog\Event\Post\PostPublished;
 use Acme\Application\Blog\Event\Post\PostUpdated;
 use Acme\Domain\Blog\Model\AuthorActivity;
 use Acme\Domain\Blog\Repository\AuthorActivityRepository;
@@ -34,14 +33,13 @@ class AddAuthorActivitySubscriber
     }
 
     /**
-     * @param PostCreated|PostUpdated|PostPublished|PostDeleted $event
+     * @param PostCreated|PostUpdated|PostDeleted $event
      */
     public function __invoke($event)
     {
         $actionMap = [
             PostCreated::class => AuthorActivity::CREATE_POST,
             PostUpdated::class => AuthorActivity::UPDATE_POST,
-            PostPublished::class => AuthorActivity::PUBLISH_POST,
             PostDeleted::class => AuthorActivity::DELETE_POST,
         ];
 
