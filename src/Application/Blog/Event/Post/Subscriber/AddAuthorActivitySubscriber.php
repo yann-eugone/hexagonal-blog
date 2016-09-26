@@ -43,6 +43,8 @@ class AddAuthorActivitySubscriber
             PostDeleted::class => AuthorActivity::DELETE_POST,
         ];
 
+        dump($event);
+
         if (!isset($actionMap[get_class($event)])) {
             return; //todo at this point we should probably report something
         }

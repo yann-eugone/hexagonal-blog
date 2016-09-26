@@ -6,6 +6,16 @@
 
     <services>
 
+        <service id="event_factory.post"
+                 class="Acme\Application\Blog\Event\Post\PostEventFactory"
+                 autowire="true">
+        </service>
+
+        <service id="event_factory.comment"
+                 class="Acme\Application\Blog\Event\Comment\CommentEventFactory"
+                 autowire="true">
+        </service>
+
         <service id="event_subscriber.add_post_author_activity"
                  class="Acme\Application\Blog\Event\Post\Subscriber\AddAuthorActivitySubscriber"
                  autowire="true">

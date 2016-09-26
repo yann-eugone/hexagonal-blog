@@ -4,7 +4,7 @@ namespace Acme\Application\Blog\Command\Post\Handler;
 
 use Acme\Application\Blog\Command\Post\CreatePost;
 use Acme\Application\Blog\Event\EventBus;
-use Acme\Application\Blog\Event\Post\PostCreated;
+use Acme\Application\Blog\Event\Post\PostEventFactory;
 use Acme\Domain\Blog\Repository\PostRepository;
 use DateTime;
 
@@ -16,17 +16,24 @@ class CreatePostHandler
     private $repository;
 
     /**
+     * @var PostEventFactory
+     */
+    private $eventFactory;
+
+    /**
      * @var EventBus
      */
     private $eventBus;
 
     /**
-     * @param PostRepository $repository
-     * @param EventBus       $eventBus
+     * @param PostRepository   $repository
+     * @param PostEventFactory $eventFactory
+     * @param EventBus         $eventBus
      */
-    public function __construct(PostRepository $repository, EventBus $eventBus)
+    public function __construct(PostRepository $repository, PostEventFactory $eventFactory, EventBus $eventBus)
     {
         $this->repository = $repository;
+        $this->eventFactory = $eventFactory;
         $this->eventBus = $eventBus;
     }
 
@@ -49,6 +56,6 @@ class CreatePostHandler
 
         $this->repository->create($post);
 
-        $this->eventBus->dispatch(new PostCreated($post->getId()));
+        $this->eventBus->dispatch($this->eventFactory->newCreatedEvent($post));
     }
 }

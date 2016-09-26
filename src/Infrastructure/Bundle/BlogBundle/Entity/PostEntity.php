@@ -211,4 +211,17 @@ class PostEntity implements PostInterface
             $this->tags->add($tag);
         }
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function __clone()
+    {
+        $tags = $this->getTags();
+
+        $this->tags = new ArrayCollection();
+        foreach ($tags as $tag) {
+            $this->tags->add($tag);
+        }
+    }
 }

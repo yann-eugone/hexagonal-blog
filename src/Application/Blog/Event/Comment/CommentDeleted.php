@@ -2,6 +2,8 @@
 
 namespace Acme\Application\Blog\Event\Comment;
 
+use DateTime;
+
 class CommentDeleted
 {
     /**
@@ -10,11 +12,18 @@ class CommentDeleted
     private $id;
 
     /**
-     * @param int $id
+     * @var DateTime
      */
-    public function __construct($id)
+    private $date;
+
+    /**
+     * @param int      $id
+     * @param DateTime $date
+     */
+    public function __construct($id, DateTime $date)
     {
         $this->id = $id;
+        $this->date = $date;
     }
 
     /**
@@ -23,5 +32,13 @@ class CommentDeleted
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 }
