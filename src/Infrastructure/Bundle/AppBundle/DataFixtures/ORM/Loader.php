@@ -24,6 +24,8 @@ class Loader implements FixtureInterface, ContainerAwareInterface
         Fixtures::load(
             [
                 sprintf($pattern, 'user'),
+                sprintf($pattern, 'tag'),
+                sprintf($pattern, 'category'),
             ],
             $manager,
             [

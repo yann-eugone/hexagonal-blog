@@ -42,6 +42,8 @@ class CreatePostHandler
         $post->setTitle($command->getTitle());
         $post->setSummary($command->getSummary());
         $post->setBody($command->getBody());
+        $post->setCategory($command->getCategory());
+        $post->setTags($command->getTags());
         $post->setAuthor($command->getAuthor());
         $post->setPostedAt(new DateTime());
 

@@ -1,0 +1,9 @@
+Acme\Infrastructure\Bundle\BlogBundle\Entity\TagEntity:
+    tag_hexagonal:
+        label: hexagonal
+    tag_architecture:
+        label: architecture
+    tag_php:
+        label: php
+    tag_symfony:
+        label: symfony

@@ -1,0 +1,7 @@
+Acme\Infrastructure\Bundle\BlogBundle\Entity\CategoryEntity:
+    category_tutorial:
+        label: Tutorial
+    category_workshop:
+        label: Workshop
+    category_discover:
+        label: Discover

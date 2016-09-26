@@ -39,6 +39,8 @@ class UpdatePostHandler
         $post->setTitle($command->getTitle());
         $post->setSummary($command->getSummary());
         $post->setBody($command->getBody());
+        $post->setCategory($command->getCategory());
+        $post->setTags($command->getTags());
 
         $this->repository->update($post);
 

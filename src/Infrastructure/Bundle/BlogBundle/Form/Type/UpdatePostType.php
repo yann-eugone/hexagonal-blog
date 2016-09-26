@@ -3,16 +3,16 @@
 namespace Acme\Infrastructure\Bundle\BlogBundle\Form\Type;
 
 use Acme\Application\Blog\Command\Post\UpdatePost;
+use Acme\Infrastructure\Bundle\BlogBundle\Entity\CategoryEntity;
+use Acme\Infrastructure\Bundle\BlogBundle\Entity\TagEntity;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\DataMapperInterface;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UpdatePostType extends AbstractType implements DataMapperInterface
+class UpdatePostType extends AbstractType
 {
     /**
      * @inheritDoc
@@ -20,11 +20,11 @@ class UpdatePostType extends AbstractType implements DataMapperInterface
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', HiddenType::class)
             ->add('title', TextType::class)
             ->add('summary', TextType::class)
             ->add('body', TextareaType::class)
-            ->setDataMapper($this)
+            ->add('category', EntityType::class, ['class' => CategoryEntity::class])
+            ->add('tags', EntityType::class, ['class' => TagEntity::class, 'multiple' => true])
         ;
     }
 
@@ -37,40 +37,8 @@ class UpdatePostType extends AbstractType implements DataMapperInterface
             ->setDefaults(
                 [
                     'data_class' => UpdatePost::class,
-                    'empty_data' => null,
                 ]
             )
         ;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function mapDataToForms($data, $forms)
-    {
-        /** @var \Acme\Application\Blog\Command\Post\UpdatePost $data */
-        $forms = iterator_to_array($forms);
-        /** @var FormInterface[] $forms */
-
-        $forms['id']->setData($data ? $data->getId() : null);
-        $forms['title']->setData($data ? $data->getTitle() : null);
-        $forms['summary']->setData($data ? $data->getSummary() : null);
-        $forms['body']->setData($data ? $data->getBody() : null);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function mapFormsToData($forms, &$data)
-    {
-        $forms = iterator_to_array($forms);
-        /** @var FormInterface[] $forms */
-
-        $data = new UpdatePost(
-            $forms['id']->getData(),
-            $forms['title']->getData(),
-            $forms['summary']->getData(),
-            $forms['body']->getData()
-        );
     }
 }

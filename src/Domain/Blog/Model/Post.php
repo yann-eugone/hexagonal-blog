@@ -42,6 +42,26 @@ interface Post
     public function setBody($body);
 
     /**
+     * @return Category
+     */
+    public function getCategory();
+
+    /**
+     * @param Category $category
+     */
+    public function setCategory($category);
+
+    /**
+     * @return Tag[]
+     */
+    public function getTags();
+
+    /**
+     * @param Tag[] $tags
+     */
+    public function setTags($tags);
+
+    /**
      * @return DateTime|null
      */
     public function getPostedAt();

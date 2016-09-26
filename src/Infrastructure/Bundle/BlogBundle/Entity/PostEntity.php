@@ -3,8 +3,12 @@
 namespace Acme\Infrastructure\Bundle\BlogBundle\Entity;
 
 use Acme\Domain\Blog\Model\Author;
+use Acme\Domain\Blog\Model\Category;
 use Acme\Domain\Blog\Model\Post as PostInterface;
+use Acme\Domain\Blog\Model\Tag;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -65,11 +69,31 @@ class PostEntity implements PostInterface
     private $author;
 
     /**
+     * @var Category
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Category")
+     */
+    private $category;
+
+    /**
+     * @var Tag[]|Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Acme\Domain\Blog\Model\Tag")
+     * @ORM\JoinTable(name="blog_post_tag")
+     */
+    private $tags;
+
+    /**
      * @return string
      */
     public function __toString()
     {
         return (string) $this->title;
+    }
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -174,5 +198,40 @@ class PostEntity implements PostInterface
     public function setAuthor($author)
     {
         $this->author = $author;
+    }
+
+    /**
+     * @return Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param Category $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getTags()
+    {
+        return $this->tags->toArray();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setTags($tags)
+    {
+        $this->tags->clear();
+        foreach ($tags as $tag) {
+            $this->tags->add($tag);
+        }
     }
 }

@@ -18,25 +18,11 @@ class UpdateComment
 
     /**
      * @param Comment $comment
-     *
-     * @return UpdateComment
      */
-    public static function fromComment(Comment $comment)
+    public function __construct(Comment $comment)
     {
-        return new self(
-            $comment->getId(),
-            $comment->getComment()
-        );
-    }
-
-    /**
-     * @param int    $id
-     * @param string $text
-     */
-    public function __construct($id, $text)
-    {
-        $this->id = $id;
-        $this->text = $text;
+        $this->id = $comment->getId();
+        $this->text = $comment->getComment();
     }
 
     /**
@@ -53,5 +39,13 @@ class UpdateComment
     public function getText()
     {
         return $this->text;
+    }
+
+    /**
+     * @param string $text
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
     }
 }

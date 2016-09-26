@@ -29,13 +29,11 @@ class CreateComment
     private $comment;
 
     /**
-     * @param string $text
      * @param Author $author
      * @param Post   $post
      */
-    public function __construct($text, Author $author, Post $post)
+    public function __construct(Author $author, Post $post)
     {
-        $this->text = $text;
         $this->author = $author;
         $this->post = $post;
     }
@@ -46,6 +44,14 @@ class CreateComment
     public function getText()
     {
         return $this->text;
+    }
+
+    /**
+     * @param string $text
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
     }
 
     /**

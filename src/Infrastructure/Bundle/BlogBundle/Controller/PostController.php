@@ -20,16 +20,26 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PostController extends Controller
 {
     /**
-     * @Route("/posts", name="post_list", defaults={"_format" = "html"})
+     * @Route("/posts", name="post_list")
+     * @Route("/posts/by-category/{category}", name="post_list_by_category", requirements={"category" = "\d+"})
+     * @Route("/posts/by-tag/{tag}", name="post_list_by_tag", requirements={"tag" = "\d+"})
      * @Method("GET")
      *
      * @param Request $request
      *
      * @return Response
      */
-    public function listAction(Request $request)
+    public function listAction(Request $request, $category = null, $tag = null)
     {
-        $posts = $this->getRepository()->list([]);
+        $criteria = [];
+        if ($category) {
+            $criteria['category'] = $category;
+        }
+        if ($tag) {
+            $criteria['tag'] = $tag;
+        }
+
+        $posts = $this->getRepository()->list($criteria);
 
         return $this->render(
             ':blog/post:list.html.twig',
@@ -70,10 +80,8 @@ class PostController extends Controller
      */
     public function createAction(Request $request)
     {
-        $form = $this->getFormFactory()->create(
-            CreatePostType::class,
-            new CreatePost(null, null, null, $this->getUser())
-        );
+        $command = new CreatePost($this->getUser());
+        $form = $this->getFormFactory()->create(CreatePostType::class, $command);
 
         $form->handleRequest($request);
 
@@ -83,9 +91,6 @@ class PostController extends Controller
                 ['form' => $form->createView()]
             );
         }
-
-        /** @var $command \Acme\Application\Blog\Command\Post\CreatePost */
-        $command = $form->getData();
 
         $this->getMessageBus()->handle($command);
 
@@ -109,10 +114,9 @@ class PostController extends Controller
             throw new NotFoundHttpException(null, $exception);
         }
 
-        $form = $this->getFormFactory()->create(
-            UpdatePostType::class,
-            UpdatePost::fromPost($post)
-        );
+        $command = new UpdatePost($post);
+
+        $form = $this->getFormFactory()->create(UpdatePostType::class, $command);
 
         $form->handleRequest($request);
 
@@ -122,9 +126,6 @@ class PostController extends Controller
                 ['post' => $post, 'form' => $form->createView()]
             );
         }
-
-        /** @var $command \Acme\Application\Blog\Command\Post\UpdatePost */
-        $command = $form->getData();
 
         $this->getMessageBus()->handle($command);
 
