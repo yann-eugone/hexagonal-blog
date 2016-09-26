@@ -11,12 +11,5 @@ interface PostNormalizer
      *
      * @return array
      */
-    public function normalizeToCommand(Post $post);
-
-    /**
-     * @param Post $post
-     *
-     * @return array
-     */
     public function normalizeToEvent(Post $post);
 }

@@ -24,14 +24,6 @@ class SymfonyCommentNormalizer implements CommentNormalizer
     /**
      * @inheritDoc
      */
-    public function normalizeToCommand(Comment $comment)
-    {
-        return $this->normalizer->normalize($comment, 'json');
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function normalizeToEvent(Comment $comment)
     {
         return $this->normalizer->normalize($comment, 'json');

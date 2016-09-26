@@ -24,14 +24,6 @@ class SymfonyPostNormalizer implements PostNormalizer
     /**
      * @inheritDoc
      */
-    public function normalizeToCommand(Post $post)
-    {
-        return $this->normalizer->normalize($post, 'json');
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function normalizeToEvent(Post $post)
     {
         return $this->normalizer->normalize($post, 'json');
