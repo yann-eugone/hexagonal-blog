@@ -2,6 +2,7 @@
 
 namespace Acme\Infrastructure\Bundle\BlogBundle\Controller;
 
+use Acme\Application\Blog\Command\CommandBus;
 use Acme\Application\Blog\Command\Comment\CommentCommandFactory;
 use Acme\Domain\Blog\Exception\Post\PostNotFoundException;
 use Acme\Domain\Blog\Repository\CommentRepository;
@@ -10,7 +11,6 @@ use Acme\Infrastructure\Bundle\BlogBundle\Form\Type\CreateCommentType;
 use Acme\Infrastructure\Bundle\BlogBundle\Form\Type\UpdateCommentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,7 +81,7 @@ class CommentController extends Controller
             );
         }
 
-        $this->getMessageBus()->handle($command);
+        $this->getCommandBus()->handle($command);
 
         return $this->redirectToRoute('post', ['id' => $post->getId()]);
     }
@@ -130,7 +130,7 @@ class CommentController extends Controller
             );
         }
 
-        $this->getMessageBus()->handle($command);
+        $this->getCommandBus()->handle($command);
 
         return $this->redirectToRoute('post', ['id' => $post->getId()]);
     }
@@ -168,10 +168,10 @@ class CommentController extends Controller
     }
 
     /**
-     * @return MessageBus
+     * @return CommandBus
      */
-    public function getMessageBus()
+    public function getCommandBus()
     {
-        return $this->get('command_bus');
+        return $this->get('application_command_bus');
     }
 }
