@@ -3,5 +3,4 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: framework/ }
-    - { resource: bundles/ }
     - { resource: services/ }
