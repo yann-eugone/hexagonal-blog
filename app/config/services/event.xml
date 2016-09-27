@@ -34,7 +34,18 @@
         </service>
 
         <service id="event_subscriber.increment_post_counter"
-                 class="Acme\Application\Blog\Event\Post\Subscriber\IncrementCounterSubscriber"
+                 class="Acme\Application\Blog\Event\Post\Subscriber\IncrementAuthorCounterSubscriber"
+                 autowire="true">
+            <tag name="event_subscriber"
+                 subscribes_to="Acme\Application\Blog\Event\Post\PostCreated"
+                 method="__invoke"/>
+            <tag name="event_subscriber"
+                 subscribes_to="Acme\Application\Blog\Event\Post\PostDeleted"
+                 method="__invoke"/>
+        </service>
+
+        <service id="event_subscriber.increment_taxonomy_counter"
+                 class="Acme\Application\Blog\Event\Post\Subscriber\IncrementTaxonomyCounterSubscriber"
                  autowire="true">
             <tag name="event_subscriber"
                  subscribes_to="Acme\Application\Blog\Event\Post\PostCreated"
@@ -59,7 +70,7 @@
         </service>
 
         <service id="event_subscriber.increment_comment_counter"
-                 class="Acme\Application\Blog\Event\Comment\Subscriber\IncrementCounterSubscriber"
+                 class="Acme\Application\Blog\Event\Comment\Subscriber\IncrementAuthorCounterSubscriber"
                  autowire="true">
             <tag name="event_subscriber"
                  subscribes_to="Acme\Application\Blog\Event\Comment\CommentCreated"

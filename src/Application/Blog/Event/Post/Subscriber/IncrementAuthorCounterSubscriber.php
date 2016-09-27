@@ -8,7 +8,7 @@ use Acme\Domain\Blog\Repository\PostCounterRepository;
 use Acme\Domain\Blog\Repository\PostRepository;
 use DateTime;
 
-class IncrementCounterSubscriber
+class IncrementAuthorCounterSubscriber
 {
     /**
      * @var PostRepository

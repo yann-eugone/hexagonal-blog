@@ -24,6 +24,12 @@
             <argument>Acme\Infrastructure\Bundle\BlogBundle\Entity\AuthorActivityEntity</argument>
         </service>
 
+        <service id="repository.taxonomy_count"
+                 class="Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository\TaxonomyCountRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>Acme\Infrastructure\Bundle\BlogBundle\Entity\TaxonomyCount</argument>
+        </service>
+
     </services>
 
 </container>
