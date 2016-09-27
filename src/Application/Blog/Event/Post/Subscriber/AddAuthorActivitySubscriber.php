@@ -43,15 +43,23 @@ class AddAuthorActivitySubscriber
             PostDeleted::class => AuthorActivity::DELETE_POST,
         ];
 
-        dump($event);
-
         if (!isset($actionMap[get_class($event)])) {
             return; //todo at this point we should probably report something
+        }
+
+        $payload = [];
+        if ($event instanceof PostCreated) {
+            $payload = $event->getData();
+        } elseif ($event instanceof PostUpdated) {
+            $before = $event->getDataBefore();
+            $after = $event->getDataAfter();
+
+            $payload = []; //todo changeset between $before & $after
         }
 
         $post = $this->postRepository->getById($event->getId());
 
         $action = $actionMap[get_class($event)];
-        $this->activityRepository->add($action, $post->getAuthor(), new DateTime(), $post);
+        $this->activityRepository->add($action, $post->getAuthor(), new DateTime(), $post, $payload);
     }
 }

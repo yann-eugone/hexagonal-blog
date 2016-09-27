@@ -20,6 +20,7 @@ interface AuthorActivityRepository
      * @param Author   $author
      * @param DateTime $date
      * @param object   $subject
+     * @param array    $payload
      */
-    public function add($action, Author $author, DateTime $date, $subject);
+    public function add($action, Author $author, DateTime $date, $subject, array $payload);
 }

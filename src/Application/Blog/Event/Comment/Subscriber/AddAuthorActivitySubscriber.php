@@ -47,9 +47,19 @@ class AddAuthorActivitySubscriber
             return; //todo at this point we should probably report something
         }
 
+        $payload = [];
+        if ($event instanceof CommentCreated) {
+            $payload = $event->getData();
+        } elseif ($event instanceof CommentUpdated) {
+            $before = $event->getDataBefore();
+            $after = $event->getDataAfter();
+
+            $payload = []; //todo changeset between $before & $after
+        }
+
         $comment = $this->commentRepository->getById($event->getId());
 
         $action = $actionMap[get_class($event)];
-        $this->activityRepository->add($action, $comment->getAuthor(), new DateTime(), $comment);
+        $this->activityRepository->add($action, $comment->getAuthor(), new DateTime(), $comment, $payload);
     }
 }

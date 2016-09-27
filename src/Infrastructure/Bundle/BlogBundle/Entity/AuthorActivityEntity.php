@@ -46,6 +46,13 @@ class AuthorActivityEntity implements AuthorActivity
     private $date;
 
     /**
+     * @var array
+     *
+     * @ORM\Column(type="json_array")
+     */
+    private $payload;
+
+    /**
      * @var Post
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Post")
@@ -64,12 +71,14 @@ class AuthorActivityEntity implements AuthorActivity
      * @param Author   $author
      * @param DateTime $date
      * @param object   $subject
+     * @param array    $payload
      */
-    public function __construct($action, Author $author, DateTime $date, $subject)
+    public function __construct($action, Author $author, DateTime $date, $subject, array $payload)
     {
         $this->action = $action;
         $this->author = $author;
         $this->date = $date;
+        $this->payload = $payload;
 
         if ($subject instanceof Comment) {
             $this->comment = $subject;
@@ -111,6 +120,14 @@ class AuthorActivityEntity implements AuthorActivity
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPayload()
+    {
+        return $this->payload;
     }
 
     /**

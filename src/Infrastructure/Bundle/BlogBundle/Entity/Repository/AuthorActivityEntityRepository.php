@@ -30,9 +30,9 @@ class AuthorActivityEntityRepository extends EntityRepository implements AuthorA
     /**
      * @inheritDoc
      */
-    public function add($action, Author $author, DateTime $date, $subject)
+    public function add($action, Author $author, DateTime $date, $subject, array $payload)
     {
-        $activity = new AuthorActivityEntity($action, $author, $date, $subject);
+        $activity = new AuthorActivityEntity($action, $author, $date, $subject, $payload);
 
         $this->getEntityManager()->persist($activity);
         $this->getEntityManager()->flush($activity);

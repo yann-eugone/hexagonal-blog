@@ -24,6 +24,11 @@ interface AuthorActivity
     public function getDate();
 
     /**
+     * @return array
+     */
+    public function getPayload();
+
+    /**
      * @return object
      */
     public function getSubject();
