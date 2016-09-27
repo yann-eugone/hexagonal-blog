@@ -29,7 +29,7 @@ class CommentEntityRepository extends EntityRepository implements CommentReposit
     /**
      * @inheritDoc
      */
-    public function list(Post $post, array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    public function search(Post $post, array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
         $criteria['post'] = $post;
 

@@ -23,7 +23,7 @@ interface PostRepository
      *
      * @return Post[]
      */
-    public function list(array $criteria, array $orderBy = null, $limit = null, $offset = null);
+    public function search(array $criteria, array $orderBy = null, $limit = null, $offset = null);
 
     /**
      * @param int $id

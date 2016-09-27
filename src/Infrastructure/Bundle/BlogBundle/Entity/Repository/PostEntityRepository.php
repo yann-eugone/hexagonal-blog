@@ -28,7 +28,7 @@ class PostEntityRepository extends EntityRepository implements PostRepositoryInt
     /**
      * @inheritdoc
      */
-    public function list(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    public function search(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
         $builder = $this->createQueryBuilder('post');
 

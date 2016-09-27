@@ -25,7 +25,7 @@ interface CommentRepository
      *
      * @return Comment[]
      */
-    public function list(Post $post, array $criteria, array $orderBy = null, $limit = null, $offset = null);
+    public function search(Post $post, array $criteria, array $orderBy = null, $limit = null, $offset = null);
 
     /**
      * @param int $id

@@ -38,7 +38,7 @@ class PostController extends Controller
             $criteria['tag'] = $tag;
         }
 
-        $posts = $this->getRepository()->list($criteria);
+        $posts = $this->getRepository()->search($criteria);
 
         return $this->render(
             ':blog/post:list.html.twig',

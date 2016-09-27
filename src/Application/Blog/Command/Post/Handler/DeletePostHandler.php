@@ -44,7 +44,7 @@ class DeletePostHandler
     {
         $post = $this->repository->getById($command->getId());
 
-        $event = $this->eventFactory->newCreatedEvent($post);
+        $event = $this->eventFactory->newDeletedEvent($post);
 
         $this->repository->delete($post);
 

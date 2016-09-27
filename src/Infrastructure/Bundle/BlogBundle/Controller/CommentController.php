@@ -36,7 +36,7 @@ class CommentController extends Controller
             throw new NotFoundHttpException(null, $exception);
         }
 
-        $comments = $this->getRepository()->list($post, []);
+        $comments = $this->getRepository()->search($post, []);
 
         return $this->render(
             ':blog/comment:list.html.twig',
