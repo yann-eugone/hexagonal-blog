@@ -26,6 +26,6 @@ class SymfonyCommentNormalizer implements CommentNormalizer
      */
     public function normalizeToEvent(Comment $comment)
     {
-        return $this->normalizer->normalize($comment, 'json');
+        return $this->normalizer->normalize($comment, 'json', ['groups' => ['event_bus']]);
     }
 }

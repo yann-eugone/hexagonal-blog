@@ -7,6 +7,7 @@ use Acme\Domain\Blog\Model\Comment;
 use Acme\Domain\Blog\Model\Post;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository\CommentEntityRepository")
@@ -27,6 +28,8 @@ class CommentEntity implements Comment
      * @var string
      *
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"event_bus"})
      */
     private $comment;
 
@@ -34,6 +37,8 @@ class CommentEntity implements Comment
      * @var DateTime
      *
      * @ORM\Column(type="datetimetz")
+     *
+     * @Groups({"event_bus"})
      */
     private $postedAt;
 
@@ -121,5 +126,15 @@ class CommentEntity implements Comment
     public function setPost($post)
     {
         $this->post = $post;
+    }
+
+    /**
+     * @return mixed
+     *
+     * @Groups({"event_bus"})
+     */
+    public function getPostId()
+    {
+        return $this->post->getId();
     }
 }

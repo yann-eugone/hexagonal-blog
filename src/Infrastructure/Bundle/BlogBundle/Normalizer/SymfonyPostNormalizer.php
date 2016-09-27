@@ -26,6 +26,6 @@ class SymfonyPostNormalizer implements PostNormalizer
      */
     public function normalizeToEvent(Post $post)
     {
-        return $this->normalizer->normalize($post, 'json');
+        return $this->normalizer->normalize($post, 'json', ['groups' => ['event_bus']]);
     }
 }

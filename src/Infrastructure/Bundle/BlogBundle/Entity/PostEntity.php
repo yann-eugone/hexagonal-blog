@@ -10,6 +10,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository\PostEntityRepository")
@@ -30,6 +31,8 @@ class PostEntity implements PostInterface
      * @var string
      *
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"event_bus"})
      */
     private $title;
 
@@ -37,6 +40,8 @@ class PostEntity implements PostInterface
      * @var string
      *
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"event_bus"})
      */
     private $summary;
 
@@ -44,6 +49,8 @@ class PostEntity implements PostInterface
      * @var string
      *
      * @ORM\Column(type="text")
+     *
+     * @Groups({"event_bus"})
      */
     private $body;
 
@@ -51,6 +58,8 @@ class PostEntity implements PostInterface
      * @var DateTime
      *
      * @ORM\Column(type="datetimetz")
+     *
+     * @Groups({"event_bus"})
      */
     private $postedAt;
 
@@ -210,6 +219,26 @@ class PostEntity implements PostInterface
         foreach ($tags as $tag) {
             $this->tags->add($tag);
         }
+    }
+
+    /**
+     * @return mixed
+     *
+     * @Groups({"event_bus"})
+     */
+    public function getCategoryId()
+    {
+        return $this->category->getId();
+    }
+
+    /**
+     * @return array
+     *
+     * @Groups({"event_bus"})
+     */
+    public function getTagIds()
+    {
+        return $this->tags->map(function (Tag $tag) { return $tag->getId(); })->toArray();
     }
 
     /**
