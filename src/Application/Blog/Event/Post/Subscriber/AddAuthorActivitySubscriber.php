@@ -40,7 +40,7 @@ class AddAuthorActivitySubscriber
         $actionMap = [
             PostCreated::class => AuthorActivity::CREATE_POST,
             PostUpdated::class => AuthorActivity::UPDATE_POST,
-            PostDeleted::class => AuthorActivity::DELETE_POST,
+            //PostDeleted::class => AuthorActivity::DELETE_POST, //todo how to handle this ?
         ];
 
         if (!isset($actionMap[get_class($event)])) {

@@ -40,7 +40,7 @@ class AddAuthorActivitySubscriber
         $actionMap = [
             CommentCreated::class => AuthorActivity::CREATE_COMMENT,
             CommentUpdated::class => AuthorActivity::UPDATE_COMMENT,
-            CommentDeleted::class => AuthorActivity::DELETE_COMMENT,
+            //CommentDeleted::class => AuthorActivity::DELETE_COMMENT, //todo how to handle this ?
         ];
 
         if (!isset($actionMap[get_class($event)])) {

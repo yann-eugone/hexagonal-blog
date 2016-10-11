@@ -100,7 +100,7 @@ class DeleteCommentHandlerTest extends \PHPUnit_Framework_TestCase
             ->shouldNotBeCalled();
 
         $this->eventBus->dispatch(Argument::any())
-            ->shouldNotBeCalled(1);
+            ->shouldNotBeCalled();
 
         $handler = $this->handler();
         $handler($command);

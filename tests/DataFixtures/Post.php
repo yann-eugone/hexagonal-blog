@@ -31,7 +31,7 @@ class Post implements \Acme\Domain\Blog\Model\Post
         $postedAt = null,
         $author = null,
         $category = null,
-        $tags = null
+        $tags = []
     ) {
         $this->id = $id;
         $this->title = $title;
