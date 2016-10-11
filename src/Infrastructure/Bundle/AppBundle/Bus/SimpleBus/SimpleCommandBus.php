@@ -1,11 +1,11 @@
 <?php
 
-namespace Acme\Infrastructure\Bundle\AppBundle\Bus;
+namespace Acme\Infrastructure\Bundle\AppBundle\Bus\SimpleBus;
 
-use Acme\Application\Blog\Event\EventBus;
+use Acme\Application\Blog\Command\CommandBus;
 use SimpleBus\Message\Bus\MessageBus;
 
-class SimpleEventBus implements EventBus
+class SimpleCommandBus implements CommandBus
 {
     /**
      * @var MessageBus
@@ -23,8 +23,8 @@ class SimpleEventBus implements EventBus
     /**
      * @inheritDoc
      */
-    public function dispatch($event)
+    public function handle($command)
     {
-        $this->simpleBus->handle($event);
+        $this->simpleBus->handle($command);
     }
 }

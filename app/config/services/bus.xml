@@ -6,13 +6,13 @@
 
     <services>
 
-        <service id="application_command_bus"
-                 class="Acme\Infrastructure\Bundle\AppBundle\Bus\SimpleCommandBus">
+        <service id="command_bus.simple_bus"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Bus\SimpleBus\SimpleCommandBus">
             <argument type="service" id="command_bus"/>
         </service>
 
-        <service id="application_event_bus"
-                 class="Acme\Infrastructure\Bundle\AppBundle\Bus\SimpleEventBus">
+        <service id="event_bus.simple_bus"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Bus\SimpleBus\SimpleEventBus">
             <argument type="service" id="event_bus"/>
         </service>
 
