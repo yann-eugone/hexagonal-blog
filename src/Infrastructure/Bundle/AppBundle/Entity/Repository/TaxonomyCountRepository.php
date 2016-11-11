@@ -1,12 +1,12 @@
 <?php
 
-namespace Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository;
+namespace Acme\Infrastructure\Bundle\AppBundle\Entity\Repository;
 
 use Acme\Domain\Blog\Model\Category;
 use Acme\Domain\Blog\Model\Tag;
 use Acme\Domain\Blog\Repository\CategoryCounterRepository;
 use Acme\Domain\Blog\Repository\TagCounterRepository;
-use Acme\Infrastructure\Bundle\BlogBundle\Entity\TaxonomyCount;
+use Acme\Infrastructure\Bundle\AppBundle\Entity\TaxonomyCount;
 use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;

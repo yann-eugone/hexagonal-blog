@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Infrastructure\Bundle\BlogBundle\Entity;
+namespace Acme\Infrastructure\Bundle\AppBundle\Entity;
 
 use Acme\Domain\Blog\Model\Category;
 use Acme\Domain\Blog\Model\Tag;
@@ -8,8 +8,8 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository\TaxonomyCountRepository")
- * @ORM\Table(name="blog_taxonomy_count")
+ * @ORM\Entity(repositoryClass="Acme\Infrastructure\Bundle\AppBundle\Entity\Repository\TaxonomyCountRepository")
+ * @ORM\Table(name="taxonomy_count")
  */
 class TaxonomyCount
 {

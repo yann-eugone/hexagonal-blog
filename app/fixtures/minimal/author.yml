@@ -1,4 +1,4 @@
-Acme\Infrastructure\Bundle\AppBundle\Entity\User:
+Acme\Infrastructure\Bundle\AppBundle\Entity\AuthorEntity:
     user_admin:
         username (unique): admin
         password:          admin

@@ -1,14 +1,14 @@
 <?php
 
-namespace Acme\Infrastructure\Bundle\BlogBundle\Controller;
+namespace Acme\Infrastructure\Bundle\AppBundle\Controller;
 
 use Acme\Application\Blog\Command\CommandBus;
 use Acme\Application\Blog\Command\Comment\CommentCommandFactory;
 use Acme\Domain\Blog\Exception\Post\PostNotFoundException;
 use Acme\Domain\Blog\Repository\CommentRepository;
 use Acme\Domain\Blog\Repository\PostRepository;
-use Acme\Infrastructure\Bundle\BlogBundle\Form\Type\CreateCommentType;
-use Acme\Infrastructure\Bundle\BlogBundle\Form\Type\UpdateCommentType;
+use Acme\Infrastructure\Bundle\AppBundle\Form\Type\CreateCommentType;
+use Acme\Infrastructure\Bundle\AppBundle\Form\Type\UpdateCommentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

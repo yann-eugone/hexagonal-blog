@@ -8,9 +8,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="user")
+ * @ORM\Table(name="author")
  */
-class User implements UserInterface, Author
+class AuthorEntity implements UserInterface, Author
 {
     /**
      * @var int

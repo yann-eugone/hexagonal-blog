@@ -23,7 +23,7 @@ class Loader implements FixtureInterface, ContainerAwareInterface
 
         Fixtures::load(
             [
-                sprintf($pattern, 'user'),
+                sprintf($pattern, 'author'),
                 sprintf($pattern, 'tag'),
                 sprintf($pattern, 'category'),
             ],
@@ -32,7 +32,7 @@ class Loader implements FixtureInterface, ContainerAwareInterface
                 'providers' => [],
             ],
             [
-                new Processor\UserProcessor($this->container->get('security.password_encoder')),
+                new Processor\AuthorProcessor($this->container->get('security.password_encoder')),
             ]
         );
     }

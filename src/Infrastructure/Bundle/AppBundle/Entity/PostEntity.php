@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Infrastructure\Bundle\BlogBundle\Entity;
+namespace Acme\Infrastructure\Bundle\AppBundle\Entity;
 
 use Acme\Domain\Blog\Model\Author;
 use Acme\Domain\Blog\Model\Category;
@@ -13,8 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ORM\Entity(repositoryClass="Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository\PostEntityRepository")
- * @ORM\Table(name="blog_post")
+ * @ORM\Entity(repositoryClass="Acme\Infrastructure\Bundle\AppBundle\Entity\Repository\PostEntityRepository")
+ * @ORM\Table(name="post")
  */
 class PostEntity implements PostInterface
 {
@@ -81,7 +81,7 @@ class PostEntity implements PostInterface
      * @var Tag[]|Collection
      *
      * @ORM\ManyToMany(targetEntity="Acme\Domain\Blog\Model\Tag")
-     * @ORM\JoinTable(name="blog_post_tag")
+     * @ORM\JoinTable(name="post_tag")
      */
     private $tags;
 

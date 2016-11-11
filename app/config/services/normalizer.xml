@@ -7,12 +7,12 @@
     <services>
 
         <service id="normalizer.post"
-                 class="Acme\Infrastructure\Bundle\BlogBundle\Normalizer\SymfonyPostNormalizer"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Normalizer\SymfonyPostNormalizer"
                  autowire="true">
         </service>
 
         <service id="normalizer.comment"
-                 class="Acme\Infrastructure\Bundle\BlogBundle\Normalizer\SymfonyCommentNormalizer"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Normalizer\SymfonyCommentNormalizer"
                  autowire="true">
         </service>
 

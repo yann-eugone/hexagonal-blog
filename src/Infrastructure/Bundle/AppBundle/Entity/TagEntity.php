@@ -1,16 +1,16 @@
 <?php
 
-namespace Acme\Infrastructure\Bundle\BlogBundle\Entity;
+namespace Acme\Infrastructure\Bundle\AppBundle\Entity;
 
-use Acme\Domain\Blog\Model\Category as CategoryInterface;
+use Acme\Domain\Blog\Model\Tag as TagInterface;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="blog_category")
+ * @ORM\Table(name="tag")
  */
-class CategoryEntity implements CategoryInterface
+class TagEntity implements TagInterface
 {
     /**
      * @var int
@@ -69,7 +69,7 @@ class CategoryEntity implements CategoryInterface
      */
     public function setLabel($label)
     {
-        $this->label = $label;
+        $this->label = strtolower($label);
     }
 
     /**

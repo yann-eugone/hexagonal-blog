@@ -7,27 +7,27 @@
     <services>
 
         <service id="repository.post"
-                 class="Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository\PostEntityRepository">
+                 class="Acme\Infrastructure\Bundle\AppBundle\Entity\Repository\PostEntityRepository">
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
-            <argument>Acme\Infrastructure\Bundle\BlogBundle\Entity\PostEntity</argument>
+            <argument>Acme\Infrastructure\Bundle\AppBundle\Entity\PostEntity</argument>
         </service>
 
         <service id="repository.comment"
-                 class="Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository\CommentEntityRepository">
+                 class="Acme\Infrastructure\Bundle\AppBundle\Entity\Repository\CommentEntityRepository">
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
-            <argument>Acme\Infrastructure\Bundle\BlogBundle\Entity\CommentEntity</argument>
+            <argument>Acme\Infrastructure\Bundle\AppBundle\Entity\CommentEntity</argument>
         </service>
 
         <service id="repository.author_activity"
-                 class="Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository\AuthorActivityEntityRepository">
+                 class="Acme\Infrastructure\Bundle\AppBundle\Entity\Repository\AuthorActivityEntityRepository">
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
-            <argument>Acme\Infrastructure\Bundle\BlogBundle\Entity\AuthorActivityEntity</argument>
+            <argument>Acme\Infrastructure\Bundle\AppBundle\Entity\AuthorActivityEntity</argument>
         </service>
 
         <service id="repository.taxonomy_count"
-                 class="Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository\TaxonomyCountRepository">
+                 class="Acme\Infrastructure\Bundle\AppBundle\Entity\Repository\TaxonomyCountRepository">
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
-            <argument>Acme\Infrastructure\Bundle\BlogBundle\Entity\TaxonomyCount</argument>
+            <argument>Acme\Infrastructure\Bundle\AppBundle\Entity\TaxonomyCount</argument>
         </service>
 
     </services>

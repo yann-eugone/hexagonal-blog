@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository;
+namespace Acme\Infrastructure\Bundle\AppBundle\Entity\Repository;
 
 use Acme\Domain\Blog\Exception\Post\CannotCreatePostException;
 use Acme\Domain\Blog\Exception\Post\CannotDeletePostException;
@@ -10,7 +10,7 @@ use Acme\Domain\Blog\Model\Author;
 use Acme\Domain\Blog\Model\Post;
 use Acme\Domain\Blog\Repository\PostCounterRepository;
 use Acme\Domain\Blog\Repository\PostRepository as PostRepositoryInterface;
-use Acme\Infrastructure\Bundle\BlogBundle\Entity\PostEntity;
+use Acme\Infrastructure\Bundle\AppBundle\Entity\PostEntity;
 use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Exception;

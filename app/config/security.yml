@@ -6,7 +6,7 @@ security:
     providers:
         main:
             entity:
-                class:    Acme\Infrastructure\Bundle\AppBundle\Entity\User
+                class:    Acme\Infrastructure\Bundle\AppBundle\Entity\AuthorEntity
                 property: username
 
     firewalls:

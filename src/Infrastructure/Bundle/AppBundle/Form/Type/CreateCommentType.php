@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Infrastructure\Bundle\BlogBundle\Form\Type;
+namespace Acme\Infrastructure\Bundle\AppBundle\Form\Type;
 
 use Acme\Application\Blog\Command\Comment\CreateComment;
 use Symfony\Component\Form\AbstractType;

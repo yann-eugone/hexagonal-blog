@@ -1,10 +1,10 @@
 <?php
 
-namespace Acme\Infrastructure\Bundle\BlogBundle\Form\Type;
+namespace Acme\Infrastructure\Bundle\AppBundle\Form\Type;
 
-use Acme\Application\Blog\Command\Post\CreatePost;
-use Acme\Infrastructure\Bundle\BlogBundle\Entity\CategoryEntity;
-use Acme\Infrastructure\Bundle\BlogBundle\Entity\TagEntity;
+use Acme\Application\Blog\Command\Post\UpdatePost;
+use Acme\Infrastructure\Bundle\AppBundle\Entity\CategoryEntity;
+use Acme\Infrastructure\Bundle\AppBundle\Entity\TagEntity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CreatePostType extends AbstractType
+class UpdatePostType extends AbstractType
 {
     /**
      * @inheritDoc
@@ -36,7 +36,7 @@ class CreatePostType extends AbstractType
         $resolver
             ->setDefaults(
                 [
-                    'data_class' => CreatePost::class,
+                    'data_class' => UpdatePost::class,
                 ]
             )
         ;

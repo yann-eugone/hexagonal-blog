@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository;
+namespace Acme\Infrastructure\Bundle\AppBundle\Entity\Repository;
 
 use Acme\Domain\Blog\Exception\Comment\CannotCreateCommentException;
 use Acme\Domain\Blog\Exception\Comment\CannotDeleteCommentException;
@@ -11,7 +11,7 @@ use Acme\Domain\Blog\Model\Comment;
 use Acme\Domain\Blog\Model\Post;
 use Acme\Domain\Blog\Repository\CommentCounterRepository;
 use Acme\Domain\Blog\Repository\CommentRepository;
-use Acme\Infrastructure\Bundle\BlogBundle\Entity\CommentEntity;
+use Acme\Infrastructure\Bundle\AppBundle\Entity\CommentEntity;
 use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Exception;

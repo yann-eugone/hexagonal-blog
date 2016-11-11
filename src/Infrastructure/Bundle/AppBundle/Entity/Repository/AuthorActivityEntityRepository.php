@@ -1,10 +1,10 @@
 <?php
 
-namespace Acme\Infrastructure\Bundle\BlogBundle\Entity\Repository;
+namespace Acme\Infrastructure\Bundle\AppBundle\Entity\Repository;
 
 use Acme\Domain\Blog\Model\Author;
 use Acme\Domain\Blog\Repository\AuthorActivityRepository;
-use Acme\Infrastructure\Bundle\BlogBundle\Entity\AuthorActivityEntity;
+use Acme\Infrastructure\Bundle\AppBundle\Entity\AuthorActivityEntity;
 use DateTime;
 use Doctrine\ORM\EntityRepository;
 
