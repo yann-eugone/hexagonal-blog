@@ -35,6 +35,7 @@ class AuthorActivityEntity implements AuthorActivity
      * @var Author
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Author")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $author;
 
@@ -56,6 +57,7 @@ class AuthorActivityEntity implements AuthorActivity
      * @var Post
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Post")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $post;
 
@@ -63,6 +65,7 @@ class AuthorActivityEntity implements AuthorActivity
      * @var Comment
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Comment")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $comment;
 
@@ -85,10 +88,9 @@ class AuthorActivityEntity implements AuthorActivity
         } elseif ($subject instanceof Post) {
             $this->post = $subject;
         } else {
-            throw new \RuntimeException('Unexpecte subject : ' . get_class($subject));
+            throw new \RuntimeException('Unexpected subject : ' . get_class($subject));
         }
     }
-
 
     /**
      * @return int

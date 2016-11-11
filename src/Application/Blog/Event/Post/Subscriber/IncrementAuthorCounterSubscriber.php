@@ -2,6 +2,7 @@
 
 namespace Acme\Application\Blog\Event\Post\Subscriber;
 
+use Acme\Application\Blog\Event\Exception\UnexpectedEventException;
 use Acme\Application\Blog\Event\Post\PostCreated;
 use Acme\Application\Blog\Event\Post\PostDeleted;
 use Acme\Domain\Blog\Repository\PostCounterRepository;
@@ -41,7 +42,7 @@ class IncrementAuthorCounterSubscriber
         ];
 
         if (!isset($incrementMap[get_class($event)])) {
-            return; //todo at this point we should probably report something
+            throw UnexpectedEventException::create($this, $event);
         }
 
         $post = $this->postRepository->getById($event->getId());

@@ -2,8 +2,8 @@
 
 namespace Acme\Application\Blog\Event\Post\Subscriber;
 
+use Acme\Application\Blog\Event\Exception\UnexpectedEventException;
 use Acme\Application\Blog\Event\Post\PostCreated;
-use Acme\Application\Blog\Event\Post\PostDeleted;
 use Acme\Application\Blog\Event\Post\PostUpdated;
 use Acme\Domain\Blog\Model\AuthorActivity;
 use Acme\Domain\Blog\Repository\AuthorActivityRepository;
@@ -33,18 +33,17 @@ class AddAuthorActivitySubscriber
     }
 
     /**
-     * @param PostCreated|PostUpdated|PostDeleted $event
+     * @param PostCreated|PostUpdated $event
      */
     public function __invoke($event)
     {
         $actionMap = [
             PostCreated::class => AuthorActivity::CREATE_POST,
             PostUpdated::class => AuthorActivity::UPDATE_POST,
-            //PostDeleted::class => AuthorActivity::DELETE_POST, //todo how to handle this ?
         ];
 
         if (!isset($actionMap[get_class($event)])) {
-            return; //todo at this point we should probably report something
+            throw UnexpectedEventException::create($this, $event);
         }
 
         $payload = [];
@@ -54,7 +53,10 @@ class AddAuthorActivitySubscriber
             $before = $event->getDataBefore();
             $after = $event->getDataAfter();
 
-            $payload = []; //todo changeset between $before & $after
+            $payload = [
+                'before' => $before,
+                'after' => $after,
+            ];
         }
 
         $post = $this->postRepository->getById($event->getId());

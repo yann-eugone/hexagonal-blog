@@ -4,6 +4,7 @@ namespace Acme\Application\Blog\Event\Comment\Subscriber;
 
 use Acme\Application\Blog\Event\Comment\CommentCreated;
 use Acme\Application\Blog\Event\Comment\CommentDeleted;
+use Acme\Application\Blog\Event\Exception\UnexpectedEventException;
 use Acme\Domain\Blog\Repository\CommentCounterRepository;
 use Acme\Domain\Blog\Repository\CommentRepository;
 use DateTime;
@@ -41,7 +42,7 @@ class IncrementAuthorCounterSubscriber
         ];
 
         if (!isset($incrementMap[get_class($event)])) {
-            return; //todo at this point we should probably report something
+            throw UnexpectedEventException::create($this, $event);
         }
 
         $comment = $this->commentRepository->getById($event->getId());

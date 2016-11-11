@@ -3,7 +3,6 @@
 namespace Acme\Application\Blog\Event\Comment\Subscriber;
 
 use Acme\Application\Blog\Event\Comment\CommentCreated;
-use Acme\Application\Blog\Event\Comment\CommentDeleted;
 use Acme\Application\Blog\Event\Comment\CommentEventFactory;
 use Acme\Application\Blog\Event\Comment\CommentUpdated;
 use Acme\Application\Blog\Normalizer\CommentNormalizer;
@@ -80,16 +79,6 @@ class AddAuthorActivitySubscriberTest extends \PHPUnit_Framework_TestCase
     private function updatedEvent($commentBefore, $commentAfter)
     {
         return (new CommentEventFactory($this->normalizer->reveal()))->newUpdatedEvent($commentBefore, $commentAfter);
-    }
-
-    /**
-     * @param $comment
-     *
-     * @return CommentDeleted
-     */
-    private function deletedEvent($comment)
-    {
-        return (new CommentEventFactory($this->normalizer->reveal()))->newDeletedEvent($comment);
     }
 
     /**
@@ -251,7 +240,10 @@ class AddAuthorActivitySubscriberTest extends \PHPUnit_Framework_TestCase
             $author,
             Argument::type(\DateTime::class),
             $commentAfter,
-            [] //todo changeset between $before & $after
+            [
+                'before' => ['lorem ipsum by john'],
+                'after' => ['lorem by john'],
+            ]
         )->shouldBeCalledTimes(1);
 
         $subscriber = $this->subscriber();

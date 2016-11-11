@@ -3,7 +3,6 @@
 namespace Acme\Application\Blog\Event\Post\Subscriber;
 
 use Acme\Application\Blog\Event\Post\PostCreated;
-use Acme\Application\Blog\Event\Post\PostDeleted;
 use Acme\Application\Blog\Event\Post\PostEventFactory;
 use Acme\Application\Blog\Event\Post\PostUpdated;
 use Acme\Application\Blog\Normalizer\PostNormalizer;
@@ -81,16 +80,6 @@ class AddAuthorActivitySubscriberTest extends \PHPUnit_Framework_TestCase
     private function updatedEvent($postBefore, $postAfter)
     {
         return (new PostEventFactory($this->normalizer->reveal()))->newUpdatedEvent($postBefore, $postAfter);
-    }
-
-    /**
-     * @param $post
-     *
-     * @return PostDeleted
-     */
-    private function deletedEvent($post)
-    {
-        return (new PostEventFactory($this->normalizer->reveal()))->newDeletedEvent($post);
     }
 
     /**
@@ -253,7 +242,10 @@ class AddAuthorActivitySubscriberTest extends \PHPUnit_Framework_TestCase
             $author,
             Argument::type(\DateTime::class),
             $postAfter,
-            [] //todo changeset between $before & $after
+            [
+                'before' => ['lorem ipsum by john'],
+                'after' => ['lorem by john'],
+            ]
         )->shouldBeCalledTimes(1);
 
         $subscriber = $this->subscriber();
