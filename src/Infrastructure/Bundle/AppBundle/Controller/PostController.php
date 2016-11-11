@@ -24,11 +24,12 @@ class PostController extends Controller
      * @Route("/posts/by-tag/{tag}", name="post_list_by_tag", requirements={"tag" = "\d+"})
      * @Method("GET")
      *
-     * @param Request $request
+     * @param int|null $category
+     * @param int|null $tag
      *
      * @return Response
      */
-    public function listAction(Request $request, $category = null, $tag = null)
+    public function listAction($category = null, $tag = null)
     {
         $criteria = [];
         if ($category) {
@@ -50,12 +51,11 @@ class PostController extends Controller
      * @Route("/posts/{id}", name="post", requirements={"id" = "\d+"})
      * @Method("GET")
      *
-     * @param int     $id
-     * @param Request $request
+     * @param int $id
      *
      * @return Response
      */
-    public function showAction($id, Request $request)
+    public function showAction($id)
     {
         try {
             $post = $this->getRepository()->getById($id);
@@ -134,7 +134,7 @@ class PostController extends Controller
     /**
      * @return PostRepository
      */
-    public function getRepository()
+    private function getRepository()
     {
         return $this->get('repository.post');
     }
@@ -142,7 +142,7 @@ class PostController extends Controller
     /**
      * @return PostCommandFactory
      */
-    public function getCommandFactory()
+    private function getCommandFactory()
     {
         return $this->get('command_factory.post');
     }
@@ -150,7 +150,7 @@ class PostController extends Controller
     /**
      * @return FormFactoryInterface
      */
-    public function getFormFactory()
+    private function getFormFactory()
     {
         return $this->get('form.factory');
     }
@@ -158,7 +158,7 @@ class PostController extends Controller
     /**
      * @return CommandBus
      */
-    public function getCommandBus()
+    private function getCommandBus()
     {
         return $this->get('application_command_bus');
     }

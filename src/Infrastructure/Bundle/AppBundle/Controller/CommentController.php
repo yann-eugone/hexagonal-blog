@@ -20,15 +20,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class CommentController extends Controller
 {
     /**
-     * @Route("/posts/{id}/comments", name="post_add_comment")
+     * @Route("/posts/{postId}/comments", name="post_list_comment")
      * @Method({"GET", "POST"})
      *
-     * @param int     $postId
-     * @param Request $request
+     * @param int $postId
      *
      * @return Response
      */
-    public function listAction($postId, Request $request)
+    public function listAction($postId)
     {
         try {
             $post = $this->getPostRepository()->getById($postId);
@@ -138,7 +137,7 @@ class CommentController extends Controller
     /**
      * @return CommentRepository
      */
-    public function getRepository()
+    private function getRepository()
     {
         return $this->get('repository.comment');
     }
@@ -146,7 +145,7 @@ class CommentController extends Controller
     /**
      * @return PostRepository
      */
-    public function getPostRepository()
+    private function getPostRepository()
     {
         return $this->get('repository.post');
     }
@@ -154,7 +153,7 @@ class CommentController extends Controller
     /**
      * @return CommentCommandFactory
      */
-    public function getCommandFactory()
+    private function getCommandFactory()
     {
         return $this->get('command_factory.comment');
     }
@@ -162,7 +161,7 @@ class CommentController extends Controller
     /**
      * @return FormFactoryInterface
      */
-    public function getFormFactory()
+    private function getFormFactory()
     {
         return $this->get('form.factory');
     }
@@ -170,7 +169,7 @@ class CommentController extends Controller
     /**
      * @return CommandBus
      */
-    public function getCommandBus()
+    private function getCommandBus()
     {
         return $this->get('application_command_bus');
     }
