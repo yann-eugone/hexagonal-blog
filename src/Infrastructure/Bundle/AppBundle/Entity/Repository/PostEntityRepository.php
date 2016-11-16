@@ -49,6 +49,12 @@ class PostEntityRepository extends EntityRepository implements PostRepositoryInt
             ;
         }
 
+        if (isset($criteria['author'])) {
+            $builder
+                ->andWhere('post.author = :author')
+                ->setParameter('author', $criteria['author']);
+        }
+
         if ($orderBy) {
             foreach ($orderBy as $column => $direction) {
                 $builder->addOrderBy(sprintf('post.%s', $column), $direction);
@@ -144,6 +150,30 @@ class PostEntityRepository extends EntityRepository implements PostRepositoryInt
     public function incrementCountForAuthorThatDay(Author $author, DateTime $day, $incr = 1)
     {
         //nothing to do : not denormalized
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function count()
+    {
+        $builder = $this->createQueryBuilder('post')
+            ->select('COUNT(post)');
+
+        return intval($builder->getQuery()->getSingleScalarResult());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function countForAuthor(Author $author)
+    {
+        $builder = $this->createQueryBuilder('post')
+            ->select('COUNT(post)')
+            ->where('post.author = :author')
+            ->setParameter('author', $author);
+
+        return intval($builder->getQuery()->getSingleScalarResult());
     }
 
     /**

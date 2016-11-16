@@ -41,11 +41,11 @@ class CommentEntityRepository extends EntityRepository implements CommentReposit
      */
     public function getById($id)
     {
-        if (!$post = $this->find($id)) {
+        if (!$comment = $this->find($id)) {
             throw CommentNotFoundException::byId($id);
         }
 
-        return $post;
+        return $comment;
     }
 
     /**
@@ -116,6 +116,30 @@ class CommentEntityRepository extends EntityRepository implements CommentReposit
     public function incrementCountForAuthorThatDay(Author $author, DateTime $day, $incr = 1)
     {
         //nothing to do : not denormalized
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function count()
+    {
+        $builder = $this->createQueryBuilder('comment')
+            ->select('COUNT(comment)');
+
+        return intval($builder->getQuery()->getSingleScalarResult());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function countForAuthor(Author $author)
+    {
+        $builder = $this->createQueryBuilder('comment')
+            ->select('COUNT(comment)')
+            ->where('comment.author = :author')
+            ->setParameter('author', $author);
+
+        return intval($builder->getQuery()->getSingleScalarResult());
     }
 
     /**

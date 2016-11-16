@@ -32,6 +32,18 @@ interface PostCounterRepository
     public function incrementCountForAuthorThatDay(Author $author, DateTime $day, $incr = 1);
 
     /**
+     * @return int
+     */
+    public function count();
+
+    /**
+     * @param Author $author
+     *
+     * @return int
+     */
+    public function countForAuthor(Author $author);
+
+    /**
      * @param DateTime $day
      *
      * @return int
