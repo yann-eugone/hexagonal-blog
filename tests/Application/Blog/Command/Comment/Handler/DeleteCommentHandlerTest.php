@@ -11,11 +11,11 @@ use Acme\Application\Blog\Event\Comment\CommentEventFactory;
 use Acme\Application\Blog\Normalizer\CommentNormalizer;
 use Acme\Domain\Blog\Exception\Comment\CommentNotFoundException;
 use Acme\Domain\Blog\Repository\CommentRepository;
-use Acme\Tests\DataFixtures\Author;
-use Acme\Tests\DataFixtures\Category;
-use Acme\Tests\DataFixtures\Comment;
-use Acme\Tests\DataFixtures\Post;
-use Acme\Tests\DataFixtures\Tag;
+use Acme\Tests\Fixtures\Fake\Author;
+use Acme\Tests\Fixtures\Fake\Category;
+use Acme\Tests\Fixtures\Fake\Comment;
+use Acme\Tests\Fixtures\Fake\Post;
+use Acme\Tests\Fixtures\Fake\Tag;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 

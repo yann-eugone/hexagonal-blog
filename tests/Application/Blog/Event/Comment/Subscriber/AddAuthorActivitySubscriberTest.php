@@ -10,9 +10,9 @@ use Acme\Domain\Blog\Exception\Comment\CommentNotFoundException;
 use Acme\Domain\Blog\Model\AuthorActivity;
 use Acme\Domain\Blog\Repository\AuthorActivityRepository;
 use Acme\Domain\Blog\Repository\CommentRepository;
-use Acme\Tests\DataFixtures\Author;
-use Acme\Tests\DataFixtures\Comment;
-use Acme\Tests\DataFixtures\Post;
+use Acme\Tests\Fixtures\Fake\Author;
+use Acme\Tests\Fixtures\Fake\Comment;
+use Acme\Tests\Fixtures\Fake\Post;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 

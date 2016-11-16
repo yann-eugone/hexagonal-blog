@@ -11,10 +11,10 @@ use Acme\Application\Blog\Event\Post\PostEventFactory;
 use Acme\Application\Blog\Normalizer\PostNormalizer;
 use Acme\Domain\Blog\Exception\Post\PostNotFoundException;
 use Acme\Domain\Blog\Repository\PostRepository;
-use Acme\Tests\DataFixtures\Author;
-use Acme\Tests\DataFixtures\Category;
-use Acme\Tests\DataFixtures\Post;
-use Acme\Tests\DataFixtures\Tag;
+use Acme\Tests\Fixtures\Fake\Author;
+use Acme\Tests\Fixtures\Fake\Category;
+use Acme\Tests\Fixtures\Fake\Post;
+use Acme\Tests\Fixtures\Fake\Tag;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 

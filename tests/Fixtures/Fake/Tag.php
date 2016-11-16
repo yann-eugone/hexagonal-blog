@@ -1,8 +1,8 @@
 <?php
 
-namespace Acme\Tests\DataFixtures;
+namespace Acme\Tests\Fixtures\Fake;
 
-class Category implements \Acme\Domain\Blog\Model\Category
+class Tag implements \Acme\Domain\Blog\Model\Tag
 {
     public $name;
 

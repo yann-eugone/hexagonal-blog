@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Tests\DataFixtures;
+namespace Acme\Tests\Fixtures\Fake;
 
 class Post implements \Acme\Domain\Blog\Model\Post
 {

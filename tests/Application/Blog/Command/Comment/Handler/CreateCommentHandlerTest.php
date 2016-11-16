@@ -10,9 +10,9 @@ use Acme\Application\Blog\Event\Comment\CommentCreated;
 use Acme\Application\Blog\Event\Comment\CommentEventFactory;
 use Acme\Application\Blog\Normalizer\CommentNormalizer;
 use Acme\Domain\Blog\Repository\CommentRepository;
-use Acme\Tests\DataFixtures\Author;
-use Acme\Tests\DataFixtures\Comment;
-use Acme\Tests\DataFixtures\Post;
+use Acme\Tests\Fixtures\Fake\Author;
+use Acme\Tests\Fixtures\Fake\Comment;
+use Acme\Tests\Fixtures\Fake\Post;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 
