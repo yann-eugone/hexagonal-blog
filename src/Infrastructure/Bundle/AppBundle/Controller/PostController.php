@@ -22,14 +22,16 @@ class PostController extends Controller
      * @Route("/posts", name="post_list")
      * @Route("/posts/by-category/{category}", name="post_list_by_category", requirements={"category" = "\d+"})
      * @Route("/posts/by-tag/{tag}", name="post_list_by_tag", requirements={"tag" = "\d+"})
+     * @Route("/posts/by-author/{author}", name="post_list_by_author", requirements={"author" = "\d+"})
      * @Method("GET")
      *
      * @param int|null $category
      * @param int|null $tag
+     * @param int|null $author
      *
      * @return Response
      */
-    public function listAction($category = null, $tag = null)
+    public function listAction($category = null, $tag = null, $author = null)
     {
         $criteria = [];
         if ($category) {
@@ -37,6 +39,9 @@ class PostController extends Controller
         }
         if ($tag) {
             $criteria['tag'] = $tag;
+        }
+        if ($author) {
+            $criteria['author'] = $author;
         }
 
         $posts = $this->getRepository()->search($criteria);

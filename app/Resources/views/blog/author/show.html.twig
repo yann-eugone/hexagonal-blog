@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('post_create') }}">create</a>
+    <div>{{ author }}</div>
+    <hr/>
+    <div>Count post : {{ count.post }}</div>
+    <div>Count comment : {{ count.comment }}</div>
+    <hr/>
     {% for post in posts %}
         {% include 'blog/post/_list.html.twig' with { post: post } only %}
     {% endfor %}
