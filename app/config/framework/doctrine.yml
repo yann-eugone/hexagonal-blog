@@ -14,8 +14,8 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         resolve_target_entities:
-            Acme\Domain\Blog\Model\Author:   Acme\Infrastructure\Bundle\AppBundle\Entity\AuthorEntity
-            Acme\Domain\Blog\Model\Category: Acme\Infrastructure\Bundle\AppBundle\Entity\CategoryEntity
-            Acme\Domain\Blog\Model\Comment:  Acme\Infrastructure\Bundle\AppBundle\Entity\CommentEntity
-            Acme\Domain\Blog\Model\Post:     Acme\Infrastructure\Bundle\AppBundle\Entity\PostEntity
-            Acme\Domain\Blog\Model\Tag:      Acme\Infrastructure\Bundle\AppBundle\Entity\TagEntity
+            Acme\Domain\Blog\Model\Author:   Acme\Infrastructure\Bundle\AppBundle\Entity\Author
+            Acme\Domain\Blog\Model\Category: Acme\Infrastructure\Bundle\AppBundle\Entity\Category
+            Acme\Domain\Blog\Model\Comment:  Acme\Infrastructure\Bundle\AppBundle\Entity\Comment
+            Acme\Domain\Blog\Model\Post:     Acme\Infrastructure\Bundle\AppBundle\Entity\Post
+            Acme\Domain\Blog\Model\Tag:      Acme\Infrastructure\Bundle\AppBundle\Entity\Tag

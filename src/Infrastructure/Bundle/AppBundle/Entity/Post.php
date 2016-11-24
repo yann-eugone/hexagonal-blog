@@ -2,10 +2,7 @@
 
 namespace Acme\Infrastructure\Bundle\AppBundle\Entity;
 
-use Acme\Domain\Blog\Model\Author;
-use Acme\Domain\Blog\Model\Category;
 use Acme\Domain\Blog\Model\Post as PostInterface;
-use Acme\Domain\Blog\Model\Tag;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,10 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ORM\Entity(repositoryClass="Acme\Infrastructure\Bundle\AppBundle\Entity\Repository\PostEntityRepository")
+ * @ORM\Entity()
  * @ORM\Table(name="post")
  */
-class PostEntity implements PostInterface
+class Post implements PostInterface
 {
     /**
      * @var int

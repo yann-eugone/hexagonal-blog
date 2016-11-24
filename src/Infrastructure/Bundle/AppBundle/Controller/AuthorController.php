@@ -4,8 +4,8 @@ namespace Acme\Infrastructure\Bundle\AppBundle\Controller;
 
 use Acme\Domain\Blog\Exception\Author\AuthorNotFoundException;
 use Acme\Domain\Blog\Repository\AuthorRepository;
-use Acme\Domain\Blog\Repository\CommentCounterRepository;
-use Acme\Domain\Blog\Repository\PostCounterRepository;
+use Acme\Domain\Blog\Repository\CommentAuthorCounterRepository;
+use Acme\Domain\Blog\Repository\PostAuthorCounterRepository;
 use Acme\Domain\Blog\Repository\PostRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -30,8 +30,8 @@ class AuthorController extends Controller
             throw $this->createNotFoundException(null, $exception);
         }
 
-        $countPost = $this->getPostCounterRepository()->countForAuthor($author);
-        $countComment = $this->getCommentCounterRepository()->countForAuthor($author);
+        $countPost = $this->getPostAuthorCounterRepository()->count($author);
+        $countComment = $this->getCommentAuthorCounterRepository()->count($author);
 
         $posts = $this->getPostRepository()->search(['author' => $author]);
 
@@ -65,18 +65,18 @@ class AuthorController extends Controller
     }
 
     /**
-     * @return PostCounterRepository
+     * @return PostAuthorCounterRepository
      */
-    private function getPostCounterRepository()
+    private function getPostAuthorCounterRepository()
     {
-        return $this->get('repository.post'); //todo use alias
+        return $this->get('repository.counter.post_author');
     }
 
     /**
-     * @return CommentCounterRepository
+     * @return CommentAuthorCounterRepository
      */
-    private function getCommentCounterRepository()
+    private function getCommentAuthorCounterRepository()
     {
-        return $this->get('repository.comment'); //todo use alias
+        return $this->get('repository.counter.comment_author');
     }
 }

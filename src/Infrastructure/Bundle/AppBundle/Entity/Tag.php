@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="tag")
  */
-class TagEntity implements TagInterface
+class Tag implements TagInterface
 {
     /**
      * @var int
@@ -36,7 +36,7 @@ class TagEntity implements TagInterface
     private $createdAt;
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function __toString()
     {

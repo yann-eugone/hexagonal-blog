@@ -2,18 +2,15 @@
 
 namespace Acme\Infrastructure\Bundle\AppBundle\Entity;
 
-use Acme\Domain\Blog\Model\AuthorActivity;
-use Acme\Domain\Blog\Model\Author;
-use Acme\Domain\Blog\Model\Comment;
-use Acme\Domain\Blog\Model\Post;
+use Acme\Domain\Blog\Model\AuthorActivity as AuthorActivityInterface;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Acme\Infrastructure\Bundle\AppBundle\Entity\Repository\AuthorActivityEntityRepository")
+ * @ORM\Entity()
  * @ORM\Table(name="author_activity")
  */
-class AuthorActivityEntity implements AuthorActivity
+class AuthorActivity implements AuthorActivityInterface
 {
     /**
      * @var int

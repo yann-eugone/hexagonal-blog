@@ -1,4 +1,4 @@
-Acme\Infrastructure\Bundle\AppBundle\Entity\CategoryEntity:
+Acme\Infrastructure\Bundle\AppBundle\Entity\Category:
     category_tutorial:
         label: Tutorial
     category_workshop:

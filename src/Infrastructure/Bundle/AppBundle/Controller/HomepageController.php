@@ -33,6 +33,6 @@ class HomepageController extends Controller
      */
     private function getPostCounterRepository()
     {
-        return $this->get('repository.post'); //todo use alias
+        return $this->get('repository.counter.post');
     }
 }

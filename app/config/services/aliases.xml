@@ -9,6 +9,12 @@
         <service id="application_command_bus" alias="command_bus.simple_bus"/>
         <service id="application_event_bus" alias="event_bus.simple_bus"/>
 
+        <service id="repository.counter.comment_author" alias="repository.counter.comment_author.denormalized"/>
+        <service id="repository.counter.comment" alias="repository.counter.comment.denormalized"/>
+        <service id="repository.counter.post_author" alias="repository.counter.post_author.denormalized"/>
+        <service id="repository.counter.post_category" alias="repository.counter.post_category.denormalized"/>
+        <service id="repository.counter.post" alias="repository.counter.post.denormalized"/>
+        <service id="repository.counter.post_tag" alias="repository.counter.post_tag.denormalized"/>
     </services>
 
 </container>

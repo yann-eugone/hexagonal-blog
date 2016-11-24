@@ -5,12 +5,12 @@ namespace Acme\Application\Blog\Event\Post\Subscriber;
 use Acme\Application\Blog\Event\Exception\UnexpectedEventException;
 use Acme\Application\Blog\Event\Post\PostCreated;
 use Acme\Application\Blog\Event\Post\PostDeleted;
-use Acme\Domain\Blog\Repository\CategoryCounterRepository;
+use Acme\Domain\Blog\Repository\PostCategoryCounterRepository;
 use Acme\Domain\Blog\Repository\PostRepository;
-use Acme\Domain\Blog\Repository\TagCounterRepository;
+use Acme\Domain\Blog\Repository\PostTagCounterRepository;
 use DateTime;
 
-class IncrementTaxonomyCounterSubscriber
+class IncrementPostTaxonomyCounterSubscriber
 {
     /**
      * @var PostRepository
@@ -18,24 +18,24 @@ class IncrementTaxonomyCounterSubscriber
     private $postRepository;
 
     /**
-     * @var CategoryCounterRepository
+     * @var PostCategoryCounterRepository
      */
     private $categoryCounterRepository;
 
     /**
-     * @var TagCounterRepository
+     * @var PostTagCounterRepository
      */
     private $tagCounterRepository;
 
     /**
-     * @param PostRepository            $postRepository
-     * @param CategoryCounterRepository $categoryCounterRepository
-     * @param TagCounterRepository      $tagCounterRepository
+     * @param PostRepository $postRepository
+     * @param PostCategoryCounterRepository $categoryCounterRepository
+     * @param PostTagCounterRepository $tagCounterRepository
      */
     public function __construct(
         PostRepository $postRepository,
-        CategoryCounterRepository $categoryCounterRepository,
-        TagCounterRepository $tagCounterRepository
+        PostCategoryCounterRepository $categoryCounterRepository,
+        PostTagCounterRepository $tagCounterRepository
     ) {
         $this->postRepository = $postRepository;
         $this->tagCounterRepository = $tagCounterRepository;
@@ -60,11 +60,15 @@ class IncrementTaxonomyCounterSubscriber
 
         $increment = $incrementMap[get_class($event)];
 
-        $this->categoryCounterRepository->incrementCategoryCount($post->getCategory(), $increment);
-        $this->categoryCounterRepository->incrementCategoryCountThatDay($post->getCategory(), new DateTime(), $increment);
+        $this->categoryCounterRepository->incrementCount($post->getCategory(), $increment);
+        $this->categoryCounterRepository->incrementCountThatDay(
+            $post->getCategory(),
+            new DateTime(),
+            $increment
+        );
         foreach ($post->getTags() as $tag) {
-            $this->tagCounterRepository->incrementTagCount($tag, $increment);
-            $this->tagCounterRepository->incrementTagCountThatDay($tag, new DateTime(), $increment);
+            $this->tagCounterRepository->incrementCount($tag, $increment);
+            $this->tagCounterRepository->incrementCountThatDay($tag, new DateTime(), $increment);
         }
     }
 }

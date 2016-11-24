@@ -5,20 +5,27 @@ namespace Acme\Domain\Blog\Repository;
 use Acme\Domain\Blog\Model\Category;
 use DateTime;
 
-interface CategoryCounterRepository
+interface PostCategoryCounterRepository
 {
     /**
      * @param Category $category
      * @param int      $incr
      */
-    public function incrementCategoryCount(Category $category, $incr = 1);
+    public function incrementCount(Category $category, $incr = 1);
 
     /**
      * @param Category $category
      * @param DateTime $day
      * @param int      $incr
      */
-    public function incrementCategoryCountThatDay(Category $category, DateTime $day, $incr = 1);
+    public function incrementCountThatDay(Category $category, DateTime $day, $incr = 1);
+
+    /**
+     * @param Category $category
+     *
+     * @return int
+     */
+    public function count(Category $category);
 
     /**
      * @param Category $category
@@ -26,7 +33,7 @@ interface CategoryCounterRepository
      *
      * @return int
      */
-    public function countCategoryThatDay(Category $category, DateTime $day);
+    public function countThatDay(Category $category, DateTime $day);
 
     /**
      * @param Category $category
@@ -35,5 +42,5 @@ interface CategoryCounterRepository
      *
      * @return int
      */
-    public function countCategoryBetween(Category $category, DateTime $from, DateTime $to);
+    public function countBetween(Category $category, DateTime $from, DateTime $to);
 }

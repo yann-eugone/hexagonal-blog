@@ -2,15 +2,15 @@
 
 namespace Acme\Infrastructure\Bundle\AppBundle\Entity;
 
-use Acme\Domain\Blog\Model\Author;
+use Acme\Domain\Blog\Model\Author as AuthorInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass="Acme\Infrastructure\Bundle\AppBundle\Entity\Repository\AuthorEntityRepository")
+ * @ORM\Entity()
  * @ORM\Table(name="author")
  */
-class AuthorEntity implements UserInterface, Author
+class Author implements UserInterface, AuthorInterface
 {
     /**
      * @var int

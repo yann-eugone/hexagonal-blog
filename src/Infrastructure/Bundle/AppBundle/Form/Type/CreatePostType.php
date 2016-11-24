@@ -3,8 +3,8 @@
 namespace Acme\Infrastructure\Bundle\AppBundle\Form\Type;
 
 use Acme\Application\Blog\Command\Post\CreatePost;
-use Acme\Infrastructure\Bundle\AppBundle\Entity\CategoryEntity;
-use Acme\Infrastructure\Bundle\AppBundle\Entity\TagEntity;
+use Acme\Infrastructure\Bundle\AppBundle\Entity\Category;
+use Acme\Infrastructure\Bundle\AppBundle\Entity\Tag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -23,8 +23,8 @@ class CreatePostType extends AbstractType
             ->add('title', TextType::class)
             ->add('summary', TextType::class)
             ->add('body', TextareaType::class)
-            ->add('category', EntityType::class, ['class' => CategoryEntity::class])
-            ->add('tags', EntityType::class, ['class' => TagEntity::class, 'multiple' => true])
+            ->add('category', EntityType::class, ['class' => Category::class])
+            ->add('tags', EntityType::class, ['class' => Tag::class, 'multiple' => true])
         ;
     }
 

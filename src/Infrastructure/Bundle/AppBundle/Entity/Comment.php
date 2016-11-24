@@ -2,18 +2,16 @@
 
 namespace Acme\Infrastructure\Bundle\AppBundle\Entity;
 
-use Acme\Domain\Blog\Model\Author;
-use Acme\Domain\Blog\Model\Comment;
-use Acme\Domain\Blog\Model\Post;
+use Acme\Domain\Blog\Model\Comment as CommentInterface;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ORM\Entity(repositoryClass="Acme\Infrastructure\Bundle\AppBundle\Entity\Repository\CommentEntityRepository")
+ * @ORM\Entity()
  * @ORM\Table(name="post_comment")
  */
-class CommentEntity implements Comment
+class Comment implements CommentInterface
 {
     /**
      * @var int

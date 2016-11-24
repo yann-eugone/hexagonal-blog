@@ -3,7 +3,7 @@
 namespace Acme\Infrastructure\Bundle\AppBundle\DataFixtures\Processor;
 
 use Nelmio\Alice\ProcessorInterface;
-use Acme\Infrastructure\Bundle\AppBundle\Entity\AuthorEntity;
+use Acme\Infrastructure\Bundle\AppBundle\Entity\Author;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AuthorProcessor implements ProcessorInterface
@@ -26,7 +26,7 @@ class AuthorProcessor implements ProcessorInterface
      */
     public function preProcess($object)
     {
-        if (!$object instanceof AuthorEntity) {
+        if (!$object instanceof Author) {
             return;
         }
 

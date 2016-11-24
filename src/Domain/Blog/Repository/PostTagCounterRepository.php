@@ -5,20 +5,27 @@ namespace Acme\Domain\Blog\Repository;
 use Acme\Domain\Blog\Model\Tag;
 use DateTime;
 
-interface TagCounterRepository
+interface PostTagCounterRepository
 {
     /**
      * @param Tag $tag
      * @param int $incr
      */
-    public function incrementTagCount(Tag $tag, $incr = 1);
+    public function incrementCount(Tag $tag, $incr = 1);
 
     /**
      * @param Tag      $tag
      * @param DateTime $day
      * @param int      $incr
      */
-    public function incrementTagCountThatDay(Tag $tag, DateTime $day, $incr = 1);
+    public function incrementCountThatDay(Tag $tag, DateTime $day, $incr = 1);
+
+    /**
+     * @param Tag $tag
+     *
+     * @return int
+     */
+    public function count(Tag $tag);
 
     /**
      * @param Tag      $tag
@@ -26,7 +33,7 @@ interface TagCounterRepository
      *
      * @return int
      */
-    public function countTagThatDay(Tag $tag, DateTime $day);
+    public function countThatDay(Tag $tag, DateTime $day);
 
     /**
      * @param Tag      $tag
@@ -35,5 +42,5 @@ interface TagCounterRepository
      *
      * @return int
      */
-    public function countTagBetween(Tag $tag, DateTime $from, DateTime $to);
+    public function countBetween(Tag $tag, DateTime $from, DateTime $to);
 }

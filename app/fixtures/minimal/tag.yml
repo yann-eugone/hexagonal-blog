@@ -1,4 +1,4 @@
-Acme\Infrastructure\Bundle\AppBundle\Entity\TagEntity:
+Acme\Infrastructure\Bundle\AppBundle\Entity\Tag:
     tag_hexagonal:
         label: hexagonal
     tag_architecture:
