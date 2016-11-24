@@ -28,17 +28,21 @@
                  class="Acme\Application\Blog\Event\Comment\Subscriber\IncrementCommentAuthorCounterSubscriber"
                  autowire="true">
             <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentCreated"/>
+                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentCreated"
+                 method="created"/>
             <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentDeleted"/>
+                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentDeleted"
+                 method="deleted"/>
         </service>
         <service id="event_subscriber.comment.increment_counter"
                  class="Acme\Application\Blog\Event\Comment\Subscriber\IncrementCommentCounterSubscriber"
                  autowire="true">
             <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentCreated"/>
+                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentCreated"
+                 method="created"/>
             <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentDeleted"/>
+                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentDeleted"
+                 method="deleted"/>
         </service>
 
         <!-- Post Subscribers -->
@@ -54,25 +58,31 @@
                  class="Acme\Application\Blog\Event\Post\Subscriber\IncrementPostAuthorCounterSubscriber"
                  autowire="true">
             <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Post\PostCreated"/>
+                 subscribes_to="Acme\Application\Blog\Event\Post\PostCreated"
+                 method="created"/>
             <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Post\PostDeleted"/>
+                 subscribes_to="Acme\Application\Blog\Event\Post\PostDeleted"
+                 method="deleted"/>
         </service>
         <service id="event_subscriber.post.increment_counter"
                  class="Acme\Application\Blog\Event\Post\Subscriber\IncrementPostCounterSubscriber"
                  autowire="true">
             <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Post\PostCreated"/>
+                 subscribes_to="Acme\Application\Blog\Event\Post\PostCreated"
+                 method="created"/>
             <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Post\PostDeleted"/>
+                 subscribes_to="Acme\Application\Blog\Event\Post\PostDeleted"
+                 method="deleted"/>
         </service>
         <service id="event_subscriber.post.increment_taxonomy_counter"
                  class="Acme\Application\Blog\Event\Post\Subscriber\IncrementPostTaxonomyCounterSubscriber"
                  autowire="true">
             <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Post\PostCreated"/>
+                 subscribes_to="Acme\Application\Blog\Event\Post\PostCreated"
+                 method="created"/>
             <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Post\PostDeleted"/>
+                 subscribes_to="Acme\Application\Blog\Event\Post\PostDeleted"
+                 method="deleted"/>
         </service>
 
     </services>

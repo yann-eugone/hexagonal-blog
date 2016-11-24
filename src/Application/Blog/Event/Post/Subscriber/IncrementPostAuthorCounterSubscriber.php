@@ -2,19 +2,18 @@
 
 namespace Acme\Application\Blog\Event\Post\Subscriber;
 
-use Acme\Application\Blog\Event\Exception\UnexpectedEventException;
 use Acme\Application\Blog\Event\Post\PostCreated;
 use Acme\Application\Blog\Event\Post\PostDeleted;
+use Acme\Domain\Blog\Repository\AuthorRepository;
 use Acme\Domain\Blog\Repository\PostAuthorCounterRepository;
-use Acme\Domain\Blog\Repository\PostRepository;
 use DateTime;
 
 class IncrementPostAuthorCounterSubscriber
 {
     /**
-     * @var PostRepository
+     * @var AuthorRepository
      */
-    private $postRepository;
+    private $authorRepository;
 
     /**
      * @var PostAuthorCounterRepository
@@ -22,34 +21,36 @@ class IncrementPostAuthorCounterSubscriber
     private $counterRepository;
 
     /**
-     * @param PostRepository        $postRepository
+     * @param AuthorRepository            $authorRepository
      * @param PostAuthorCounterRepository $counterRepository
      */
-    public function __construct(PostRepository $postRepository, PostAuthorCounterRepository $counterRepository)
+    public function __construct(AuthorRepository $authorRepository, PostAuthorCounterRepository $counterRepository)
     {
-        $this->postRepository = $postRepository;
+        $this->authorRepository = $authorRepository;
         $this->counterRepository = $counterRepository;
     }
 
     /**
-     * @param PostCreated|PostDeleted $event
+     * @param PostCreated $event
      */
-    public function __invoke($event)
+    public function created(PostCreated $event)
     {
-        $incrementMap = [
-            PostCreated::class => 1,
-            PostDeleted::class => -1,
-        ];
+        $author = $this->authorRepository->getById($event->getData()['author_id']);
+        $date = new DateTime($event->getData()['posted_at']);
 
-        if (!isset($incrementMap[get_class($event)])) {
-            throw UnexpectedEventException::create($this, $event);
-        }
+        $this->counterRepository->incrementCount($author, 1);
+        $this->counterRepository->incrementCountThatDay($author, $date, 1);
+    }
 
-        $post = $this->postRepository->getById($event->getId());
+    /**
+     * @param PostDeleted $event
+     */
+    public function deleted(PostDeleted $event)
+    {
+        $author = $this->authorRepository->getById($event->getData()['author_id']);
+        $date = new DateTime($event->getData()['posted_at']);
 
-        $increment = $incrementMap[get_class($event)];
-
-        $this->counterRepository->incrementCount($post->getAuthor(), $increment);
-        $this->counterRepository->incrementCountThatDay($post->getAuthor(), new DateTime(), $increment);
+        $this->counterRepository->incrementCount($author, -1);
+        $this->counterRepository->incrementCountThatDay($author, $date, -1);
     }
 }

@@ -7,18 +7,6 @@
     <services>
 
         <!-- ORM Repositories -->
-        <service id="orm.repository.post"
-                 class="Doctrine\ORM\EntityRepository"
-                 public="false">
-            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
-            <argument>Acme\Infrastructure\Bundle\AppBundle\Entity\Post</argument>
-        </service>
-        <service id="orm.repository.comment"
-                 class="Doctrine\ORM\EntityRepository"
-                 public="false">
-            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
-            <argument>Acme\Infrastructure\Bundle\AppBundle\Entity\Comment</argument>
-        </service>
         <service id="orm.repository.author"
                  class="Doctrine\ORM\EntityRepository"
                  public="false">
@@ -31,24 +19,38 @@
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
             <argument>Acme\Infrastructure\Bundle\AppBundle\Entity\AuthorActivity</argument>
         </service>
+        <service id="orm.repository.category"
+                 class="Doctrine\ORM\EntityRepository"
+                 public="false">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>Acme\Infrastructure\Bundle\AppBundle\Entity\Category</argument>
+        </service>
+        <service id="orm.repository.comment"
+                 class="Doctrine\ORM\EntityRepository"
+                 public="false">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>Acme\Infrastructure\Bundle\AppBundle\Entity\Comment</argument>
+        </service>
         <service id="orm.repository.counter"
                  class="Acme\Infrastructure\Bundle\AppBundle\Entity\Repository\CounterRepository"
                  public="false">
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
             <argument>Acme\Infrastructure\Bundle\AppBundle\Entity\Counter</argument>
         </service>
+        <service id="orm.repository.post"
+                 class="Doctrine\ORM\EntityRepository"
+                 public="false">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>Acme\Infrastructure\Bundle\AppBundle\Entity\Post</argument>
+        </service>
+        <service id="orm.repository.tag"
+                 class="Doctrine\ORM\EntityRepository"
+                 public="false">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>Acme\Infrastructure\Bundle\AppBundle\Entity\Tag</argument>
+        </service>
 
         <!-- Entity Repository -->
-        <service id="repository.post"
-                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\PostRepository">
-            <argument type="service" id="doctrine.orm.entity_manager"/>
-            <argument type="service" id="orm.repository.post"/>
-        </service>
-        <service id="repository.comment"
-                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\CommentRepository">
-            <argument type="service" id="doctrine.orm.entity_manager"/>
-            <argument type="service" id="orm.repository.comment"/>
-        </service>
         <service id="repository.author"
                  class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\AuthorRepository">
             <argument type="service" id="orm.repository.author"/>
@@ -57,6 +59,24 @@
                  class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\AuthorActivityRepository">
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="orm.repository.author_activity"/>
+        </service>
+        <service id="repository.category"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\CategoryRepository">
+            <argument type="service" id="orm.repository.category"/>
+        </service>
+        <service id="repository.comment"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\CommentRepository">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="orm.repository.comment"/>
+        </service>
+        <service id="repository.post"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\PostRepository">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="orm.repository.post"/>
+        </service>
+        <service id="repository.tag"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\TagRepository">
+            <argument type="service" id="orm.repository.tag"/>
         </service>
 
         <!-- Denormalized Counter Repository -->

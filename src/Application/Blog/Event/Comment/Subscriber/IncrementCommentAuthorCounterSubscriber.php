@@ -4,17 +4,16 @@ namespace Acme\Application\Blog\Event\Comment\Subscriber;
 
 use Acme\Application\Blog\Event\Comment\CommentCreated;
 use Acme\Application\Blog\Event\Comment\CommentDeleted;
-use Acme\Application\Blog\Event\Exception\UnexpectedEventException;
+use Acme\Domain\Blog\Repository\AuthorRepository;
 use Acme\Domain\Blog\Repository\CommentAuthorCounterRepository;
-use Acme\Domain\Blog\Repository\CommentRepository;
 use DateTime;
 
 class IncrementCommentAuthorCounterSubscriber
 {
     /**
-     * @var CommentRepository
+     * @var AuthorRepository
      */
-    private $commentRepository;
+    private $authorRepository;
 
     /**
      * @var CommentAuthorCounterRepository
@@ -22,34 +21,36 @@ class IncrementCommentAuthorCounterSubscriber
     private $counterRepository;
 
     /**
-     * @param CommentRepository              $commentRepository
+     * @param AuthorRepository               $authorRepository
      * @param CommentAuthorCounterRepository $counterRepository
      */
-    public function __construct(CommentRepository $commentRepository, CommentAuthorCounterRepository $counterRepository)
+    public function __construct(AuthorRepository $authorRepository, CommentAuthorCounterRepository $counterRepository)
     {
-        $this->commentRepository = $commentRepository;
+        $this->authorRepository = $authorRepository;
         $this->counterRepository = $counterRepository;
     }
 
     /**
-     * @param CommentCreated|CommentDeleted $event
+     * @param CommentCreated $event
      */
-    public function __invoke($event)
+    public function created(CommentCreated $event)
     {
-        $incrementMap = [
-            CommentCreated::class => 1,
-            CommentDeleted::class => -1,
-        ];
+        $author = $this->authorRepository->getById($event->getData()['author_id']);
+        $date = new DateTime($event->getData()['posted_at']);
 
-        if (!isset($incrementMap[get_class($event)])) {
-            throw UnexpectedEventException::create($this, $event);
-        }
+        $this->counterRepository->incrementCount($author, 1);
+        $this->counterRepository->incrementCountThatDay($author, $date, 1);
+    }
 
-        $comment = $this->commentRepository->getById($event->getId());
+    /**
+     * @param CommentDeleted $event
+     */
+    public function deleted(CommentDeleted $event)
+    {
+        $author = $this->authorRepository->getById($event->getData()['author_id']);
+        $date = new DateTime($event->getData()['posted_at']);
 
-        $increment = $incrementMap[get_class($event)];
-
-        $this->counterRepository->incrementCount($comment->getAuthor(), $increment);
-        $this->counterRepository->incrementCountThatDay($comment->getAuthor(), new DateTime(), $increment);
+        $this->counterRepository->incrementCount($author, -1);
+        $this->counterRepository->incrementCountThatDay($author, $date, -1);
     }
 }

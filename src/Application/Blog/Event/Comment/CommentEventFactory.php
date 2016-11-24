@@ -60,7 +60,8 @@ class CommentEventFactory
     {
         return new CommentDeleted(
             $comment->getId(),
-            new DateTime()
+            new DateTime(),
+            $this->normalizer->normalizeToEvent($comment)
         );
     }
 }

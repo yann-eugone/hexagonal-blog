@@ -2,7 +2,6 @@
 
 namespace Acme\Application\Blog\Event\Post\Subscriber;
 
-use Acme\Application\Blog\Event\Exception\UnexpectedEventException;
 use Acme\Application\Blog\Event\Post\PostCreated;
 use Acme\Application\Blog\Event\Post\PostDeleted;
 use Acme\Domain\Blog\Repository\PostCounterRepository;
@@ -24,22 +23,24 @@ class IncrementPostCounterSubscriber
     }
 
     /**
-     * @param PostCreated|PostDeleted $event
+     * @param PostCreated $event
      */
-    public function __invoke($event)
+    public function created(PostCreated $event)
     {
-        $incrementMap = [
-            PostCreated::class => 1,
-            PostDeleted::class => -1,
-        ];
+        $date = new DateTime($event->getData()['posted_at']);
 
-        if (!isset($incrementMap[get_class($event)])) {
-            throw UnexpectedEventException::create($this, $event);
-        }
+        $this->counterRepository->incrementCount(1);
+        $this->counterRepository->incrementCountThatDay($date, 1);
+    }
 
-        $increment = $incrementMap[get_class($event)];
+    /**
+     * @param PostDeleted $event
+     */
+    public function deleted(PostDeleted $event)
+    {
+        $date = new DateTime($event->getData()['posted_at']);
 
-        $this->counterRepository->incrementCount($increment);
-        $this->counterRepository->incrementCountThatDay(new DateTime(), $increment);
+        $this->counterRepository->incrementCount(-1);
+        $this->counterRepository->incrementCountThatDay($date, -1);
     }
 }

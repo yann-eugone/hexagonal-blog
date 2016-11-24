@@ -4,7 +4,6 @@ namespace Acme\Application\Blog\Event\Comment\Subscriber;
 
 use Acme\Application\Blog\Event\Comment\CommentCreated;
 use Acme\Application\Blog\Event\Comment\CommentDeleted;
-use Acme\Application\Blog\Event\Exception\UnexpectedEventException;
 use Acme\Domain\Blog\Repository\CommentCounterRepository;
 use DateTime;
 
@@ -24,22 +23,24 @@ class IncrementCommentCounterSubscriber
     }
 
     /**
-     * @param CommentCreated|CommentDeleted $event
+     * @param CommentCreated $event
      */
-    public function __invoke($event)
+    public function created(CommentCreated $event)
     {
-        $incrementMap = [
-            CommentCreated::class => 1,
-            CommentDeleted::class => -1,
-        ];
+        $date = new DateTime($event->getData()['posted_at']);
 
-        if (!isset($incrementMap[get_class($event)])) {
-            throw UnexpectedEventException::create($this, $event);
-        }
+        $this->counterRepository->incrementCount(1);
+        $this->counterRepository->incrementCountThatDay($date, 1);
+    }
 
-        $increment = $incrementMap[get_class($event)];
+    /**
+     * @param CommentDeleted $event
+     */
+    public function deleted(CommentDeleted $event)
+    {
+        $date = new DateTime($event->getData()['posted_at']);
 
-        $this->counterRepository->incrementCount($increment);
-        $this->counterRepository->incrementCountThatDay(new DateTime(), $increment);
+        $this->counterRepository->incrementCount(-1);
+        $this->counterRepository->incrementCountThatDay($date, -1);
     }
 }

@@ -127,7 +127,17 @@ class Comment implements CommentInterface
     }
 
     /**
-     * @return mixed
+     * @return int
+     *
+     * @Groups({"event_bus"})
+     */
+    public function getAuthorId()
+    {
+        return $this->author->getId();
+    }
+
+    /**
+     * @return int
      *
      * @Groups({"event_bus"})
      */
