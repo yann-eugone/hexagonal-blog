@@ -5,7 +5,7 @@ namespace Acme\Tests\Application\Blog\Command\Comment\Handler;
 use Acme\Application\Blog\Command\Comment\UpdateComment;
 use Acme\Application\Blog\Command\Comment\Handler\UpdateCommentHandler;
 use Acme\Application\Blog\Command\Comment\CommentCommandFactory;
-use Acme\Application\Blog\Event\EventBus;
+use Acme\Application\Common\Event\EventBus;
 use Acme\Application\Blog\Event\Comment\CommentUpdated;
 use Acme\Application\Blog\Event\Comment\CommentEventFactory;
 use Acme\Application\Blog\Normalizer\CommentNormalizer;
@@ -27,7 +27,7 @@ class UpdateCommentHandlerTest extends \PHPUnit_Framework_TestCase
     private $repository;
 
     /**
-     * @var EventBus|ObjectProphecy
+     * @var \Acme\Application\Common\Event\EventBus|ObjectProphecy
      */
     private $eventBus;
 

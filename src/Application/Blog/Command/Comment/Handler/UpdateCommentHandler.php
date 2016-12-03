@@ -4,7 +4,7 @@ namespace Acme\Application\Blog\Command\Comment\Handler;
 
 use Acme\Application\Blog\Command\Comment\UpdateComment;
 use Acme\Application\Blog\Event\Comment\CommentEventFactory;
-use Acme\Application\Blog\Event\EventBus;
+use Acme\Application\Common\Event\EventBus;
 use Acme\Domain\Blog\Repository\CommentRepository;
 
 class UpdateCommentHandler

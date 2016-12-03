@@ -2,7 +2,7 @@
 
 namespace Acme\Infrastructure\Bundle\AppBundle\Bus\SimpleBus;
 
-use Acme\Application\Blog\Command\CommandBus;
+use Acme\Application\Common\Command\CommandBus;
 use SimpleBus\Message\Bus\MessageBus;
 
 class SimpleCommandBus implements CommandBus

@@ -3,7 +3,7 @@
 namespace Acme\Application\Blog\Command\Post\Handler;
 
 use Acme\Application\Blog\Command\Post\UpdatePost;
-use Acme\Application\Blog\Event\EventBus;
+use Acme\Application\Common\Event\EventBus;
 use Acme\Application\Blog\Event\Post\PostEventFactory;
 use Acme\Domain\Blog\Repository\PostRepository;
 
@@ -20,14 +20,14 @@ class UpdatePostHandler
     private $eventFactory;
 
     /**
-     * @var EventBus
+     * @var \Acme\Application\Common\Event\EventBus
      */
     private $eventBus;
 
     /**
-     * @param PostRepository   $repository
-     * @param PostEventFactory $eventFactory
-     * @param EventBus         $eventBus
+     * @param PostRepository                          $repository
+     * @param PostEventFactory                        $eventFactory
+     * @param \Acme\Application\Common\Event\EventBus $eventBus
      */
     public function __construct(PostRepository $repository, PostEventFactory $eventFactory, EventBus $eventBus)
     {

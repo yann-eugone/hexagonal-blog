@@ -2,7 +2,7 @@
 
 namespace Acme\Infrastructure\Bundle\AppBundle\Bus\SimpleBus;
 
-use Acme\Application\Blog\Event\EventBus;
+use Acme\Application\Common\Event\EventBus;
 use SimpleBus\Message\Bus\MessageBus;
 
 class SimpleEventBus implements EventBus

@@ -5,7 +5,7 @@ namespace Acme\Tests\Application\Blog\Command\Comment\Handler;
 use Acme\Application\Blog\Command\Comment\DeleteComment;
 use Acme\Application\Blog\Command\Comment\Handler\DeleteCommentHandler;
 use Acme\Application\Blog\Command\Comment\CommentCommandFactory;
-use Acme\Application\Blog\Event\EventBus;
+use Acme\Application\Common\Event\EventBus;
 use Acme\Application\Blog\Event\Comment\CommentDeleted;
 use Acme\Application\Blog\Event\Comment\CommentEventFactory;
 use Acme\Application\Blog\Normalizer\CommentNormalizer;

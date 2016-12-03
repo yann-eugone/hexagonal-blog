@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Application\Blog\Command;
+namespace Acme\Application\Common\Command;
 
 interface CommandBus
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Application\Blog\Event;
+namespace Acme\Application\Common\Event;
 
 interface EventBus
 {

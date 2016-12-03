@@ -5,7 +5,7 @@ namespace Acme\Tests\Application\Blog\Command\Post\Handler;
 use Acme\Application\Blog\Command\Post\CreatePost;
 use Acme\Application\Blog\Command\Post\Handler\CreatePostHandler;
 use Acme\Application\Blog\Command\Post\PostCommandFactory;
-use Acme\Application\Blog\Event\EventBus;
+use Acme\Application\Common\Event\EventBus;
 use Acme\Application\Blog\Event\Post\PostCreated;
 use Acme\Application\Blog\Event\Post\PostEventFactory;
 use Acme\Application\Blog\Normalizer\PostNormalizer;
@@ -25,7 +25,7 @@ class CreatePostHandlerTest extends \PHPUnit_Framework_TestCase
     private $repository;
 
     /**
-     * @var EventBus|ObjectProphecy
+     * @var \Acme\Application\Common\Event\EventBus|ObjectProphecy
      */
     private $eventBus;
 

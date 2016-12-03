@@ -4,7 +4,7 @@ namespace Acme\Application\Blog\Command\Comment\Handler;
 
 use Acme\Application\Blog\Command\Comment\CreateComment;
 use Acme\Application\Blog\Event\Comment\CommentEventFactory;
-use Acme\Application\Blog\Event\EventBus;
+use Acme\Application\Common\Event\EventBus;
 use Acme\Domain\Blog\Repository\CommentRepository;
 use DateTime;
 
@@ -21,14 +21,14 @@ class CreateCommentHandler
     private $eventFactory;
 
     /**
-     * @var EventBus
+     * @var \Acme\Application\Common\Event\EventBus
      */
     private $eventBus;
 
     /**
-     * @param CommentRepository   $repository
-     * @param CommentEventFactory $eventFactory
-     * @param EventBus            $eventBus
+     * @param CommentRepository                       $repository
+     * @param CommentEventFactory                     $eventFactory
+     * @param \Acme\Application\Common\Event\EventBus $eventBus
      */
     public function __construct(CommentRepository $repository, CommentEventFactory $eventFactory, EventBus $eventBus)
     {

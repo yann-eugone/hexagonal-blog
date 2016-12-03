@@ -2,7 +2,7 @@
 
 namespace Acme\Infrastructure\Bundle\AppBundle\Controller;
 
-use Acme\Application\Blog\Command\CommandBus;
+use Acme\Application\Common\Command\CommandBus;
 use Acme\Application\Blog\Command\Comment\CommentCommandFactory;
 use Acme\Domain\Blog\Exception\Post\PostNotFoundException;
 use Acme\Domain\Blog\Repository\CommentRepository;
@@ -167,7 +167,7 @@ class CommentController extends Controller
     }
 
     /**
-     * @return CommandBus
+     * @return \Acme\Application\Common\Command\CommandBus
      */
     private function getCommandBus()
     {

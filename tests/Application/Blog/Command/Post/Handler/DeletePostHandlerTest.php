@@ -5,7 +5,7 @@ namespace Acme\Tests\Application\Blog\Command\Post\Handler;
 use Acme\Application\Blog\Command\Post\DeletePost;
 use Acme\Application\Blog\Command\Post\Handler\DeletePostHandler;
 use Acme\Application\Blog\Command\Post\PostCommandFactory;
-use Acme\Application\Blog\Event\EventBus;
+use Acme\Application\Common\Event\EventBus;
 use Acme\Application\Blog\Event\Post\PostDeleted;
 use Acme\Application\Blog\Event\Post\PostEventFactory;
 use Acme\Application\Blog\Normalizer\PostNormalizer;
@@ -26,7 +26,7 @@ class DeletePostHandlerTest extends \PHPUnit_Framework_TestCase
     private $repository;
 
     /**
-     * @var EventBus|ObjectProphecy
+     * @var \Acme\Application\Common\Event\EventBus|ObjectProphecy
      */
     private $eventBus;
 

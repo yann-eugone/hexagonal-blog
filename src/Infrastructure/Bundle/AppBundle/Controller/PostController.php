@@ -2,7 +2,7 @@
 
 namespace Acme\Infrastructure\Bundle\AppBundle\Controller;
 
-use Acme\Application\Blog\Command\CommandBus;
+use Acme\Application\Common\Command\CommandBus;
 use Acme\Application\Blog\Command\Post\PostCommandFactory;
 use Acme\Domain\Blog\Exception\Post\PostNotFoundException;
 use Acme\Domain\Blog\Repository\PostRepository;
@@ -161,7 +161,7 @@ class PostController extends Controller
     }
 
     /**
-     * @return CommandBus
+     * @return \Acme\Application\Common\Command\CommandBus
      */
     private function getCommandBus()
     {
