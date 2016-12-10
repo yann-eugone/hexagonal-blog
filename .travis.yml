@@ -16,7 +16,7 @@ before_install:
 install: composer install --prefer-dist --no-interaction $COMPOSER_FLAGS
 
 script:
-  - ~/.composer/vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.clover
+  - ~/.composer/vendor/bin/phpunit -c phpunit.xml.dist --coverage-text
 
 notifications:
   email: yann.eugone@gmail.com
