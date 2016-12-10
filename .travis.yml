@@ -11,11 +11,12 @@ cache:
 
 before_install:
   - composer selfupdate
+  - composer require --global phpunit/phpunit
 
 install: composer install --prefer-dist --no-interaction $COMPOSER_FLAGS
 
 script:
-  - vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.clover
+  - ~/.composer/vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.clover
 
 notifications:
   email: yann.eugone@gmail.com
