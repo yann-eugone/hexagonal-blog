@@ -12,7 +12,7 @@ cache:
 before_install:
   - composer selfupdate
 
-install: composer update --prefer-dist --no-interaction $COMPOSER_FLAGS
+install: composer install --prefer-dist --no-interaction $COMPOSER_FLAGS
 
 script:
   - vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.clover
