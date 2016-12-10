@@ -7,7 +7,7 @@ use Acme\Application\Blog\Event\Comment\CommentDeleted;
 use Acme\Domain\Blog\Repository\CommentCounterRepository;
 use DateTime;
 
-class IncrementCommentCounterSubscriber
+class IncrementCounterSubscriber
 {
     /**
      * @var CommentCounterRepository

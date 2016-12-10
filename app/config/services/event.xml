@@ -16,26 +16,8 @@
         </service>
 
         <!-- Comment Subscribers -->
-        <service id="event_subscriber.comment.add_author_activity"
-                 class="Acme\Application\Blog\Event\Comment\Subscriber\AddAuthorActivitySubscriber"
-                 autowire="true">
-            <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentCreated"/>
-            <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentUpdated"/>
-        </service>
-        <service id="event_subscriber.comment.increment_author_counter"
-                 class="Acme\Application\Blog\Event\Comment\Subscriber\IncrementCommentAuthorCounterSubscriber"
-                 autowire="true">
-            <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentCreated"
-                 method="created"/>
-            <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentDeleted"
-                 method="deleted"/>
-        </service>
         <service id="event_subscriber.comment.increment_counter"
-                 class="Acme\Application\Blog\Event\Comment\Subscriber\IncrementCommentCounterSubscriber"
+                 class="Acme\Application\Blog\Event\Comment\Subscriber\IncrementCounterSubscriber"
                  autowire="true">
             <tag name="event_subscriber"
                  subscribes_to="Acme\Application\Blog\Event\Comment\CommentCreated"
@@ -46,26 +28,8 @@
         </service>
 
         <!-- Post Subscribers -->
-        <service id="event_subscriber.post.add_author_activity"
-                 class="Acme\Application\Blog\Event\Post\Subscriber\AddAuthorActivitySubscriber"
-                 autowire="true">
-            <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Post\PostCreated"/>
-            <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Post\PostUpdated"/>
-        </service>
-        <service id="event_subscriber.post.increment_author_counter"
-                 class="Acme\Application\Blog\Event\Post\Subscriber\IncrementPostAuthorCounterSubscriber"
-                 autowire="true">
-            <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Post\PostCreated"
-                 method="created"/>
-            <tag name="event_subscriber"
-                 subscribes_to="Acme\Application\Blog\Event\Post\PostDeleted"
-                 method="deleted"/>
-        </service>
         <service id="event_subscriber.post.increment_counter"
-                 class="Acme\Application\Blog\Event\Post\Subscriber\IncrementPostCounterSubscriber"
+                 class="Acme\Application\Blog\Event\Post\Subscriber\IncrementCounterSubscriber"
                  autowire="true">
             <tag name="event_subscriber"
                  subscribes_to="Acme\Application\Blog\Event\Post\PostCreated"
@@ -74,15 +38,45 @@
                  subscribes_to="Acme\Application\Blog\Event\Post\PostDeleted"
                  method="deleted"/>
         </service>
-        <service id="event_subscriber.post.increment_taxonomy_counter"
-                 class="Acme\Application\Blog\Event\Post\Subscriber\IncrementPostTaxonomyCounterSubscriber"
+
+        <!-- Author Subscribers -->
+        <service id="event_subscriber.author.increment_counter"
+                 class="Acme\Application\Blog\Event\Author\Subscriber\IncrementCounterSubscriber"
                  autowire="true">
             <tag name="event_subscriber"
                  subscribes_to="Acme\Application\Blog\Event\Post\PostCreated"
-                 method="created"/>
+                 method="postCreated"/>
             <tag name="event_subscriber"
                  subscribes_to="Acme\Application\Blog\Event\Post\PostDeleted"
-                 method="deleted"/>
+                 method="postDeleted"/>
+            <tag name="event_subscriber"
+                 subscribes_to="Acme\Application\Blog\Event\Post\PostFavorited"
+                 method="postFavorited"/>
+            <tag name="event_subscriber"
+                 subscribes_to="Acme\Application\Blog\Event\Post\PostUnfavorited"
+                 method="postUnfavorited"/>
+            <tag name="event_subscriber"
+                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentCreated"
+                 method="commentCreated"/>
+            <tag name="event_subscriber"
+                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentDeleted"
+                 method="commentDeleted"/>
+        </service>
+        <service id="event_subscriber.author.record_activity"
+                 class="Acme\Application\Blog\Event\Author\Subscriber\RecordActivitySubscriber"
+                 autowire="true">
+            <tag name="event_subscriber"
+                 subscribes_to="Acme\Application\Blog\Event\Post\PostCreated"
+                 method="postCreated"/>
+            <tag name="event_subscriber"
+                 subscribes_to="Acme\Application\Blog\Event\Post\PostUpdated"
+                 method="postUpdated"/>
+            <tag name="event_subscriber"
+                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentCreated"
+                 method="commentCreated"/>
+            <tag name="event_subscriber"
+                 subscribes_to="Acme\Application\Blog\Event\Comment\CommentUpdated"
+                 method="commentUpdated"/>
         </service>
 
     </services>

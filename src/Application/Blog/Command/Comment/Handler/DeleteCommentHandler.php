@@ -20,14 +20,14 @@ class DeleteCommentHandler
     private $eventFactory;
 
     /**
-     * @var \Acme\Application\Common\Event\EventBus
+     * @var EventBus
      */
     private $eventBus;
 
     /**
-     * @param CommentRepository                       $repository
-     * @param CommentEventFactory                     $eventFactory
-     * @param \Acme\Application\Common\Event\EventBus $eventBus
+     * @param CommentRepository   $repository
+     * @param CommentEventFactory $eventFactory
+     * @param EventBus            $eventBus
      */
     public function __construct(CommentRepository $repository, CommentEventFactory $eventFactory, EventBus $eventBus)
     {

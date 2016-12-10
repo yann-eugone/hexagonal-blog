@@ -24,7 +24,7 @@ class CreateCommentHandlerTest extends \PHPUnit_Framework_TestCase
     private $repository;
 
     /**
-     * @var \Acme\Application\Common\Event\EventBus|ObjectProphecy
+     * @var EventBus|ObjectProphecy
      */
     private $eventBus;
 

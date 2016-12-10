@@ -3,6 +3,7 @@
 namespace Acme\Application\Blog\Event\Post;
 
 use Acme\Application\Blog\Normalizer\PostNormalizer;
+use Acme\Domain\Blog\Model\Author;
 use Acme\Domain\Blog\Model\Post;
 use DateTime;
 
@@ -60,7 +61,40 @@ class PostEventFactory
     {
         return new PostDeleted(
             $post->getId(),
-            new DateTime()
+            new DateTime(),
+            $this->normalizer->normalizeToEvent($post)
+        );
+    }
+
+    /**
+     * @param Post     $post
+     * @param Author   $author
+     * @param DateTime $date
+     *
+     * @return PostFavorited
+     */
+    public function newFavoritedEvent(Post $post, Author $author, DateTime $date = null)
+    {
+        return new PostFavorited(
+            $post->getId(),
+            $author->getId(),
+            $date ?: new DateTime()
+        );
+    }
+
+    /**
+     * @param Post     $post
+     * @param Author   $author
+     * @param DateTime $date
+     *
+     * @return PostUnfavorited
+     */
+    public function newUnfavoritedEvent(Post $post, Author $author, DateTime $date = null)
+    {
+        return new PostUnfavorited(
+            $post->getId(),
+            $author->getId(),
+            $date ?: new DateTime()
         );
     }
 }

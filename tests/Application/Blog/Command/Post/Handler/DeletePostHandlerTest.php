@@ -26,7 +26,7 @@ class DeletePostHandlerTest extends \PHPUnit_Framework_TestCase
     private $repository;
 
     /**
-     * @var \Acme\Application\Common\Event\EventBus|ObjectProphecy
+     * @var EventBus|ObjectProphecy
      */
     private $eventBus;
 
@@ -140,9 +140,14 @@ class DeletePostHandlerTest extends \PHPUnit_Framework_TestCase
         $this->repository->delete($post)
             ->shouldBeCalledTimes(1);
 
+        $this->normalizer->normalizeToEvent($post)
+            ->shouldBeCalledTimes(1)
+            ->willReturn(['lorem ipsum by john']);
+
         $eventAssertions = Argument::allOf(
             Argument::type(PostDeleted::class),
-            Argument::which('getId', 1)
+            Argument::which('getId', 1),
+            Argument::which('getData', ['lorem ipsum by john'])
         );
         $this->eventBus->dispatch($eventAssertions)
             ->shouldBeCalledTimes(1);

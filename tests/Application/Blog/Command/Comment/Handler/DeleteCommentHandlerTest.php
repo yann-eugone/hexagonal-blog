@@ -131,9 +131,14 @@ class DeleteCommentHandlerTest extends \PHPUnit_Framework_TestCase
         $this->repository->delete($comment)
             ->shouldBeCalledTimes(1);
 
+        $this->normalizer->normalizeToEvent($comment)
+            ->shouldBeCalledTimes(1)
+            ->willReturn(['lorem ipsum by john']);
+
         $eventAssertions = Argument::allOf(
             Argument::type(CommentDeleted::class),
-            Argument::which('getId', 1)
+            Argument::which('getId', 1),
+            Argument::which('getData', ['lorem ipsum by john'])
         );
         $this->eventBus->dispatch($eventAssertions)
             ->shouldBeCalledTimes(1);

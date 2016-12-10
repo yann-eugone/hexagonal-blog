@@ -21,4 +21,12 @@ class Author implements \Acme\Domain\Blog\Model\Author
     {
         return $this->name;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getId()
+    {
+        return $this->name;
+    }
 }

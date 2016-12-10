@@ -20,14 +20,14 @@ class UpdatePostHandler
     private $eventFactory;
 
     /**
-     * @var \Acme\Application\Common\Event\EventBus
+     * @var EventBus
      */
     private $eventBus;
 
     /**
-     * @param PostRepository                          $repository
-     * @param PostEventFactory                        $eventFactory
-     * @param \Acme\Application\Common\Event\EventBus $eventBus
+     * @param PostRepository   $repository
+     * @param PostEventFactory $eventFactory
+     * @param EventBus         $eventBus
      */
     public function __construct(PostRepository $repository, PostEventFactory $eventFactory, EventBus $eventBus)
     {

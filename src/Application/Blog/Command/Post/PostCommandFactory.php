@@ -4,6 +4,7 @@ namespace Acme\Application\Blog\Command\Post;
 
 use Acme\Domain\Blog\Model\Author;
 use Acme\Domain\Blog\Model\Post;
+use DateTime;
 
 class PostCommandFactory
 {
@@ -42,5 +43,37 @@ class PostCommandFactory
     public function newDeleteCommand(Post $post)
     {
         return new DeletePost($post->getId());
+    }
+
+    /**
+     * @param Post     $post
+     * @param Author   $author
+     * @param DateTime $date
+     *
+     * @return FavoritePost
+     */
+    public function newFavoriteCommand(Post $post, Author $author, DateTime $date = null)
+    {
+        return new FavoritePost(
+            $post->getId(),
+            $author->getId(),
+            $date ?: new DateTime()
+        );
+    }
+
+    /**
+     * @param Post     $post
+     * @param Author   $author
+     * @param DateTime $date
+     *
+     * @return UnfavoritePost
+     */
+    public function newUnfavoriteCommand(Post $post, Author $author, DateTime $date = null)
+    {
+        return new UnfavoritePost(
+            $post->getId(),
+            $author->getId(),
+            $date ?: new DateTime()
+        );
     }
 }

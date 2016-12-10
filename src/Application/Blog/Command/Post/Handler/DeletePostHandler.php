@@ -4,7 +4,6 @@ namespace Acme\Application\Blog\Command\Post\Handler;
 
 use Acme\Application\Blog\Command\Post\DeletePost;
 use Acme\Application\Common\Event\EventBus;
-use Acme\Application\Blog\Event\Post\PostDeleted;
 use Acme\Application\Blog\Event\Post\PostEventFactory;
 use Acme\Domain\Blog\Repository\PostRepository;
 
@@ -21,14 +20,14 @@ class DeletePostHandler
     private $eventFactory;
 
     /**
-     * @var \Acme\Application\Common\Event\EventBus
+     * @var EventBus
      */
     private $eventBus;
 
     /**
-     * @param PostRepository                          $repository
-     * @param PostEventFactory                        $eventFactory
-     * @param \Acme\Application\Common\Event\EventBus $eventBus
+     * @param PostRepository   $repository
+     * @param PostEventFactory $eventFactory
+     * @param EventBus         $eventBus
      */
     public function __construct(PostRepository $repository, PostEventFactory $eventFactory, EventBus $eventBus)
     {
