@@ -49,6 +49,12 @@
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
             <argument>Acme\Infrastructure\Bundle\AppBundle\Entity\Tag</argument>
         </service>
+        <service id="orm.repository.favorite"
+                 class="Doctrine\ORM\EntityRepository"
+                 public="false">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>Acme\Infrastructure\Bundle\AppBundle\Entity\Favorite</argument>
+        </service>
 
         <!-- Entity Repository -->
         <service id="repository.author"
@@ -104,6 +110,14 @@
                  class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized\PostTagCounterRepository">
             <argument type="service" id="orm.repository.counter"/>
         </service>
+        <service id="repository.counter.favorite_author.denormalized"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized\FavoriteAuthorCounterRepository">
+            <argument type="service" id="orm.repository.counter"/>
+        </service>
+        <service id="repository.counter.favorite_post.denormalized"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized\FavoritePostCounterRepository">
+            <argument type="service" id="orm.repository.counter"/>
+        </service>
 
         <!-- Normalized Counter Repository -->
         <service id="repository.counter.comment_author.normalized"
@@ -129,6 +143,14 @@
         <service id="repository.counter.post_tag.normalized"
                  class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized\PostTagCounterRepository">
             <argument type="service" id="orm.repository.post"/>
+        </service>
+        <service id="repository.counter.favorite_author.normalized"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized\FavoriteAuthorCounterRepository">
+            <argument type="service" id="orm.repository.favorite"/>
+        </service>
+        <service id="repository.counter.favorite_post.normalized"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized\FavoritePostCounterRepository">
+            <argument type="service" id="orm.repository.favorite"/>
         </service>
 
     </services>

@@ -4,6 +4,8 @@ namespace Acme\Infrastructure\Bundle\AppBundle\DependencyInjection;
 
 use Acme\Domain\Blog\Repository\CommentAuthorCounterRepository;
 use Acme\Domain\Blog\Repository\CommentCounterRepository;
+use Acme\Domain\Blog\Repository\FavoriteAuthorCounterRepository;
+use Acme\Domain\Blog\Repository\FavoritePostCounterRepository;
 use Acme\Domain\Blog\Repository\PostAuthorCounterRepository;
 use Acme\Domain\Blog\Repository\PostCategoryCounterRepository;
 use Acme\Domain\Blog\Repository\PostCounterRepository;
@@ -47,6 +49,8 @@ class AppExtension extends Extension implements PrependExtensionInterface, Compi
             PostCategoryCounterRepository::class => 'repository.counter.post_category.denormalized',
             PostCounterRepository::class => 'repository.counter.post.denormalized',
             PostTagCounterRepository::class => 'repository.counter.post_tag.denormalized',
+            FavoriteAuthorCounterRepository::class => 'repository.counter.favorite_author.denormalized',
+            FavoritePostCounterRepository::class => 'repository.counter.favorite_post.denormalized',
         ];
         foreach ($autowiring as $class => $service) {
             $container->findDefinition($service)->setAutowiringTypes([$class]);
