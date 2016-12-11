@@ -16,7 +16,11 @@ before_install:
 install: composer install --prefer-dist --no-interaction $COMPOSER_FLAGS
 
 script:
-  - ~/.composer/vendor/bin/phpunit -c phpunit.xml.dist --coverage-text
+  - ~/.composer/vendor/bin/phpunit -c phpunit.xml.dist --coverage-text --coverage-clover=clover.coverage
+
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover clover.coverage
 
 notifications:
   email: yann.eugone@gmail.com
