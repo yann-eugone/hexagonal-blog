@@ -67,6 +67,7 @@ class Post implements PostInterface
      * @var AuthorInterface
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Author")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $author;
 
@@ -74,6 +75,7 @@ class Post implements PostInterface
      * @var CategoryInterface
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Category")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $category;
 

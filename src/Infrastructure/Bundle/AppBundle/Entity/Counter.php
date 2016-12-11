@@ -2,6 +2,7 @@
 
 namespace Acme\Infrastructure\Bundle\AppBundle\Entity;
 
+use Acme\Domain\Blog\Model\Post;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,6 +32,7 @@ class Counter
      * @var Tag|null
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Tag")
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      */
     private $tag;
 
@@ -38,13 +40,23 @@ class Counter
      * @var Category|null
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Category")
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      */
     private $category;
+
+    /**
+     * @var Post|null
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Post")
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
+     */
+    private $post;
 
     /**
      * @var Author|null
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Author")
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      */
     private $author;
 
@@ -63,10 +75,10 @@ class Counter
     private $value;
 
     /**
-     * @param string            $type
-     * @param DateTime|null     $date
-     * @param Tag|Category|null $subject
-     * @param Author|null       $author
+     * @param string        $type
+     * @param DateTime|null $date
+     * @param object|null   $subject
+     * @param Author|null   $author
      */
     public function __construct(
         $type,
@@ -82,6 +94,8 @@ class Counter
             $this->category = $subject;
         } elseif ($subject instanceof Tag) {
             $this->tag = $subject;
+        } elseif ($subject instanceof Post) {
+            $this->post = $subject;
         }
     }
 

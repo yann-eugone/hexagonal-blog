@@ -46,6 +46,7 @@ class Comment implements CommentInterface
      * @var AuthorInterface
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Author")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $author;
 
@@ -53,6 +54,7 @@ class Comment implements CommentInterface
      * @var PostInterface
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Post")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $post;
 

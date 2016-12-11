@@ -4,6 +4,7 @@ namespace Acme\Infrastructure\Bundle\AppBundle\Entity\Repository;
 
 use Acme\Domain\Blog\Model\Author;
 use Acme\Domain\Blog\Model\Category;
+use Acme\Domain\Blog\Model\Post;
 use Acme\Domain\Blog\Model\Tag;
 use Acme\Infrastructure\Bundle\AppBundle\Entity\Counter;
 use DateTime;
@@ -14,9 +15,9 @@ use Doctrine\ORM\QueryBuilder;
 class CounterRepository extends EntityRepository
 {
     /**
-     * @param string            $type
-     * @param Category|Tag|null $subject
-     * @param Author|null       $author
+     * @param string      $type
+     * @param object|null $subject
+     * @param Author|null $author
      *
      * @return int
      */
@@ -29,10 +30,10 @@ class CounterRepository extends EntityRepository
     }
 
     /**
-     * @param string            $type
-     * @param DateTime          $date
-     * @param Category|Tag|null $subject
-     * @param Author|null       $author
+     * @param string      $type
+     * @param DateTime    $date
+     * @param object|null $subject
+     * @param Author|null $author
      *
      * @return int
      */
@@ -46,11 +47,11 @@ class CounterRepository extends EntityRepository
     }
 
     /**
-     * @param string            $type
-     * @param DateTime          $from
-     * @param DateTime          $to
-     * @param Category|Tag|null $subject
-     * @param Author|null       $author
+     * @param string      $type
+     * @param DateTime    $from
+     * @param DateTime    $to
+     * @param object|null $subject
+     * @param Author|null $author
      *
      * @return int
      */
@@ -64,10 +65,10 @@ class CounterRepository extends EntityRepository
     }
 
     /**
-     * @param int               $value
-     * @param string            $type
-     * @param Category|Tag|null $subject
-     * @param Author|null       $author
+     * @param int         $value
+     * @param string      $type
+     * @param object|null $subject
+     * @param Author|null $author
      */
     public function increment($type, $value, $subject = null, $author = null)
     {
@@ -78,11 +79,11 @@ class CounterRepository extends EntityRepository
     }
 
     /**
-     * @param int               $value
-     * @param DateTime          $date
-     * @param string            $type
-     * @param Category|Tag|null $subject
-     * @param Author|null       $author
+     * @param int         $value
+     * @param DateTime    $date
+     * @param string      $type
+     * @param object|null $subject
+     * @param Author|null $author
      */
     public function incrementThatDay($type, DateTime $date, $value, $subject = null, $author = null)
     {
@@ -93,10 +94,10 @@ class CounterRepository extends EntityRepository
     }
 
     /**
-     * @param string            $type
-     * @param Category|Tag|null $subject
-     * @param Author|null       $author
-     * @param DateTime|null     $date
+     * @param string        $type
+     * @param object|null   $subject
+     * @param Author|null   $author
+     * @param DateTime|null $date
      *
      * @return Counter
      */
@@ -119,9 +120,9 @@ class CounterRepository extends EntityRepository
     }
 
     /**
-     * @param string       $type
-     * @param Category|Tag $subject
-     * @param Author|null  $author
+     * @param string      $type
+     * @param object|null $subject
+     * @param Author|null $author
      *
      * @return QueryBuilder
      */
@@ -139,6 +140,11 @@ class CounterRepository extends EntityRepository
             $builder
                 ->andWhere('counter.tag = :tag')
                 ->setParameter('tag', $subject)
+            ;
+        } elseif ($subject instanceof Post) {
+            $builder
+                ->andWhere('counter.post = :post')
+                ->setParameter('post', $subject)
             ;
         }
 

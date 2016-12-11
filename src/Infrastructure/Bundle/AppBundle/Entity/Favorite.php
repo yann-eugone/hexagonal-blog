@@ -25,7 +25,7 @@ class Favorite
     /**
      * @var AuthorInterface
      *
-     * @ORM\OneToMany(targetEntity="Acme\Domain\Blog\Model\Author")
+     * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Author")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $author;
@@ -33,7 +33,7 @@ class Favorite
     /**
      * @var PostInterface
      *
-     * @ORM\OneToMany(targetEntity="Acme\Domain\Blog\Model\Post")
+     * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Post")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $post;
