@@ -3,6 +3,8 @@
 namespace Acme\Infrastructure\Bundle\AppBundle\Entity;
 
 use Acme\Domain\Blog\Model\Comment as CommentInterface;
+use Acme\Domain\Blog\Model\Post as PostInterface;
+use Acme\Domain\Blog\Model\Author as AuthorInterface;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -41,14 +43,14 @@ class Comment implements CommentInterface
     private $postedAt;
 
     /**
-     * @var Author
+     * @var AuthorInterface
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Author")
      */
     private $author;
 
     /**
-     * @var Post
+     * @var PostInterface
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Post")
      */

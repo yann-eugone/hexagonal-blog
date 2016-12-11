@@ -35,7 +35,7 @@ class FavoriteAuthorCounterRepository implements FavoriteAuthorCounterRepository
      */
     public function incrementCountThatDay(Author $author, DateTime $day, $incr = 1)
     {
-        $this->repository->incrementThatDay('favorite_by_author', $day, $incr, $author);
+        $this->repository->incrementThatDay('favorite_by_author', $day, $incr, null, $author);
     }
 
     /**

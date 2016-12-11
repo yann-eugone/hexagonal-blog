@@ -35,7 +35,7 @@ class PostAuthorCounterRepository implements PostAuthorCounterRepositoryInterfac
      */
     public function incrementCountThatDay(Author $author, DateTime $day, $incr = 1)
     {
-        $this->repository->incrementThatDay('post_by_author', $day, $incr, $author);
+        $this->repository->incrementThatDay('post_by_author', $day, $incr, null, $author);
     }
 
     /**

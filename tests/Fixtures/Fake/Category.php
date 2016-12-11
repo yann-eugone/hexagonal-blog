@@ -21,4 +21,12 @@ class Category implements \Acme\Domain\Blog\Model\Category
     {
         return $this->name;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getId()
+    {
+        return $this->name;
+    }
 }

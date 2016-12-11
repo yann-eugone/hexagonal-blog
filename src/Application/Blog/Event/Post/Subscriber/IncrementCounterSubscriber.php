@@ -56,6 +56,7 @@ class IncrementCounterSubscriber
     ) {
         $this->tagRepository = $tagRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->counterRepository = $counterRepository;
         $this->categoryCounterRepository = $categoryCounterRepository;
         $this->tagCounterRepository = $tagCounterRepository;
     }

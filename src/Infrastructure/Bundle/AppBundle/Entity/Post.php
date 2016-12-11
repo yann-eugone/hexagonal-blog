@@ -3,6 +3,9 @@
 namespace Acme\Infrastructure\Bundle\AppBundle\Entity;
 
 use Acme\Domain\Blog\Model\Post as PostInterface;
+use Acme\Domain\Blog\Model\Author as AuthorInterface;
+use Acme\Domain\Blog\Model\Category as CategoryInterface;
+use Acme\Domain\Blog\Model\Tag as TagInterface;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -61,21 +64,21 @@ class Post implements PostInterface
     private $postedAt;
 
     /**
-     * @var Author
+     * @var AuthorInterface
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Author")
      */
     private $author;
 
     /**
-     * @var Category
+     * @var CategoryInterface
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Category")
      */
     private $category;
 
     /**
-     * @var Tag[]|Collection
+     * @var TagInterface[]|Collection
      *
      * @ORM\ManyToMany(targetEntity="Acme\Domain\Blog\Model\Tag")
      * @ORM\JoinTable(name="post_tag")
@@ -184,7 +187,7 @@ class Post implements PostInterface
     }
 
     /**
-     * @return Category
+     * @inheritdoc
      */
     public function getCategory()
     {
@@ -192,7 +195,7 @@ class Post implements PostInterface
     }
 
     /**
-     * @param Category $category
+     * @inheritdoc
      */
     public function setCategory($category)
     {
@@ -245,11 +248,12 @@ class Post implements PostInterface
      */
     public function getTagIds()
     {
-        return $this->tags->map(
+        return array_map(
             function (Tag $tag) {
                 return $tag->getId();
-            }
-        )->toArray();
+            },
+            $this->tags->toArray()
+        );
     }
 
     /**

@@ -99,7 +99,12 @@ class PostController extends AbstractController
      */
     public function createAction(Request $request)
     {
-        $command = $this->getCommandFactory()->newCreateCommand($this->getAuthor());
+        $author = $this->getAuthor();
+        if ($author === null) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $command = $this->getCommandFactory()->newCreateCommand($author);
         $form = $this->getFormFactory()->create(CreatePostType::class, $command);
 
         $form->handleRequest($request);

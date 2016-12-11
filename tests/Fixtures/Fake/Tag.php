@@ -21,4 +21,12 @@ class Tag implements \Acme\Domain\Blog\Model\Tag
     {
         return $this->name;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getId()
+    {
+        return $this->name;
+    }
 }

@@ -8,4 +8,9 @@ interface Tag
      * @return string
      */
     public function __toString();
+
+    /**
+     * @return int
+     */
+    public function getId();
 }

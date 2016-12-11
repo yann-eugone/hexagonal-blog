@@ -27,7 +27,7 @@ class FavoritePostCounterRepository implements FavoritePostCounterRepositoryInte
      */
     public function incrementCount(Post $post, $incr = 1)
     {
-        $this->repository->increment('favorite_by_post', $incr, null, $post);
+        $this->repository->increment('favorite_by_post', $incr, $post);
     }
 
     /**
@@ -43,7 +43,7 @@ class FavoritePostCounterRepository implements FavoritePostCounterRepositoryInte
      */
     public function count(Post $post)
     {
-        return $this->repository->count('favorite_by_post', null, $post);
+        return $this->repository->count('favorite_by_post', $post);
     }
 
     /**
@@ -51,7 +51,7 @@ class FavoritePostCounterRepository implements FavoritePostCounterRepositoryInte
      */
     public function countThatDay(Post $post, DateTime $day)
     {
-        return $this->repository->countThatDay('favorite_by_post', $day, null, $post);
+        return $this->repository->countThatDay('favorite_by_post', $day, $post);
     }
 
     /**
@@ -59,6 +59,6 @@ class FavoritePostCounterRepository implements FavoritePostCounterRepositoryInte
      */
     public function countBetween(Post $post, DateTime $from, DateTime $to)
     {
-        return $this->repository->countBetween('favorite_by_post', $from, $to, null, $post);
+        return $this->repository->countBetween('favorite_by_post', $from, $to, $post);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Acme\Domain\Blog\Model;
 
+use DateTime;
+
 interface AuthorActivity
 {
     const CREATE_POST = 'post.create';
@@ -16,7 +18,7 @@ interface AuthorActivity
     public function getAction();
 
     /**
-     * @return string
+     * @return DateTime
      */
     public function getDate();
 

@@ -14,9 +14,9 @@ use Doctrine\ORM\QueryBuilder;
 class CounterRepository extends EntityRepository
 {
     /**
-     * @param string       $type
-     * @param Category|Tag $subject
-     * @param Author|null  $author
+     * @param string            $type
+     * @param Category|Tag|null $subject
+     * @param Author|null       $author
      *
      * @return int
      */
@@ -29,10 +29,10 @@ class CounterRepository extends EntityRepository
     }
 
     /**
-     * @param string       $type
-     * @param DateTime     $date
-     * @param Category|Tag $subject
-     * @param Author|null  $author
+     * @param string            $type
+     * @param DateTime          $date
+     * @param Category|Tag|null $subject
+     * @param Author|null       $author
      *
      * @return int
      */
@@ -46,11 +46,11 @@ class CounterRepository extends EntityRepository
     }
 
     /**
-     * @param string       $type
-     * @param DateTime     $from
-     * @param DateTime     $to
-     * @param Category|Tag $subject
-     * @param Author|null  $author
+     * @param string            $type
+     * @param DateTime          $from
+     * @param DateTime          $to
+     * @param Category|Tag|null $subject
+     * @param Author|null       $author
      *
      * @return int
      */
@@ -64,10 +64,10 @@ class CounterRepository extends EntityRepository
     }
 
     /**
-     * @param int           $value
-     * @param string        $type
-     * @param Category|Tag  $subject
-     * @param Author|null   $author
+     * @param int               $value
+     * @param string            $type
+     * @param Category|Tag|null $subject
+     * @param Author|null       $author
      */
     public function increment($type, $value, $subject = null, $author = null)
     {
@@ -78,11 +78,11 @@ class CounterRepository extends EntityRepository
     }
 
     /**
-     * @param int           $value
-     * @param DateTime      $date
-     * @param string        $type
-     * @param Category|Tag  $subject
-     * @param Author|null   $author
+     * @param int               $value
+     * @param DateTime          $date
+     * @param string            $type
+     * @param Category|Tag|null $subject
+     * @param Author|null       $author
      */
     public function incrementThatDay($type, DateTime $date, $value, $subject = null, $author = null)
     {
@@ -93,10 +93,10 @@ class CounterRepository extends EntityRepository
     }
 
     /**
-     * @param string        $type
-     * @param Category|Tag  $subject
-     * @param Author|null   $author
-     * @param DateTime|null $date
+     * @param string            $type
+     * @param Category|Tag|null $subject
+     * @param Author|null       $author
+     * @param DateTime|null     $date
      *
      * @return Counter
      */
@@ -128,9 +128,7 @@ class CounterRepository extends EntityRepository
     private function createSearchQueryBuilder($type, $subject = null, $author = null)
     {
         $builder = $this->createQueryBuilder('counter');
-        $builder
-            ->where('counter.type = :type')
-            ->setParameter('type', $type);
+        $builder->where('counter.type = :type')->setParameter('type', $type);
 
         if ($subject instanceof Category) {
             $builder
@@ -163,10 +161,7 @@ class CounterRepository extends EntityRepository
     private function addExactDateCondition(QueryBuilder $builder, $date = null)
     {
         if ($date instanceof DateTime) {
-            $builder
-                ->andWhere('counter.date = :date')
-                ->setParameter('date', $date->format('Y-m-d'))
-            ;
+            $builder->andWhere('counter.date = :date')->setParameter('date', $date->format('Y-m-d'));
         } else {
             $builder->andWhere('counter.date IS NULL');
         }
@@ -179,8 +174,7 @@ class CounterRepository extends EntityRepository
      */
     private function addDateRangeCondition(QueryBuilder $builder, DateTime $from, DateTime $to)
     {
-        $builder
-            ->andWhere('counter.date >= :from')
+        $builder->andWhere('counter.date >= :from')
             ->andWhere('counter.date <= :to')
             ->setParameter('to', $to)
             ->setParameter('from', $from)
