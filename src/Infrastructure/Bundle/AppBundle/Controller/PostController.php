@@ -2,21 +2,20 @@
 
 namespace Acme\Infrastructure\Bundle\AppBundle\Controller;
 
-use Acme\Application\Common\Command\CommandBus;
 use Acme\Application\Blog\Command\Post\PostCommandFactory;
+use Acme\Application\Common\Command\CommandBus;
 use Acme\Domain\Blog\Exception\Post\PostNotFoundException;
 use Acme\Domain\Blog\Repository\PostRepository;
 use Acme\Infrastructure\Bundle\AppBundle\Form\Type\CreatePostType;
 use Acme\Infrastructure\Bundle\AppBundle\Form\Type\UpdatePostType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PostController extends Controller
+class PostController extends AbstractController
 {
     /**
      * @Route("/posts", name="post_list")
@@ -34,13 +33,13 @@ class PostController extends Controller
     public function listAction($category = null, $tag = null, $author = null)
     {
         $criteria = [];
-        if ($category) {
+        if ($category !== null) {
             $criteria['category'] = $category;
         }
-        if ($tag) {
+        if ($tag !== null) {
             $criteria['tag'] = $tag;
         }
-        if ($author) {
+        if ($author !== null) {
             $criteria['author'] = $author;
         }
 
@@ -84,12 +83,12 @@ class PostController extends Controller
      */
     public function createAction(Request $request)
     {
-        $command = $this->getCommandFactory()->newCreateCommand($this->getUser());
+        $command = $this->getCommandFactory()->newCreateCommand($this->getAuthor());
         $form = $this->getFormFactory()->create(CreatePostType::class, $command);
 
         $form->handleRequest($request);
 
-        if (!$form->isSubmitted() || !$form->isValid()) {
+        if (!$this->isFormProcessable($form)) {
             return $this->render(
                 ':blog/post:create.html.twig',
                 ['form' => $form->createView()]
@@ -124,7 +123,7 @@ class PostController extends Controller
 
         $form->handleRequest($request);
 
-        if (!$form->isSubmitted() || !$form->isValid()) {
+        if (!$this->isFormProcessable($form)) {
             return $this->render(
                 ':blog/post:update.html.twig',
                 ['post' => $post, 'form' => $form->createView()]
@@ -161,7 +160,7 @@ class PostController extends Controller
     }
 
     /**
-     * @return \Acme\Application\Common\Command\CommandBus
+     * @return CommandBus
      */
     private function getCommandBus()
     {

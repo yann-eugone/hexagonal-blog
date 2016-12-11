@@ -117,6 +117,11 @@ class FavoriteRepository implements FavoriteRepositoryInterface
      */
     private function find(Post $post, Author $author)
     {
-        return $this->repository->findOneBy(['author' => $author, 'post' => $post]);
+        $favorite = $this->repository->findOneBy(['author' => $author, 'post' => $post]);
+        if (!$favorite instanceof Favorite) {
+            return null;
+        }
+
+        return $favorite;
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Acme\Infrastructure\Bundle\AppBundle\Controller;
 
-use Acme\Application\Common\Command\CommandBus;
 use Acme\Application\Blog\Command\Comment\CommentCommandFactory;
+use Acme\Application\Common\Command\CommandBus;
 use Acme\Domain\Blog\Exception\Post\PostNotFoundException;
 use Acme\Domain\Blog\Repository\CommentRepository;
 use Acme\Domain\Blog\Repository\PostRepository;
@@ -11,13 +11,12 @@ use Acme\Infrastructure\Bundle\AppBundle\Form\Type\CreateCommentType;
 use Acme\Infrastructure\Bundle\AppBundle\Form\Type\UpdateCommentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class CommentController extends Controller
+class CommentController extends AbstractController
 {
     /**
      * @Route("/posts/{postId}/comments", name="post_list_comment")
@@ -60,7 +59,7 @@ class CommentController extends Controller
             throw new NotFoundHttpException(null, $exception);
         }
 
-        $command = $this->getCommandFactory()->newCreateCommand($this->getUser(), $post);
+        $command = $this->getCommandFactory()->newCreateCommand($this->getAuthor(), $post);
 
         $form = $this->getFormFactory()->create(
             CreateCommentType::class,
@@ -73,7 +72,7 @@ class CommentController extends Controller
 
         $form->handleRequest($request);
 
-        if (!$form->isSubmitted() || !$form->isValid()) {
+        if (!$this->isFormProcessable($form)) {
             return $this->render(
                 ':blog/comment:create.html.twig',
                 ['form' => $form->createView()]
@@ -122,7 +121,7 @@ class CommentController extends Controller
 
         $form->handleRequest($request);
 
-        if (!$form->isSubmitted() || !$form->isValid()) {
+        if (!$this->isFormProcessable($form)) {
             return $this->render(
                 ':blog/comment:update.html.twig',
                 ['comment' => $comment, 'form' => $form->createView()]
@@ -167,7 +166,7 @@ class CommentController extends Controller
     }
 
     /**
-     * @return \Acme\Application\Common\Command\CommandBus
+     * @return CommandBus
      */
     private function getCommandBus()
     {

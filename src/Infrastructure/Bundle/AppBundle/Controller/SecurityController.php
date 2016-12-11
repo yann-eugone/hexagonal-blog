@@ -5,11 +5,10 @@ namespace Acme\Infrastructure\Bundle\AppBundle\Controller;
 use Acme\Infrastructure\Bundle\AppBundle\Form\Type\Security\LoginType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-class SecurityController extends Controller
+class SecurityController extends AbstractController
 {
     /**
      * @Route("/login", name="security_login")

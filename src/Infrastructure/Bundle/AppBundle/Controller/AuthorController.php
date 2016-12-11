@@ -9,10 +9,9 @@ use Acme\Domain\Blog\Repository\PostAuthorCounterRepository;
 use Acme\Domain\Blog\Repository\PostRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthorController extends Controller
+class AuthorController extends AbstractController
 {
     /**
      * @Route("/author/{id}", name="author")

@@ -2,6 +2,8 @@
 
 namespace Acme\Infrastructure\Bundle\AppBundle\Entity;
 
+use Acme\Domain\Blog\Model\Author as AuthorInterface;
+use Acme\Domain\Blog\Model\Post as PostInterface;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -21,17 +23,17 @@ class Favorite
     private $id;
 
     /**
-     * @var Author
+     * @var AuthorInterface
      *
-     * @ORM\OneToMany(targetEntity="Acme\Infrastructure\Bundle\AppBundle\Entity\Author")
+     * @ORM\OneToMany(targetEntity="Acme\Domain\Blog\Model\Author")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $author;
 
     /**
-     * @var Post
+     * @var PostInterface
      *
-     * @ORM\OneToMany(targetEntity="Acme\Infrastructure\Bundle\AppBundle\Entity\Post")
+     * @ORM\OneToMany(targetEntity="Acme\Domain\Blog\Model\Post")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $post;
@@ -44,11 +46,11 @@ class Favorite
     private $favoritedAt;
 
     /**
-     * @param Author   $author
-     * @param Post     $post
-     * @param DateTime $favoritedAt
+     * @param AuthorInterface $author
+     * @param PostInterface   $post
+     * @param DateTime        $favoritedAt
      */
-    public function __construct(Author $author, Post $post, DateTime $favoritedAt = null)
+    public function __construct(AuthorInterface $author, PostInterface $post, DateTime $favoritedAt = null)
     {
         $this->author = $author;
         $this->post = $post;
@@ -64,7 +66,7 @@ class Favorite
     }
 
     /**
-     * @return Author
+     * @return AuthorInterface
      */
     public function getAuthor()
     {
@@ -72,7 +74,7 @@ class Favorite
     }
 
     /**
-     * @return Post
+     * @return PostInterface
      */
     public function getPost()
     {

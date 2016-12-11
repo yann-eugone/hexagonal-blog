@@ -4,10 +4,9 @@ namespace Acme\Infrastructure\Bundle\AppBundle\Controller;
 
 use Acme\Domain\Blog\Repository\PostCounterRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class HomepageController extends Controller
+class HomepageController extends AbstractController
 {
     /**
      * @Route("/", name="homepage")

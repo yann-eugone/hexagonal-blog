@@ -3,6 +3,7 @@
 namespace Acme\Infrastructure\Bundle\AppBundle\Entity;
 
 use Acme\Domain\Blog\Model\AuthorActivity as AuthorActivityInterface;
+use Acme\Domain\Blog\Model\Author as AuthorInterface;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,7 +30,7 @@ class AuthorActivity implements AuthorActivityInterface
     private $action;
 
     /**
-     * @var Author
+     * @var AuthorInterface
      *
      * @ORM\ManyToOne(targetEntity="Acme\Domain\Blog\Model\Author")
      * @ORM\JoinColumn(onDelete="CASCADE")
@@ -67,13 +68,13 @@ class AuthorActivity implements AuthorActivityInterface
     private $comment;
 
     /**
-     * @param string   $action
-     * @param Author   $author
-     * @param DateTime $date
-     * @param object   $subject
-     * @param array    $payload
+     * @param string          $action
+     * @param AuthorInterface $author
+     * @param DateTime        $date
+     * @param object          $subject
+     * @param array           $payload
      */
-    public function __construct($action, Author $author, DateTime $date, $subject, array $payload)
+    public function __construct($action, AuthorInterface $author, DateTime $date, $subject, array $payload)
     {
         $this->action = $action;
         $this->author = $author;
@@ -106,7 +107,7 @@ class AuthorActivity implements AuthorActivityInterface
     }
 
     /**
-     * @return Author
+     * @return AuthorInterface
      */
     public function getAuthor()
     {
