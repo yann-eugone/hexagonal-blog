@@ -91,7 +91,7 @@ class RecordActivitySubscriberTest extends \PHPUnit_Framework_TestCase
      */
     private function postCreatedEvent($post)
     {
-        return (new PostEventFactory($this->postNormalizer->reveal()))->newCreatedEvent($post);
+        return (new PostEventFactory($this->postNormalizer->reveal()))->postCreated($post);
     }
 
     /**
@@ -102,7 +102,7 @@ class RecordActivitySubscriberTest extends \PHPUnit_Framework_TestCase
      */
     private function postUpdatedEvent($postBefore, $postAfter)
     {
-        return (new PostEventFactory($this->postNormalizer->reveal()))->newUpdatedEvent($postBefore, $postAfter);
+        return (new PostEventFactory($this->postNormalizer->reveal()))->postUpdated($postBefore, $postAfter);
     }
 
     /**
@@ -112,7 +112,7 @@ class RecordActivitySubscriberTest extends \PHPUnit_Framework_TestCase
      */
     private function commentCreatedEvent($comment)
     {
-        return (new CommentEventFactory($this->commentNormalizer->reveal()))->newCreatedEvent($comment);
+        return (new CommentEventFactory($this->commentNormalizer->reveal()))->commentCreated($comment);
     }
 
     /**
@@ -123,7 +123,7 @@ class RecordActivitySubscriberTest extends \PHPUnit_Framework_TestCase
      */
     private function commentUpdatedEvent($commentBefore, $commentAfter)
     {
-        return (new CommentEventFactory($this->commentNormalizer->reveal()))->newUpdatedEvent($commentBefore, $commentAfter);
+        return (new CommentEventFactory($this->commentNormalizer->reveal()))->commentUpdated($commentBefore, $commentAfter);
     }
 
     /**

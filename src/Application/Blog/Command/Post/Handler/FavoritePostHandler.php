@@ -67,6 +67,6 @@ class FavoritePostHandler
 
         $this->favoriteRepository->add($post, $author);
 
-        $this->eventBus->dispatch($this->eventFactory->newFavoritedEvent($post, $author, $command->getDate()));
+        $this->eventBus->dispatch($this->eventFactory->postFavorited($post, $author, $command->getDate()));
     }
 }

@@ -13,7 +13,7 @@ class PostCommandFactory
      *
      * @return CreatePost
      */
-    public function newCreateCommand(Author $author)
+    public function createPost(Author $author)
     {
         return new CreatePost($author);
     }
@@ -23,7 +23,7 @@ class PostCommandFactory
      *
      * @return UpdatePost
      */
-    public function newUpdateCommand(Post $post)
+    public function updatePost(Post $post)
     {
         return new UpdatePost(
             $post->getId(),
@@ -40,7 +40,7 @@ class PostCommandFactory
      *
      * @return DeletePost
      */
-    public function newDeleteCommand(Post $post)
+    public function deletePost(Post $post)
     {
         return new DeletePost($post->getId());
     }
@@ -52,7 +52,7 @@ class PostCommandFactory
      *
      * @return FavoritePost
      */
-    public function newFavoriteCommand(Post $post, Author $author, DateTime $date = null)
+    public function favoritePost(Post $post, Author $author, DateTime $date = null)
     {
         return new FavoritePost(
             $post->getId(),
@@ -68,7 +68,7 @@ class PostCommandFactory
      *
      * @return UnfavoritePost
      */
-    public function newUnfavoriteCommand(Post $post, Author $author, DateTime $date = null)
+    public function unfavoritePost(Post $post, Author $author, DateTime $date = null)
     {
         return new UnfavoritePost(
             $post->getId(),

@@ -14,7 +14,7 @@ class CommentCommandFactory
      *
      * @return CreateComment
      */
-    public function newCreateCommand(Author $author, Post $post)
+    public function createComment(Author $author, Post $post)
     {
         return new CreateComment($author, $post);
     }
@@ -24,7 +24,7 @@ class CommentCommandFactory
      *
      * @return UpdateComment
      */
-    public function newUpdateCommand(Comment $comment)
+    public function updateComment(Comment $comment)
     {
         return new UpdateComment(
             $comment->getId(),
@@ -37,7 +37,7 @@ class CommentCommandFactory
      *
      * @return DeleteComment
      */
-    public function newDeleteCommand(Comment $comment)
+    public function deleteComment(Comment $comment)
     {
         return new DeleteComment($comment->getId());
     }

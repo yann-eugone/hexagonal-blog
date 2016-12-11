@@ -27,7 +27,7 @@ class PostEventFactory
      *
      * @return PostCreated
      */
-    public function newCreatedEvent(Post $post)
+    public function postCreated(Post $post)
     {
         return new PostCreated(
             $post->getId(),
@@ -42,7 +42,7 @@ class PostEventFactory
      *
      * @return PostUpdated
      */
-    public function newUpdatedEvent(Post $postBefore, Post $postAfter)
+    public function postUpdated(Post $postBefore, Post $postAfter)
     {
         return new PostUpdated(
             $postAfter->getId(),
@@ -57,7 +57,7 @@ class PostEventFactory
      *
      * @return PostDeleted
      */
-    public function newDeletedEvent(Post $post)
+    public function postDeleted(Post $post)
     {
         return new PostDeleted(
             $post->getId(),
@@ -73,7 +73,7 @@ class PostEventFactory
      *
      * @return PostFavorited
      */
-    public function newFavoritedEvent(Post $post, Author $author, DateTime $date = null)
+    public function postFavorited(Post $post, Author $author, DateTime $date = null)
     {
         return new PostFavorited(
             $post->getId(),
@@ -89,7 +89,7 @@ class PostEventFactory
      *
      * @return PostUnfavorited
      */
-    public function newUnfavoritedEvent(Post $post, Author $author, DateTime $date = null)
+    public function postUnfavorited(Post $post, Author $author, DateTime $date = null)
     {
         return new PostUnfavorited(
             $post->getId(),

@@ -26,7 +26,7 @@ class CommentEventFactory
      *
      * @return CommentCreated
      */
-    public function newCreatedEvent(Comment $comment)
+    public function commentCreated(Comment $comment)
     {
         return new CommentCreated(
             $comment->getId(),
@@ -41,7 +41,7 @@ class CommentEventFactory
      *
      * @return CommentUpdated
      */
-    public function newUpdatedEvent(Comment $commentBefore, Comment $commentAfter)
+    public function commentUpdated(Comment $commentBefore, Comment $commentAfter)
     {
         return new CommentUpdated(
             $commentAfter->getId(),
@@ -56,7 +56,7 @@ class CommentEventFactory
      *
      * @return CommentDeleted
      */
-    public function newDeletedEvent(Comment $comment)
+    public function commentDeleted(Comment $comment)
     {
         return new CommentDeleted(
             $comment->getId(),

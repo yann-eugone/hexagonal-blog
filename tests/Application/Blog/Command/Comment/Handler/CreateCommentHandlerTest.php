@@ -69,7 +69,7 @@ class CreateCommentHandlerTest extends \PHPUnit_Framework_TestCase
      */
     private function command($author, $post)
     {
-        return (new CommentCommandFactory())->newCreateCommand($author, $post);
+        return (new CommentCommandFactory())->createComment($author, $post);
     }
 
     /**

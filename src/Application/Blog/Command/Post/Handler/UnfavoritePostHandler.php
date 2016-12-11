@@ -67,6 +67,6 @@ class UnfavoritePostHandler
 
         $this->favoriteRepository->remove($post, $author);
 
-        $this->eventBus->dispatch($this->eventFactory->newUnfavoritedEvent($post, $author, $command->getDate()));
+        $this->eventBus->dispatch($this->eventFactory->postUnfavorited($post, $author, $command->getDate()));
     }
 }

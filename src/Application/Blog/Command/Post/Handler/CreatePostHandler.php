@@ -56,6 +56,6 @@ class CreatePostHandler
 
         $this->repository->create($post);
 
-        $this->eventBus->dispatch($this->eventFactory->newCreatedEvent($post));
+        $this->eventBus->dispatch($this->eventFactory->postCreated($post));
     }
 }

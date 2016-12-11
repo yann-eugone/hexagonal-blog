@@ -43,7 +43,7 @@ class DeleteCommentHandler
     {
         $comment = $this->repository->getById($command->getId());
 
-        $event = $this->eventFactory->newDeletedEvent($comment);
+        $event = $this->eventFactory->commentDeleted($comment);
 
         $this->repository->delete($comment);
 

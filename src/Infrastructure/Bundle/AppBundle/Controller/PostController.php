@@ -104,7 +104,7 @@ class PostController extends AbstractController
             throw $this->createAccessDeniedException();
         }
 
-        $command = $this->getCommandFactory()->newCreateCommand($author);
+        $command = $this->getCommandFactory()->createPost($author);
         $form = $this->getFormFactory()->create(CreatePostType::class, $command);
 
         $form->handleRequest($request);
@@ -141,7 +141,7 @@ class PostController extends AbstractController
             throw new NotFoundHttpException(null, $exception);
         }
 
-        $command = $this->getCommandFactory()->newUpdateCommand($post);
+        $command = $this->getCommandFactory()->updatePost($post);
 
         $form = $this->getFormFactory()->create(UpdatePostType::class, $command);
 

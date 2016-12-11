@@ -70,7 +70,7 @@ class DeletePostHandlerTest extends \PHPUnit_Framework_TestCase
      */
     private function command($post)
     {
-        return (new PostCommandFactory())->newDeleteCommand($post);
+        return (new PostCommandFactory())->deletePost($post);
     }
 
     /**

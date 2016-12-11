@@ -71,7 +71,7 @@ class DeleteCommentHandlerTest extends \PHPUnit_Framework_TestCase
      */
     private function command($comment)
     {
-        return (new CommentCommandFactory())->newDeleteCommand($comment);
+        return (new CommentCommandFactory())->deleteComment($comment);
     }
 
     /**

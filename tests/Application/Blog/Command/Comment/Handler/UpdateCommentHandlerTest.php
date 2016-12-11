@@ -71,7 +71,7 @@ class UpdateCommentHandlerTest extends \PHPUnit_Framework_TestCase
      */
     private function command($comment)
     {
-        return (new CommentCommandFactory())->newUpdateCommand($comment);
+        return (new CommentCommandFactory())->updateComment($comment);
     }
 
     /**

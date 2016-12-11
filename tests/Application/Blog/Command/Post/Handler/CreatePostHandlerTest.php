@@ -69,7 +69,7 @@ class CreatePostHandlerTest extends \PHPUnit_Framework_TestCase
      */
     private function command($author)
     {
-        return (new PostCommandFactory())->newCreateCommand($author);
+        return (new PostCommandFactory())->createPost($author);
     }
 
     /**

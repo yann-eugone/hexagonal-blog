@@ -70,7 +70,7 @@ class UpdatePostHandlerTest extends \PHPUnit_Framework_TestCase
      */
     private function command($post)
     {
-        return (new PostCommandFactory())->newUpdateCommand($post);
+        return (new PostCommandFactory())->updatePost($post);
     }
 
     /**

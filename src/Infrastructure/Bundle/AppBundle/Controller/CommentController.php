@@ -69,7 +69,7 @@ class CommentController extends AbstractController
             throw $this->createAccessDeniedException();
         }
 
-        $command = $this->getCommandFactory()->newCreateCommand($author, $post);
+        $command = $this->getCommandFactory()->createComment($author, $post);
 
         $form = $this->getFormFactory()->create(
             CreateCommentType::class,
@@ -121,7 +121,7 @@ class CommentController extends AbstractController
             throw new NotFoundHttpException(null, $exception);
         }
 
-        $command = $this->getCommandFactory()->newUpdateCommand($comment);
+        $command = $this->getCommandFactory()->updateComment($comment);
 
         $form = $this->getFormFactory()->create(
             UpdateCommentType::class,

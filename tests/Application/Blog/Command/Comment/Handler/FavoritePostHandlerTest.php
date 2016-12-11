@@ -79,7 +79,7 @@ class FavoritePostHandlerTest extends \PHPUnit_Framework_TestCase
      */
     private function command($post, $author)
     {
-        return (new PostCommandFactory())->newFavoriteCommand($post, $author);
+        return (new PostCommandFactory())->favoritePost($post, $author);
     }
 
     /**

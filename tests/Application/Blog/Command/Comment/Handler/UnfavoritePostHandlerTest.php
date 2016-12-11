@@ -79,7 +79,7 @@ class UnfavoritePostHandlerTest extends \PHPUnit_Framework_TestCase
      */
     private function command($post, $author)
     {
-        return (new PostCommandFactory())->newUnfavoriteCommand($post, $author);
+        return (new PostCommandFactory())->unfavoritePost($post, $author);
     }
 
     /**

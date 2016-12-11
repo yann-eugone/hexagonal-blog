@@ -53,6 +53,6 @@ class UpdatePostHandler
 
         $this->repository->update($post);
 
-        $this->eventBus->dispatch($this->eventFactory->newUpdatedEvent($referencePost, $post));
+        $this->eventBus->dispatch($this->eventFactory->postUpdated($referencePost, $post));
     }
 }

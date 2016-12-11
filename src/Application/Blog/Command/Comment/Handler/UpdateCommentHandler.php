@@ -49,6 +49,6 @@ class UpdateCommentHandler
 
         $this->repository->update($comment);
 
-        $this->eventBus->dispatch($this->eventFactory->newUpdatedEvent($referenceComment, $comment));
+        $this->eventBus->dispatch($this->eventFactory->commentUpdated($referenceComment, $comment));
     }
 }

@@ -53,6 +53,6 @@ class CreateCommentHandler
 
         $this->repository->create($comment);
 
-        $this->eventBus->dispatch($this->eventFactory->newCreatedEvent($comment));
+        $this->eventBus->dispatch($this->eventFactory->commentCreated($comment));
     }
 }
