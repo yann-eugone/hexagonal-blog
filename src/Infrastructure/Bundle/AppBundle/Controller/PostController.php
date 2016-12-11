@@ -18,10 +18,21 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PostController extends AbstractController
 {
     /**
-     * @Route("/posts", name="post_list")
-     * @Route("/posts/by-category/{category}", name="post_list_by_category", requirements={"category" = "\d+"})
-     * @Route("/posts/by-tag/{tag}", name="post_list_by_tag", requirements={"tag" = "\d+"})
-     * @Route("/posts/by-author/{author}", name="post_list_by_author", requirements={"author" = "\d+"})
+     * @Route("/posts",
+     *     name="post_list"
+     * )
+     * @Route("/posts/by-category/{category}",
+     *     name="post_list_by_category",
+     *     requirements={"category" = "\d+"}
+     * )
+     * @Route("/posts/by-tag/{tag}",
+     *     name="post_list_by_tag",
+     *     requirements={"tag" = "\d+"}
+     * )
+     * @Route("/posts/by-author/{author}",
+     *     name="post_list_by_author",
+     *     requirements={"author" = "\d+"}
+     * )
      * @Method("GET")
      *
      * @param int|null $category
@@ -52,7 +63,10 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/posts/{id}", name="post", requirements={"id" = "\d+"})
+     * @Route("/posts/{id}",
+     *     name="post",
+     *     requirements={"id" = "\d+"}
+     * )
      * @Method("GET")
      *
      * @param int $id
@@ -74,7 +88,9 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/posts/create", name="post_create")
+     * @Route("/posts/create",
+     *     name="post_create"
+     * )
      * @Method({"GET", "POST"})
      *
      * @param Request $request
@@ -101,7 +117,10 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/posts/{id}/update", name="post_update", requirements={"id" = "\d+"})
+     * @Route("/posts/{id}/update",
+     *     name="post_update",
+     *     requirements={"id" = "\d+"}
+     * )
      * @Method({"GET", "POST"})
      *
      * @param int     $id

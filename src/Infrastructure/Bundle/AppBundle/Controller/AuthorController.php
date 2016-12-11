@@ -14,7 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 class AuthorController extends AbstractController
 {
     /**
-     * @Route("/author/{id}", name="author")
+     * @Route("/author/{id}",
+     *     name="author"
+     * )
      * @Method({"GET"})
      *
      * @param int $id

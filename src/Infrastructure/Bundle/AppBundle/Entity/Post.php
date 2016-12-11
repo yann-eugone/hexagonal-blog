@@ -245,7 +245,11 @@ class Post implements PostInterface
      */
     public function getTagIds()
     {
-        return $this->tags->map(function (Tag $tag) { return $tag->getId(); })->toArray();
+        return $this->tags->map(
+            function (Tag $tag) {
+                return $tag->getId();
+            }
+        )->toArray();
     }
 
     /**

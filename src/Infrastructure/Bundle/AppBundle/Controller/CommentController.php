@@ -19,7 +19,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class CommentController extends AbstractController
 {
     /**
-     * @Route("/posts/{postId}/comments", name="post_list_comment")
+     * @Route("/posts/{postId}/comments",
+     *     name="post_list_comment"
+     * )
      * @Method({"GET", "POST"})
      *
      * @param int $postId
@@ -43,7 +45,10 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route("/posts/{postId}/comments/add", name="post_add_comment", requirements={"postId" = "\d+"})
+     * @Route("/posts/{postId}/comments/add",
+     *     name="post_add_comment",
+     *     requirements={"postId" = "\d+"}
+     * )
      * @Method({"GET", "POST"})
      *
      * @param int     $postId
@@ -85,7 +90,10 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route("/posts/{postId}/comments/{id}/update", name="post_update_comment", requirements={"postId" = "\d+", "id" = "\d+"})
+     * @Route("/posts/{postId}/comments/{id}/update",
+     *     name="post_update_comment",
+     *     requirements={"postId" = "\d+", "id" = "\d+"}
+     * )
      * @Method({"GET", "POST"})
      *
      * @param int     $postId

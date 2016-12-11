@@ -11,7 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="security_login")
+     * @Route("/login",
+     *     name="security_login"
+     * )
      * @Method("GET")
      *
      * @return Response
@@ -29,7 +31,9 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/authenticate", name="security_authenticate")
+     * @Route("/authenticate",
+     *     name="security_authenticate"
+     * )
      */
     public function authenticateAction()
     {
@@ -37,7 +41,9 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="security_logout")
+     * @Route("/logout",
+     *     name="security_logout"
+     * )
      */
     public function logoutAction()
     {
