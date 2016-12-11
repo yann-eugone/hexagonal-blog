@@ -84,7 +84,7 @@ class IncrementCounterSubscriber
     public function postFavorited(PostFavorited $event)
     {
         $author = $this->authorRepository->getById($event->getAuthorId());
-        $date = new DateTime($event->getDate());
+        $date = $event->getDate();
 
         $this->favoriteCounterRepository->incrementCount($author, 1);
         $this->favoriteCounterRepository->incrementCountThatDay($author, $date, 1);
@@ -96,7 +96,7 @@ class IncrementCounterSubscriber
     public function postUnfavorited(PostUnfavorited $event)
     {
         $author = $this->authorRepository->getById($event->getAuthorId());
-        $date = new DateTime($event->getDate());
+        $date = $event->getDate();
 
         $this->favoriteCounterRepository->incrementCount($author, -1);
         $this->favoriteCounterRepository->incrementCountThatDay($author, $date, -1);

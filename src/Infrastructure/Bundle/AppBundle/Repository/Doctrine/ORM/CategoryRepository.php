@@ -32,4 +32,12 @@ class CategoryRepository implements CategoryRepositoryInterface
 
         return $category;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function list()
+    {
+        return $this->repository->findAll();
+    }
 }

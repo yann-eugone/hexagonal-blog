@@ -32,4 +32,12 @@ class TagRepository implements TagRepositoryInterface
 
         return $tag;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function list()
+    {
+        return $this->repository->findAll();
+    }
 }

@@ -14,4 +14,9 @@ interface CategoryRepository
      * @throws CategoryNotFoundException
      */
     public function getById($id);
+
+    /**
+     * @return Category[]
+     */
+    public function list();
 }

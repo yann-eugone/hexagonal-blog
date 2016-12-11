@@ -84,6 +84,11 @@
                  class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\TagRepository">
             <argument type="service" id="orm.repository.tag"/>
         </service>
+        <service id="repository.favorite"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\FavoriteRepository">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="orm.repository.favorite"/>
+        </service>
 
         <!-- Denormalized Counter Repository -->
         <service id="repository.counter.comment_author.denormalized"

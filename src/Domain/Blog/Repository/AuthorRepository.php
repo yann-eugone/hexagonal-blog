@@ -14,4 +14,12 @@ interface AuthorRepository
      * @throws AuthorNotFoundException
      */
     public function getById($id);
+
+    /**
+     * @param int $username
+     *
+     * @return Author
+     * @throws AuthorNotFoundException
+     */
+    public function getByUsername($username);
 }

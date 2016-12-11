@@ -32,4 +32,16 @@ class AuthorRepository implements AuthorRepositoryInterface
 
         return $author;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getByUsername($username)
+    {
+        if (!$author = $this->repository->findOneBy(['username' => $username])) {
+            throw AuthorNotFoundException::byUsername($username);
+        }
+
+        return $author;
+    }
 }

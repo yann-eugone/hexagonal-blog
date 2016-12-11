@@ -14,4 +14,9 @@ interface TagRepository
      * @throws TagNotFoundException
      */
     public function getById($id);
+
+    /**
+     * @return Tag[]
+     */
+    public function list();
 }

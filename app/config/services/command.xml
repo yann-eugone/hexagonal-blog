@@ -6,46 +6,54 @@
 
     <services>
 
+        <!-- Command Factories -->
         <service id="command_factory.post"
                  class="Acme\Application\Blog\Command\Post\PostCommandFactory"
                  autowire="true">
         </service>
-
         <service id="command_factory.comment"
                  class="Acme\Application\Blog\Command\Comment\CommentCommandFactory"
                  autowire="true">
         </service>
 
+        <!-- Post Handlers -->
         <service id="command_handler.create_post"
                  class="Acme\Application\Blog\Command\Post\Handler\CreatePostHandler"
                  autowire="true">
             <tag name="command_handler" handles="Acme\Application\Blog\Command\Post\CreatePost"/>
         </service>
-
         <service id="command_handler.update_post"
                  class="Acme\Application\Blog\Command\Post\Handler\UpdatePostHandler"
                  autowire="true">
             <tag name="command_handler" handles="Acme\Application\Blog\Command\Post\UpdatePost"/>
         </service>
-
         <service id="command_handler.delete_post"
                  class="Acme\Application\Blog\Command\Post\Handler\DeletePostHandler"
                  autowire="true">
             <tag name="command_handler" handles="Acme\Application\Blog\Command\Post\DeletePost"/>
         </service>
+        <service id="command_handler.favorite_post"
+                 class="Acme\Application\Blog\Command\Post\Handler\FavoritePostHandler"
+                 autowire="true">
+            <tag name="command_handler" handles="Acme\Application\Blog\Command\Post\FavoritePost"/>
+        </service>
+        <service id="command_handler.unfavorite_post"
+                 class="Acme\Application\Blog\Command\Post\Handler\UnfavoritePostHandler"
+                 autowire="true">
+            <tag name="command_handler" handles="Acme\Application\Blog\Command\Post\UnfavoritePost"/>
+        </service>
 
+        <!-- Comment Handlers -->
         <service id="command_handler.create_comment"
                  class="Acme\Application\Blog\Command\Comment\Handler\CreateCommentHandler"
                  autowire="true">
             <tag name="command_handler" handles="Acme\Application\Blog\Command\Comment\CreateComment"/>
         </service>
-
         <service id="command_handler.update_comment"
                  class="Acme\Application\Blog\Command\Comment\Handler\UpdateCommentHandler"
                  autowire="true">
             <tag name="command_handler" handles="Acme\Application\Blog\Command\Comment\UpdateComment"/>
         </service>
-
         <service id="command_handler.delete_comment"
                  class="Acme\Application\Blog\Command\Comment\Handler\DeleteCommentHandler"
                  autowire="true">

@@ -4,17 +4,26 @@ namespace Acme\Application\Blog\Event\Post\Subscriber;
 
 use Acme\Application\Blog\Event\Post\PostCreated;
 use Acme\Application\Blog\Event\Post\PostDeleted;
+use Acme\Application\Blog\Event\Post\PostFavorited;
+use Acme\Application\Blog\Event\Post\PostUnfavorited;
 use Acme\Domain\Blog\Model\Category;
 use Acme\Domain\Blog\Model\Tag;
 use Acme\Domain\Blog\Repository\CategoryRepository;
+use Acme\Domain\Blog\Repository\FavoritePostCounterRepository;
 use Acme\Domain\Blog\Repository\PostCategoryCounterRepository;
 use Acme\Domain\Blog\Repository\PostCounterRepository;
+use Acme\Domain\Blog\Repository\PostRepository;
 use Acme\Domain\Blog\Repository\PostTagCounterRepository;
 use Acme\Domain\Blog\Repository\TagRepository;
 use DateTime;
 
 class IncrementCounterSubscriber
 {
+    /**
+     * @var PostRepository
+     */
+    private $postRepository;
+
     /**
      * @var TagRepository
      */
@@ -41,24 +50,35 @@ class IncrementCounterSubscriber
     private $tagCounterRepository;
 
     /**
+     * @var FavoritePostCounterRepository
+     */
+    private $favoriteCounterRepository;
+
+    /**
+     * @param PostRepository                $postRepository
      * @param TagRepository                 $tagRepository
      * @param CategoryRepository            $categoryRepository
      * @param PostCounterRepository         $counterRepository
      * @param PostCategoryCounterRepository $categoryCounterRepository
      * @param PostTagCounterRepository      $tagCounterRepository
+     * @param FavoritePostCounterRepository $favoriteCounterRepository
      */
     public function __construct(
+        PostRepository $postRepository,
         TagRepository $tagRepository,
         CategoryRepository $categoryRepository,
         PostCounterRepository $counterRepository,
         PostCategoryCounterRepository $categoryCounterRepository,
-        PostTagCounterRepository $tagCounterRepository
+        PostTagCounterRepository $tagCounterRepository,
+        FavoritePostCounterRepository $favoriteCounterRepository
     ) {
+        $this->postRepository = $postRepository;
         $this->tagRepository = $tagRepository;
         $this->categoryRepository = $categoryRepository;
         $this->counterRepository = $counterRepository;
         $this->categoryCounterRepository = $categoryCounterRepository;
         $this->tagCounterRepository = $tagCounterRepository;
+        $this->favoriteCounterRepository = $favoriteCounterRepository;
     }
 
     /**
@@ -91,6 +111,30 @@ class IncrementCounterSubscriber
         $this->incrementCategory($category, $date, -1);
 
         $this->incrementTags($tags, $date, -1);
+    }
+
+    /**
+     * @param PostFavorited $event
+     */
+    public function favorited(PostFavorited $event)
+    {
+        $post = $this->postRepository->getById($event->getPostId());
+        $date = $event->getDate();
+
+        $this->favoriteCounterRepository->incrementCount($post, 1);
+        $this->favoriteCounterRepository->incrementCountThatDay($post, $date, 1);
+    }
+
+    /**
+     * @param PostUnfavorited $event
+     */
+    public function unfavorited(PostUnfavorited $event)
+    {
+        $post = $this->postRepository->getById($event->getPostId());
+        $date = $event->getDate();
+
+        $this->favoriteCounterRepository->incrementCount($post, -1);
+        $this->favoriteCounterRepository->incrementCountThatDay($post, $date, -1);
     }
 
     /**

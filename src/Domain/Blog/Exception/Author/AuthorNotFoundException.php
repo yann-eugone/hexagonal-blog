@@ -17,4 +17,16 @@ class AuthorNotFoundException extends RuntimeException
             sprintf('Author with id %d was not found.', $id)
         );
     }
+
+    /**
+     * @param int $username
+     *
+     * @return AuthorNotFoundException
+     */
+    public static function byUsername($username)
+    {
+        return new self(
+            sprintf('Author with username %s was not found.', $username)
+        );
+    }
 }

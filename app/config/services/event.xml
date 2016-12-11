@@ -6,6 +6,7 @@
 
     <services>
 
+        <!-- Event Factories -->
         <service id="event_factory.post"
                  class="Acme\Application\Blog\Event\Post\PostEventFactory"
                  autowire="true">
@@ -37,6 +38,12 @@
             <tag name="event_subscriber"
                  subscribes_to="Acme\Application\Blog\Event\Post\PostDeleted"
                  method="deleted"/>
+            <tag name="event_subscriber"
+                 subscribes_to="Acme\Application\Blog\Event\Post\PostFavorited"
+                 method="favorited"/>
+            <tag name="event_subscriber"
+                 subscribes_to="Acme\Application\Blog\Event\Post\PostUnfavorited"
+                 method="unfavorited"/>
         </service>
 
         <!-- Author Subscribers -->
