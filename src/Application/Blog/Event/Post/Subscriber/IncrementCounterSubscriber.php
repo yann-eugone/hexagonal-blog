@@ -9,11 +9,11 @@ use Acme\Application\Blog\Event\Post\PostUnfavorited;
 use Acme\Domain\Blog\Model\Category;
 use Acme\Domain\Blog\Model\Tag;
 use Acme\Domain\Blog\Repository\CategoryRepository;
-use Acme\Domain\Blog\Repository\FavoritePostCounterRepository;
-use Acme\Domain\Blog\Repository\PostCategoryCounterRepository;
+use Acme\Domain\Blog\Repository\PostFavoriteCounterRepository;
+use Acme\Domain\Blog\Repository\CategoryPostCounterRepository;
 use Acme\Domain\Blog\Repository\PostCounterRepository;
 use Acme\Domain\Blog\Repository\PostRepository;
-use Acme\Domain\Blog\Repository\PostTagCounterRepository;
+use Acme\Domain\Blog\Repository\TagPostCounterRepository;
 use Acme\Domain\Blog\Repository\TagRepository;
 use DateTime;
 
@@ -40,17 +40,17 @@ class IncrementCounterSubscriber
     private $counterRepository;
 
     /**
-     * @var PostCategoryCounterRepository
+     * @var CategoryPostCounterRepository
      */
     private $categoryCounterRepository;
 
     /**
-     * @var PostTagCounterRepository
+     * @var TagPostCounterRepository
      */
     private $tagCounterRepository;
 
     /**
-     * @var FavoritePostCounterRepository
+     * @var PostFavoriteCounterRepository
      */
     private $favoriteCounterRepository;
 
@@ -59,18 +59,18 @@ class IncrementCounterSubscriber
      * @param TagRepository                 $tagRepository
      * @param CategoryRepository            $categoryRepository
      * @param PostCounterRepository         $counterRepository
-     * @param PostCategoryCounterRepository $categoryCounterRepository
-     * @param PostTagCounterRepository      $tagCounterRepository
-     * @param FavoritePostCounterRepository $favoriteCounterRepository
+     * @param CategoryPostCounterRepository $categoryCounterRepository
+     * @param TagPostCounterRepository      $tagCounterRepository
+     * @param PostFavoriteCounterRepository $favoriteCounterRepository
      */
     public function __construct(
         PostRepository $postRepository,
         TagRepository $tagRepository,
         CategoryRepository $categoryRepository,
         PostCounterRepository $counterRepository,
-        PostCategoryCounterRepository $categoryCounterRepository,
-        PostTagCounterRepository $tagCounterRepository,
-        FavoritePostCounterRepository $favoriteCounterRepository
+        CategoryPostCounterRepository $categoryCounterRepository,
+        TagPostCounterRepository $tagCounterRepository,
+        PostFavoriteCounterRepository $favoriteCounterRepository
     ) {
         $this->postRepository = $postRepository;
         $this->tagRepository = $tagRepository;

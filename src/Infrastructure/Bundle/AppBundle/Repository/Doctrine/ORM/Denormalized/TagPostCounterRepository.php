@@ -3,11 +3,11 @@
 namespace Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized;
 
 use Acme\Domain\Blog\Model\Tag;
-use Acme\Domain\Blog\Repository\PostTagCounterRepository as PostTagCounterRepositoryInterface;
+use Acme\Domain\Blog\Repository\TagPostCounterRepository as TagPostCounterRepositoryInterface;
 use Acme\Infrastructure\Bundle\AppBundle\Entity\Repository\CounterRepository;
 use DateTime;
 
-class PostTagCounterRepository implements PostTagCounterRepositoryInterface
+class TagPostCounterRepository implements TagPostCounterRepositoryInterface
 {
     /**
      * @var CounterRepository

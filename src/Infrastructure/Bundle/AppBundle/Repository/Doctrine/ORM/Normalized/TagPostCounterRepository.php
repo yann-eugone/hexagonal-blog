@@ -3,12 +3,12 @@
 namespace Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized;
 
 use Acme\Domain\Blog\Model\Tag;
-use Acme\Domain\Blog\Repository\PostTagCounterRepository as PostTagCounterRepositoryInterface;
+use Acme\Domain\Blog\Repository\TagPostCounterRepository as TagPostCounterRepositoryInterface;
 use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 
-class PostTagCounterRepository implements PostTagCounterRepositoryInterface
+class TagPostCounterRepository implements TagPostCounterRepositoryInterface
 {
     /**
      * @var EntityRepository

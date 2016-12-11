@@ -9,9 +9,9 @@ use Acme\Application\Blog\Event\Post\PostDeleted;
 use Acme\Application\Blog\Event\Post\PostFavorited;
 use Acme\Application\Blog\Event\Post\PostUnfavorited;
 use Acme\Domain\Blog\Repository\AuthorRepository;
-use Acme\Domain\Blog\Repository\CommentAuthorCounterRepository;
-use Acme\Domain\Blog\Repository\FavoriteAuthorCounterRepository;
-use Acme\Domain\Blog\Repository\PostAuthorCounterRepository;
+use Acme\Domain\Blog\Repository\AuthorCommentCounterRepository;
+use Acme\Domain\Blog\Repository\AuthorFavoriteCounterRepository;
+use Acme\Domain\Blog\Repository\AuthorPostCounterRepository;
 use DateTime;
 
 class IncrementCounterSubscriber
@@ -22,31 +22,31 @@ class IncrementCounterSubscriber
     private $authorRepository;
 
     /**
-     * @var PostAuthorCounterRepository
+     * @var AuthorPostCounterRepository
      */
     private $postCounterRepository;
 
     /**
-     * @var FavoriteAuthorCounterRepository
+     * @var AuthorFavoriteCounterRepository
      */
     private $favoriteCounterRepository;
 
     /**
-     * @var CommentAuthorCounterRepository
+     * @var AuthorCommentCounterRepository
      */
     private $commentCounterRepository;
 
     /**
      * @param AuthorRepository                $authorRepository
-     * @param PostAuthorCounterRepository     $postCounterRepository
-     * @param FavoriteAuthorCounterRepository $favoriteCounterRepository
-     * @param CommentAuthorCounterRepository  $commentCounterRepository
+     * @param AuthorPostCounterRepository     $postCounterRepository
+     * @param AuthorFavoriteCounterRepository $favoriteCounterRepository
+     * @param AuthorCommentCounterRepository  $commentCounterRepository
      */
     public function __construct(
         AuthorRepository $authorRepository,
-        PostAuthorCounterRepository $postCounterRepository,
-        FavoriteAuthorCounterRepository $favoriteCounterRepository,
-        CommentAuthorCounterRepository $commentCounterRepository
+        AuthorPostCounterRepository $postCounterRepository,
+        AuthorFavoriteCounterRepository $favoriteCounterRepository,
+        AuthorCommentCounterRepository $commentCounterRepository
     ) {
         $this->authorRepository = $authorRepository;
         $this->postCounterRepository = $postCounterRepository;

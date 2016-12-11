@@ -3,11 +3,11 @@
 namespace Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized;
 
 use Acme\Domain\Blog\Model\Author;
-use Acme\Domain\Blog\Repository\PostAuthorCounterRepository as PostAuthorCounterRepositoryInterface;
+use Acme\Domain\Blog\Repository\AuthorCommentCounterRepository as AuthorCommentCounterRepositoryInterface;
 use DateTime;
 use Doctrine\ORM\EntityRepository;
 
-class PostAuthorCounterRepository implements PostAuthorCounterRepositoryInterface
+class AuthorCommentCounterRepository implements AuthorCommentCounterRepositoryInterface
 {
     /**
      * @var EntityRepository
@@ -43,9 +43,9 @@ class PostAuthorCounterRepository implements PostAuthorCounterRepositoryInterfac
      */
     public function count(Author $author)
     {
-        $builder = $this->repository->createQueryBuilder('post')
-            ->select('COUNT(post)')
-            ->where('post.author = :author')
+        $builder = $this->repository->createQueryBuilder('comment')
+            ->select('COUNT(comment)')
+            ->where('comment.author = :author')
             ->setParameter('author', $author);
 
         return intval($builder->getQuery()->getSingleScalarResult());
@@ -56,10 +56,10 @@ class PostAuthorCounterRepository implements PostAuthorCounterRepositoryInterfac
      */
     public function countThatDay(DateTime $day, Author $author)
     {
-        $builder = $this->repository->createQueryBuilder('post')
-            ->select('COUNT(post)')
-            ->where('post.postedAt = :day')
-            ->andWhere('post.author = :author')
+        $builder = $this->repository->createQueryBuilder('comment')
+            ->select('COUNT(comment)')
+            ->where('comment.postedAt = :day')
+            ->andWhere('comment.author = :author')
             ->setParameter('day', $day)
             ->setParameter('author', $author);
 
@@ -71,11 +71,11 @@ class PostAuthorCounterRepository implements PostAuthorCounterRepositoryInterfac
      */
     public function countBetween(DateTime $from, DateTime $to, Author $author)
     {
-        $builder = $this->repository->createQueryBuilder('post')
-            ->select('COUNT(post)')
-            ->where('post.postedAt >= :from')
-            ->andWhere('post.postedAt <= :to')
-            ->andWhere('post.author = :author')
+        $builder = $this->repository->createQueryBuilder('comment')
+            ->select('COUNT(comment)')
+            ->where('comment.postedAt >= :from')
+            ->andWhere('comment.postedAt <= :to')
+            ->andWhere('comment.author = :author')
             ->setParameter('to', $to)
             ->setParameter('from', $from)
             ->setParameter('author', $author);

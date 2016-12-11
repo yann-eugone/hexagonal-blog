@@ -5,7 +5,7 @@ namespace Acme\Domain\Blog\Repository;
 use Acme\Domain\Blog\Model\Tag;
 use DateTime;
 
-interface PostTagCounterRepository
+interface TagPostCounterRepository
 {
     /**
      * @param Tag $tag

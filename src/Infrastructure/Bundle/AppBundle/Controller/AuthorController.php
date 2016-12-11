@@ -4,8 +4,8 @@ namespace Acme\Infrastructure\Bundle\AppBundle\Controller;
 
 use Acme\Domain\Blog\Exception\Author\AuthorNotFoundException;
 use Acme\Domain\Blog\Repository\AuthorRepository;
-use Acme\Domain\Blog\Repository\CommentAuthorCounterRepository;
-use Acme\Domain\Blog\Repository\PostAuthorCounterRepository;
+use Acme\Domain\Blog\Repository\AuthorCommentCounterRepository;
+use Acme\Domain\Blog\Repository\AuthorPostCounterRepository;
 use Acme\Domain\Blog\Repository\PostRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -66,7 +66,7 @@ class AuthorController extends AbstractController
     }
 
     /**
-     * @return PostAuthorCounterRepository
+     * @return AuthorPostCounterRepository
      */
     private function getPostAuthorCounterRepository()
     {
@@ -74,7 +74,7 @@ class AuthorController extends AbstractController
     }
 
     /**
-     * @return CommentAuthorCounterRepository
+     * @return AuthorCommentCounterRepository
      */
     private function getCommentAuthorCounterRepository()
     {

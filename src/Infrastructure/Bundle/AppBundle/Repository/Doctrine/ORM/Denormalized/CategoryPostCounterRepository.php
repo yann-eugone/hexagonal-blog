@@ -3,11 +3,11 @@
 namespace Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized;
 
 use Acme\Domain\Blog\Model\Category;
-use Acme\Domain\Blog\Repository\PostCategoryCounterRepository as PostCategoryCounterRepositoryInterface;
+use Acme\Domain\Blog\Repository\CategoryPostCounterRepository as CategoryPostCounterRepositoryInterface;
 use Acme\Infrastructure\Bundle\AppBundle\Entity\Repository\CounterRepository;
 use DateTime;
 
-class PostCategoryCounterRepository implements PostCategoryCounterRepositoryInterface
+class CategoryPostCounterRepository implements CategoryPostCounterRepositoryInterface
 {
     /**
      * @var CounterRepository

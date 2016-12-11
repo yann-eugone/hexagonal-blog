@@ -3,11 +3,11 @@
 namespace Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized;
 
 use Acme\Domain\Blog\Model\Post;
-use Acme\Domain\Blog\Repository\FavoritePostCounterRepository as FavoritePostCounterRepositoryInterface;
+use Acme\Domain\Blog\Repository\PostFavoriteCounterRepository as PostFavoriteCounterRepositoryInterface;
 use Acme\Infrastructure\Bundle\AppBundle\Entity\Repository\CounterRepository;
 use DateTime;
 
-class FavoritePostCounterRepository implements FavoritePostCounterRepositoryInterface
+class PostFavoriteCounterRepository implements PostFavoriteCounterRepositoryInterface
 {
     /**
      * @var CounterRepository

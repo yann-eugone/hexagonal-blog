@@ -2,14 +2,14 @@
 
 namespace Acme\Infrastructure\Bundle\AppBundle\DependencyInjection;
 
-use Acme\Domain\Blog\Repository\CommentAuthorCounterRepository;
+use Acme\Domain\Blog\Repository\AuthorCommentCounterRepository;
 use Acme\Domain\Blog\Repository\CommentCounterRepository;
-use Acme\Domain\Blog\Repository\FavoriteAuthorCounterRepository;
-use Acme\Domain\Blog\Repository\FavoritePostCounterRepository;
-use Acme\Domain\Blog\Repository\PostAuthorCounterRepository;
-use Acme\Domain\Blog\Repository\PostCategoryCounterRepository;
+use Acme\Domain\Blog\Repository\AuthorFavoriteCounterRepository;
+use Acme\Domain\Blog\Repository\PostFavoriteCounterRepository;
+use Acme\Domain\Blog\Repository\AuthorPostCounterRepository;
+use Acme\Domain\Blog\Repository\CategoryPostCounterRepository;
 use Acme\Domain\Blog\Repository\PostCounterRepository;
-use Acme\Domain\Blog\Repository\PostTagCounterRepository;
+use Acme\Domain\Blog\Repository\TagPostCounterRepository;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -43,14 +43,14 @@ class AppExtension extends Extension implements PrependExtensionInterface, Compi
     {
         $autowiring = [
             NormalizerInterface::class => 'serializer',
-            CommentAuthorCounterRepository::class => 'repository.counter.comment_author.denormalized',
+            AuthorCommentCounterRepository::class => 'repository.counter.comment_author.denormalized',
             CommentCounterRepository::class => 'repository.counter.comment.denormalized',
-            PostAuthorCounterRepository::class => 'repository.counter.post_author.denormalized',
-            PostCategoryCounterRepository::class => 'repository.counter.post_category.denormalized',
+            AuthorPostCounterRepository::class => 'repository.counter.post_author.denormalized',
+            CategoryPostCounterRepository::class => 'repository.counter.post_category.denormalized',
             PostCounterRepository::class => 'repository.counter.post.denormalized',
-            PostTagCounterRepository::class => 'repository.counter.post_tag.denormalized',
-            FavoriteAuthorCounterRepository::class => 'repository.counter.favorite_author.denormalized',
-            FavoritePostCounterRepository::class => 'repository.counter.favorite_post.denormalized',
+            TagPostCounterRepository::class => 'repository.counter.post_tag.denormalized',
+            AuthorFavoriteCounterRepository::class => 'repository.counter.favorite_author.denormalized',
+            PostFavoriteCounterRepository::class => 'repository.counter.favorite_post.denormalized',
         ];
         foreach ($autowiring as $class => $service) {
             $container->findDefinition($service)->setAutowiringTypes([$class]);

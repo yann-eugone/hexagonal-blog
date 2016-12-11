@@ -3,11 +3,11 @@
 namespace Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized;
 
 use Acme\Domain\Blog\Model\Author;
-use Acme\Domain\Blog\Repository\FavoriteAuthorCounterRepository as FavoriteAuthorCounterRepositoryInterface;
+use Acme\Domain\Blog\Repository\AuthorPostCounterRepository as AuthorPostCounterRepositoryInterface;
 use DateTime;
 use Doctrine\ORM\EntityRepository;
 
-class FavoriteAuthorCounterRepository implements FavoriteAuthorCounterRepositoryInterface
+class AuthorPostCounterRepository implements AuthorPostCounterRepositoryInterface
 {
     /**
      * @var EntityRepository
@@ -43,9 +43,9 @@ class FavoriteAuthorCounterRepository implements FavoriteAuthorCounterRepository
      */
     public function count(Author $author)
     {
-        $builder = $this->repository->createQueryBuilder('favorite')
-            ->select('COUNT(favorite)')
-            ->where('favorite.author = :author')
+        $builder = $this->repository->createQueryBuilder('post')
+            ->select('COUNT(post)')
+            ->where('post.author = :author')
             ->setParameter('author', $author);
 
         return intval($builder->getQuery()->getSingleScalarResult());
@@ -54,12 +54,12 @@ class FavoriteAuthorCounterRepository implements FavoriteAuthorCounterRepository
     /**
      * @inheritDoc
      */
-    public function countThatDay(Author $author, DateTime $day)
+    public function countThatDay(DateTime $day, Author $author)
     {
-        $builder = $this->repository->createQueryBuilder('favorite')
-            ->select('COUNT(favorite)')
-            ->where('favorite.postedAt = :day')
-            ->andWhere('favorite.author = :author')
+        $builder = $this->repository->createQueryBuilder('post')
+            ->select('COUNT(post)')
+            ->where('post.postedAt = :day')
+            ->andWhere('post.author = :author')
             ->setParameter('day', $day)
             ->setParameter('author', $author);
 
@@ -69,13 +69,13 @@ class FavoriteAuthorCounterRepository implements FavoriteAuthorCounterRepository
     /**
      * @inheritDoc
      */
-    public function countBetween(Author $author, DateTime $from, DateTime $to)
+    public function countBetween(DateTime $from, DateTime $to, Author $author)
     {
-        $builder = $this->repository->createQueryBuilder('favorite')
-            ->select('COUNT(favorite)')
-            ->where('favorite.author = :author')
-            ->andWhere('favorite.postedAt >= :from')
-            ->andWhere('favorite.postedAt <= :to')
+        $builder = $this->repository->createQueryBuilder('post')
+            ->select('COUNT(post)')
+            ->where('post.postedAt >= :from')
+            ->andWhere('post.postedAt <= :to')
+            ->andWhere('post.author = :author')
             ->setParameter('to', $to)
             ->setParameter('from', $from)
             ->setParameter('author', $author);

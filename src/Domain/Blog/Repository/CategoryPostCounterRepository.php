@@ -5,7 +5,7 @@ namespace Acme\Domain\Blog\Repository;
 use Acme\Domain\Blog\Model\Category;
 use DateTime;
 
-interface PostCategoryCounterRepository
+interface CategoryPostCounterRepository
 {
     /**
      * @param Category $category

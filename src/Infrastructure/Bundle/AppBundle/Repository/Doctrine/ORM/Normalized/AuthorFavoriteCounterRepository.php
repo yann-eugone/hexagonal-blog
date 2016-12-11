@@ -3,11 +3,11 @@
 namespace Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized;
 
 use Acme\Domain\Blog\Model\Author;
-use Acme\Domain\Blog\Repository\CommentAuthorCounterRepository as CommentAuthorCounterRepositoryInterface;
+use Acme\Domain\Blog\Repository\AuthorFavoriteCounterRepository as AuthorFavoriteCounterRepositoryInterface;
 use DateTime;
 use Doctrine\ORM\EntityRepository;
 
-class CommentAuthorCounterRepository implements CommentAuthorCounterRepositoryInterface
+class AuthorFavoriteCounterRepository implements AuthorFavoriteCounterRepositoryInterface
 {
     /**
      * @var EntityRepository
@@ -43,9 +43,9 @@ class CommentAuthorCounterRepository implements CommentAuthorCounterRepositoryIn
      */
     public function count(Author $author)
     {
-        $builder = $this->repository->createQueryBuilder('comment')
-            ->select('COUNT(comment)')
-            ->where('comment.author = :author')
+        $builder = $this->repository->createQueryBuilder('favorite')
+            ->select('COUNT(favorite)')
+            ->where('favorite.author = :author')
             ->setParameter('author', $author);
 
         return intval($builder->getQuery()->getSingleScalarResult());
@@ -54,12 +54,12 @@ class CommentAuthorCounterRepository implements CommentAuthorCounterRepositoryIn
     /**
      * @inheritDoc
      */
-    public function countThatDay(DateTime $day, Author $author)
+    public function countThatDay(Author $author, DateTime $day)
     {
-        $builder = $this->repository->createQueryBuilder('comment')
-            ->select('COUNT(comment)')
-            ->where('comment.postedAt = :day')
-            ->andWhere('comment.author = :author')
+        $builder = $this->repository->createQueryBuilder('favorite')
+            ->select('COUNT(favorite)')
+            ->where('favorite.postedAt = :day')
+            ->andWhere('favorite.author = :author')
             ->setParameter('day', $day)
             ->setParameter('author', $author);
 
@@ -69,13 +69,13 @@ class CommentAuthorCounterRepository implements CommentAuthorCounterRepositoryIn
     /**
      * @inheritDoc
      */
-    public function countBetween(DateTime $from, DateTime $to, Author $author)
+    public function countBetween(Author $author, DateTime $from, DateTime $to)
     {
-        $builder = $this->repository->createQueryBuilder('comment')
-            ->select('COUNT(comment)')
-            ->where('comment.postedAt >= :from')
-            ->andWhere('comment.postedAt <= :to')
-            ->andWhere('comment.author = :author')
+        $builder = $this->repository->createQueryBuilder('favorite')
+            ->select('COUNT(favorite)')
+            ->where('favorite.author = :author')
+            ->andWhere('favorite.postedAt >= :from')
+            ->andWhere('favorite.postedAt <= :to')
             ->setParameter('to', $to)
             ->setParameter('from', $from)
             ->setParameter('author', $author);

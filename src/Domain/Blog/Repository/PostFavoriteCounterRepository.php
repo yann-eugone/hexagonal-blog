@@ -5,7 +5,7 @@ namespace Acme\Domain\Blog\Repository;
 use Acme\Domain\Blog\Model\Post;
 use DateTime;
 
-interface FavoritePostCounterRepository
+interface PostFavoriteCounterRepository
 {
     /**
      * @param Post $post

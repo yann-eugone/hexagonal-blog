@@ -5,13 +5,11 @@ namespace Acme\Domain\Blog\Repository;
 use Acme\Domain\Blog\Model\Author;
 use DateTime;
 
-interface FavoriteAuthorCounterRepository
+interface AuthorCommentCounterRepository
 {
     /**
      * @param Author $author
      * @param int    $incr
-     *
-     * @return int
      */
     public function incrementCount(Author $author, $incr = 1);
 
@@ -19,8 +17,6 @@ interface FavoriteAuthorCounterRepository
      * @param Author   $author
      * @param DateTime $day
      * @param int      $incr
-     *
-     * @return int
      */
     public function incrementCountThatDay(Author $author, DateTime $day, $incr = 1);
 
@@ -32,19 +28,19 @@ interface FavoriteAuthorCounterRepository
     public function count(Author $author);
 
     /**
-     * @param Author   $author
      * @param DateTime $day
+     * @param Author   $author
      *
      * @return int
      */
-    public function countThatDay(Author $author, DateTime $day);
+    public function countThatDay(DateTime $day, Author $author);
 
     /**
-     * @param Author   $author
      * @param DateTime $from
      * @param DateTime $to
+     * @param Author   $author
      *
      * @return int
      */
-    public function countBetween(Author $author, DateTime $from, DateTime $to);
+    public function countBetween(DateTime $from, DateTime $to, Author $author);
 }

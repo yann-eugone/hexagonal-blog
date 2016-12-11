@@ -92,7 +92,7 @@
 
         <!-- Denormalized Counter Repository -->
         <service id="repository.counter.comment_author.denormalized"
-                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized\CommentAuthorCounterRepository">
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized\AuthorCommentCounterRepository">
             <argument type="service" id="orm.repository.counter"/>
         </service>
         <service id="repository.counter.comment.denormalized"
@@ -100,11 +100,11 @@
             <argument type="service" id="orm.repository.counter"/>
         </service>
         <service id="repository.counter.post_author.denormalized"
-                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized\PostAuthorCounterRepository">
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized\AuthorPostCounterRepository">
             <argument type="service" id="orm.repository.counter"/>
         </service>
         <service id="repository.counter.post_category.denormalized"
-                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized\PostCategoryCounterRepository">
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized\CategoryPostCounterRepository">
             <argument type="service" id="orm.repository.counter"/>
         </service>
         <service id="repository.counter.post.denormalized"
@@ -112,21 +112,21 @@
             <argument type="service" id="orm.repository.counter"/>
         </service>
         <service id="repository.counter.post_tag.denormalized"
-                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized\PostTagCounterRepository">
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized\TagPostCounterRepository">
             <argument type="service" id="orm.repository.counter"/>
         </service>
         <service id="repository.counter.favorite_author.denormalized"
-                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized\FavoriteAuthorCounterRepository">
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized\AuthorFavoriteCounterRepository">
             <argument type="service" id="orm.repository.counter"/>
         </service>
         <service id="repository.counter.favorite_post.denormalized"
-                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized\FavoritePostCounterRepository">
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized\PostFavoriteCounterRepository">
             <argument type="service" id="orm.repository.counter"/>
         </service>
 
         <!-- Normalized Counter Repository -->
         <service id="repository.counter.comment_author.normalized"
-                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized\CommentAuthorCounterRepository">
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized\AuthorCommentCounterRepository">
             <argument type="service" id="orm.repository.comment"/>
         </service>
         <service id="repository.counter.comment.normalized"
@@ -134,11 +134,11 @@
             <argument type="service" id="orm.repository.comment"/>
         </service>
         <service id="repository.counter.post_author.normalized"
-                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized\PostAuthorCounterRepository">
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized\AuthorPostCounterRepository">
             <argument type="service" id="orm.repository.post"/>
         </service>
         <service id="repository.counter.post_category.normalized"
-                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized\PostCategoryCounterRepository">
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized\CategoryPostCounterRepository">
             <argument type="service" id="orm.repository.post"/>
         </service>
         <service id="repository.counter.post.normalized"
@@ -146,15 +146,15 @@
             <argument type="service" id="orm.repository.post"/>
         </service>
         <service id="repository.counter.post_tag.normalized"
-                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized\PostTagCounterRepository">
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized\TagPostCounterRepository">
             <argument type="service" id="orm.repository.post"/>
         </service>
         <service id="repository.counter.favorite_author.normalized"
-                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized\FavoriteAuthorCounterRepository">
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized\AuthorFavoriteCounterRepository">
             <argument type="service" id="orm.repository.favorite"/>
         </service>
         <service id="repository.counter.favorite_post.normalized"
-                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized\FavoritePostCounterRepository">
+                 class="Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized\PostFavoriteCounterRepository">
             <argument type="service" id="orm.repository.favorite"/>
         </service>
 

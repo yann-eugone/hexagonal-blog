@@ -5,7 +5,7 @@ namespace Acme\Domain\Blog\Repository;
 use Acme\Domain\Blog\Model\Author;
 use DateTime;
 
-interface PostAuthorCounterRepository
+interface AuthorPostCounterRepository
 {
     /**
      * @param Author $author

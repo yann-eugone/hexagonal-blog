@@ -3,11 +3,11 @@
 namespace Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Denormalized;
 
 use Acme\Domain\Blog\Model\Author;
-use Acme\Domain\Blog\Repository\CommentAuthorCounterRepository as CommentAuthorCounterRepositoryInterface;
+use Acme\Domain\Blog\Repository\AuthorFavoriteCounterRepository as AuthorFavoriteCounterRepositoryInterface;
 use Acme\Infrastructure\Bundle\AppBundle\Entity\Repository\CounterRepository;
 use DateTime;
 
-class CommentAuthorCounterRepository implements CommentAuthorCounterRepositoryInterface
+class AuthorFavoriteCounterRepository implements AuthorFavoriteCounterRepositoryInterface
 {
     /**
      * @var CounterRepository
@@ -27,7 +27,7 @@ class CommentAuthorCounterRepository implements CommentAuthorCounterRepositoryIn
      */
     public function incrementCount(Author $author, $incr = 1)
     {
-        $this->repository->increment('comment_by_author', $incr, null, $author);
+        $this->repository->increment('favorite_by_author', $incr, null, $author);
     }
 
     /**
@@ -35,7 +35,7 @@ class CommentAuthorCounterRepository implements CommentAuthorCounterRepositoryIn
      */
     public function incrementCountThatDay(Author $author, DateTime $day, $incr = 1)
     {
-        $this->repository->incrementThatDay('comment_by_author', $day, $incr, null, $author);
+        $this->repository->incrementThatDay('favorite_by_author', $day, $incr, null, $author);
     }
 
     /**
@@ -43,22 +43,22 @@ class CommentAuthorCounterRepository implements CommentAuthorCounterRepositoryIn
      */
     public function count(Author $author)
     {
-        return $this->repository->count('comment_by_author', null, $author);
+        return $this->repository->count('favorite_by_author', null, $author);
     }
 
     /**
      * @inheritDoc
      */
-    public function countThatDay(DateTime $day, Author $author)
+    public function countThatDay(Author $author, DateTime $day)
     {
-        return $this->repository->countThatDay('comment_by_author', $day, null, $author);
+        return $this->repository->countThatDay('favorite_by_author', $day, null, $author);
     }
 
     /**
      * @inheritDoc
      */
-    public function countBetween(DateTime $from, DateTime $to, Author $author)
+    public function countBetween(Author $author, DateTime $from, DateTime $to)
     {
-        return $this->repository->countBetween('comment_by_author', $from, $to, null, $author);
+        return $this->repository->countBetween('favorite_by_author', $from, $to, null, $author);
     }
 }

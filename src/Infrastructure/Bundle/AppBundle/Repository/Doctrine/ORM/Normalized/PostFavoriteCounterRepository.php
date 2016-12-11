@@ -3,11 +3,11 @@
 namespace Acme\Infrastructure\Bundle\AppBundle\Repository\Doctrine\ORM\Normalized;
 
 use Acme\Domain\Blog\Model\Post;
-use Acme\Domain\Blog\Repository\FavoritePostCounterRepository as FavoritePostCounterRepositoryInterface;
+use Acme\Domain\Blog\Repository\PostFavoriteCounterRepository as PostFavoriteCounterRepositoryInterface;
 use DateTime;
 use Doctrine\ORM\EntityRepository;
 
-class FavoritePostCounterRepository implements FavoritePostCounterRepositoryInterface
+class PostFavoriteCounterRepository implements PostFavoriteCounterRepositoryInterface
 {
     /**
      * @var EntityRepository
