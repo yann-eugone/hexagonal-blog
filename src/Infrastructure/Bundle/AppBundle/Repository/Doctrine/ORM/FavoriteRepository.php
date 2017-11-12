@@ -76,6 +76,14 @@ class FavoriteRepository implements FavoriteRepositoryInterface
     /**
      * @inheritDoc
      */
+    public function has(Post $post, Author $author)
+    {
+        return $this->find($post, $author) !== null;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function add(Post $post, Author $author)
     {
         if ($this->find($post, $author)) {

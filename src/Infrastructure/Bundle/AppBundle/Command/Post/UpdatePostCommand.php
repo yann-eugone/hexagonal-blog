@@ -19,6 +19,7 @@ class UpdatePostCommand extends AbstractPostCommand
     {
         $this
             ->setName('blog:post:update')
+            ->addArgument('author', InputArgument::REQUIRED)
             ->addArgument('post', InputArgument::REQUIRED)
             ->addOption('category', null, InputOption::VALUE_REQUIRED)
             ->addOption('tags', null, InputOption::VALUE_REQUIRED)
@@ -33,6 +34,15 @@ class UpdatePostCommand extends AbstractPostCommand
      */
     protected function interact(InputInterface $input, OutputInterface $output)
     {
+        // Author
+        if (($author = $input->getArgument('author')) !== null) {
+            $author = $this->getAuthorRepository()->getByUsername($author);
+        } else {
+            $author = $this->askAuthor($input, $output);
+        }
+        $input->setArgument('author', $author);
+        $this->authenticate($author);
+
         // Post
         if (($post = $input->getArgument('post')) !== null) {
             $post = $this->getPostRepository()->getById($post);
@@ -126,6 +136,12 @@ class UpdatePostCommand extends AbstractPostCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        if (!$this->isGranted('update', $input->getArgument('post'))) {
+            $output->writeln('<error>You are not allowed to update this Post.</error>');
+
+            return 1;
+        }
+
         $command = $this->getPostCommandFactory()->updatePost($input->getArgument('post'));
         if (($category = $input->getOption('category')) !== null) {
             $command->setCategory($category);
@@ -144,6 +160,8 @@ class UpdatePostCommand extends AbstractPostCommand
         }
 
         $this->getCommandBus()->handle($command);
+
+        return 0;
     }
 
     /**

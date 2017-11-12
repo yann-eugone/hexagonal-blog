@@ -15,6 +15,7 @@ class DeletePostCommand extends AbstractPostCommand
     {
         $this
             ->setName('blog:post:delete')
+            ->addArgument('author', InputArgument::REQUIRED)
             ->addArgument('post', InputArgument::REQUIRED)
         ;
     }
@@ -24,6 +25,15 @@ class DeletePostCommand extends AbstractPostCommand
      */
     protected function interact(InputInterface $input, OutputInterface $output)
     {
+        // Author
+        if (($author = $input->getArgument('author')) !== null) {
+            $author = $this->getAuthorRepository()->getByUsername($author);
+        } else {
+            $author = $this->askAuthor($input, $output);
+        }
+        $input->setArgument('author', $author);
+        $this->authenticate($author);
+
         // Post
         if (($post = $input->getArgument('post')) !== null) {
             $post = $this->getPostRepository()->getById($post);
@@ -38,8 +48,16 @@ class DeletePostCommand extends AbstractPostCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        if (!$this->isGranted('delete', $input->getArgument('post'))) {
+            $output->writeln('<error>You are not allowed to delete this Post.</error>');
+
+            return 1;
+        }
+
         $command = $this->getPostCommandFactory()->deletePost($input->getArgument('post'));
 
         $this->getCommandBus()->handle($command);
+
+        return 0;
     }
 }

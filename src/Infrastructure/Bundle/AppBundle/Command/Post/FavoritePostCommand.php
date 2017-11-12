@@ -32,6 +32,7 @@ class FavoritePostCommand extends AbstractPostCommand
             $author = $this->askAuthor($input, $output);
         }
         $input->setArgument('author', $author);
+        $this->authenticate($author);
 
         // Post
         if (($post = $input->getArgument('post')) !== null) {
@@ -47,11 +48,19 @@ class FavoritePostCommand extends AbstractPostCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        if (!$this->isGranted('favorite', $input->getArgument('post'))) {
+            $output->writeln('<error>You are not allowed to favorite this Post.</error>');
+
+            return 1;
+        }
+
         $command = $this->getPostCommandFactory()->favoritePost(
             $input->getArgument('post'),
             $input->getArgument('author')
         );
 
         $this->getCommandBus()->handle($command);
+
+        return 0;
     }
 }

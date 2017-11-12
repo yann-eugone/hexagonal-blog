@@ -29,4 +29,12 @@ class Author implements \Acme\Domain\Blog\Model\Author
     {
         return $this->name;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUsername()
+    {
+        return $this->name;
+    }
 }

@@ -32,6 +32,7 @@ class UnfavoritePostCommand extends AbstractPostCommand
             $author = $this->askAuthor($input, $output);
         }
         $input->setArgument('author', $author);
+        $this->authenticate($author);
 
         // Post
         if (($post = $input->getArgument('post')) !== null) {
@@ -47,11 +48,19 @@ class UnfavoritePostCommand extends AbstractPostCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        if (!$this->isGranted('unfavorite', $input->getArgument('post'))) {
+            $output->writeln('<error>You are not allowed to unfavorite this Post.</error>');
+
+            return 1;
+        }
+
         $command = $this->getPostCommandFactory()->unfavoritePost(
             $input->getArgument('post'),
             $input->getArgument('author')
         );
 
         $this->getCommandBus()->handle($command);
+
+        return 0;
     }
 }

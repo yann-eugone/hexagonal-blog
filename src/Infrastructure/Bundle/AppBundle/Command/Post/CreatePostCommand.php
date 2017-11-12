@@ -2,6 +2,7 @@
 
 namespace Acme\Infrastructure\Bundle\AppBundle\Command\Post;
 
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -15,7 +16,7 @@ class CreatePostCommand extends AbstractPostCommand
     {
         $this
             ->setName('blog:post:create')
-            ->addOption('author', null, InputOption::VALUE_REQUIRED)
+            ->addArgument('author', InputArgument::REQUIRED)
             ->addOption('category', null, InputOption::VALUE_REQUIRED)
             ->addOption('tags', null, InputOption::VALUE_REQUIRED)
             ->addOption('title', null, InputOption::VALUE_REQUIRED)
@@ -30,12 +31,13 @@ class CreatePostCommand extends AbstractPostCommand
     protected function interact(InputInterface $input, OutputInterface $output)
     {
         // Author
-        if (($author = $input->getOption('author')) !== null) {
+        if (($author = $input->getArgument('author')) !== null) {
             $author = $this->getAuthorRepository()->getByUsername($author);
         } else {
             $author = $this->askAuthor($input, $output);
         }
-        $input->setOption('author', $author);
+        $input->setArgument('author', $author);
+        $this->authenticate($author);
 
         // Category
         if (($category = $input->getOption('category')) !== null) {
@@ -79,7 +81,13 @@ class CreatePostCommand extends AbstractPostCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $command = $this->getPostCommandFactory()->createPost($input->getOption('author'));
+        if (!$this->isGranted('create_post')) {
+            $output->writeln('<error>You are not allowed to create a Post.</error>');
+
+            return 1;
+        }
+
+        $command = $this->getPostCommandFactory()->createPost($input->getArgument('author'));
         $command->setCategory($input->getOption('category'));
         $command->setTags($input->getOption('tags'));
         $command->setTitle($input->getOption('title'));
@@ -87,5 +95,7 @@ class CreatePostCommand extends AbstractPostCommand
         $command->setSummary($input->getOption('summary') ?: substr($input->getOption('body'), 200));
 
         $this->getCommandBus()->handle($command);
+
+        return 0;
     }
 }

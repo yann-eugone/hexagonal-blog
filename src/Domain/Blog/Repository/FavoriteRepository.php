@@ -27,6 +27,14 @@ interface FavoriteRepository
      * @param Post   $post
      * @param Author $author
      *
+     * @return bool
+     */
+    public function has(Post $post, Author $author);
+
+    /**
+     * @param Post   $post
+     * @param Author $author
+     *
      * @throws CannotAddFavoriteException
      */
     public function add(Post $post, Author $author);

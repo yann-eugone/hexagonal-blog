@@ -12,6 +12,30 @@
             <argument type="collection"/><!-- replaced by AppExtension -->
         </service>
 
+        <!-- Domain Voters -->
+        <service id="security.domain_voter.comment"
+                 class="Acme\Domain\Blog\Security\Voter\CommentVoter"
+                 public="false"
+                 autowire="true"/>
+        <service id="security.domain_voter.post"
+                 class="Acme\Domain\Blog\Security\Voter\PostVoter"
+                 public="false"
+                 autowire="true"/>
+
+        <!-- Framework Voters -->
+        <service id="security.domain.comment"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Security\Voter\CommentVoter"
+                 public="false"
+                 autowire="true">
+            <tag name="security.voter"/>
+        </service>
+        <service id="security.domain.post"
+                 class="Acme\Infrastructure\Bundle\AppBundle\Security\Voter\PostVoter"
+                 public="false"
+                 autowire="true">
+            <tag name="security.voter"/>
+        </service>
+
     </services>
 
 </container>
